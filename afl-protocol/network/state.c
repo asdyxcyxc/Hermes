@@ -1,4 +1,3 @@
-#include <ctype.h>
 #include "state.h"
 
 messages *newMsg(int size, char *data, messages *prev)
@@ -12,14 +11,12 @@ messages *newMsg(int size, char *data, messages *prev)
     return result;
 }
 
-protocol *newProtocol(int current_msg, messages *start_msg, messages *end_msg, int isSkipped, int isAdded, int size)
+protocol *newProtocol(int current_msg, messages *start_msg, messages *end_msg, int size)
 {
     protocol *result = calloc(1, sizeof(protocol));
     result->current_msg = current_msg;
     result->start_msg = start_msg;
     result->end_msg = end_msg;
-    result->isSkipped = 0;
-    result->isAdded = 0;
     result->size = size;
     return result;
 }
@@ -77,14 +74,6 @@ protocol *loadFromMem(char *tmp_buf, int totalSize)
     pos += sizeof(int);
     int cnt = 0;
 
-    int isSkipped;
-    memcpy(&isSkipped, tmp_buf + pos, sizeof(int));
-    pos += sizeof(int);
-
-    int isAdded;
-    memcpy(&isAdded, tmp_buf + pos, sizeof(int));
-    pos += sizeof(int);
-
     while (pos < totalSize) {
         int size;
         memcpy(&size, tmp_buf + pos, sizeof(int));
@@ -104,7 +93,7 @@ protocol *loadFromMem(char *tmp_buf, int totalSize)
         cnt++;
     }
 
-    return newProtocol(current_msg, start, prev_obj, isSkipped, isAdded, cnt);
+    return newProtocol(current_msg, start, prev_obj, cnt);
 }
 
 protocol *unserialize(char *filename)
@@ -124,16 +113,12 @@ protocol *unserialize(char *filename)
     return result;
 }
 
-void serialize(protocol *state, int cur_index, char *msg, int len, char *filename, int mode)
+void serialize(protocol *state, int cur_index, char *msg, int len, char *filename)
 {
     int fd = open(filename, O_WRONLY | O_CREAT | O_EXCL, 0600);
     if (fd < 0) PFATAL("Unable to save state into '%s'", filename);
 
-    int tmp = cur_index + mode;
-
-    ck_write(fd, &tmp, sizeof(int), filename);
-    ck_write(fd, &state->isSkipped, sizeof(int), filename);
-    ck_write(fd, &state->isAdded, sizeof(int), filename);
+    ck_write(fd, &cur_index, sizeof(int), filename);
 
     messages *cur = state->start_msg;
     int cnt = 0;

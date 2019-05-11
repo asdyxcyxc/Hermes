@@ -7,18 +7,13 @@
 #include <unistd.h>
 #include <fcntl.h> 
 #include <string.h>
+#include <ctype.h>
 
-#include "../debug.h"
-#include "../config.h"
-#include "../types.h"
-#include "../alloc-inl.h"
-#include "../hash.h"
-
-#define NEXT_STEP 1
-#define KEEP_STEP 0
-
-#define SERVER_FIRST 1;
-#define CLIENT_FIRST 0;
+#include "../helper/debug.h"
+#include "../helper/config.h"
+#include "../helper/types.h"
+#include "../helper/alloc-inl.h"
+#include "../helper/hash.h"
 
 struct messages {
     int size;
@@ -30,29 +25,14 @@ typedef struct messages messages;
 typedef struct {
     int current_msg;
     messages *start_msg, *end_msg;
-    int isSkipped;
-    int isAdded;
-    // int who_first;
     int size;
 } protocol;
 
-typedef struct {
-    int srv_pid;
-    int cli_pid;
-    int flag;
-} share_info;
-
-share_info *newInfo();
-void setInfo_srv_pid(share_info *, int);
-void setInfo_cli_pid(share_info *, int);
-void enableInfo_flag(share_info *);
-void deleteInfo(share_info *);
-
 messages *newMsg(int, char *, messages *);
-protocol *newProtocol(int, messages*, messages*, int, int, int);
+protocol *newProtocol(int, messages*, messages*, int);
 protocol *loadFromMem(char *, int);
 protocol *unserialize(char *);
-void serialize(protocol *state, int cur_index, char *msg, int len, char *filename, int mode);
+void serialize(protocol *, int, char *, int, char *);
 void deleteMsg(messages *);
 void deleteProtocol(protocol *);
 void debugMsg(messages *);

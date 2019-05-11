@@ -45,7 +45,7 @@ static void sig_handler(int sig)
         }
         messages *cur_msg = getCurMsg(state);
         debugProtocol(state);
-        serialize(state, 0, cur_msg->data, cur_msg->size, outfile, KEEP_STEP);
+        serialize(state, 0, cur_msg->data, cur_msg->size, outfile);
         deleteProtocol(state);
         puts ("Done generating record!");
         exit(0);

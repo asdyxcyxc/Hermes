@@ -26,11 +26,11 @@
 #define _GNU_SOURCE
 #define _FILE_OFFSET_BITS 64
 
-#include "config.h"
-#include "types.h"
-#include "debug.h"
-#include "alloc-inl.h"
-#include "hash.h"
+#include "helper/config.h"
+#include "helper/types.h"
+#include "helper/debug.h"
+#include "helper/alloc-inl.h"
+#include "helper/hash.h"
 
 #include <stdio.h>
 #include <unistd.h>
@@ -217,7 +217,7 @@ static s32 cpu_core_count;            /* CPU core count                   */
 
 #ifdef HAVE_AFFINITY
 
-static s32 cpu_aff = -1;       	      /* Selected CPU core                */
+static s32 cpu_aff = -1;			  /* Selected CPU core                */
 
 #endif /* HAVE_AFFINITY */
 
