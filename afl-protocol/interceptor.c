@@ -151,8 +151,13 @@ static void my_packet_handler(u_char *args, const struct pcap_pkthdr *header, co
 
         udp_info = (struct udphdr *)udp_header;
 
+#ifdef HAVE_DUMB_UDPHDR
         printf("Source: %s ---- %d\n", inet_ntoa(ip_info->ip_src), ntohs(udp_info->source));
         printf("Destination: %s ---- %d\n", inet_ntoa(ip_info->ip_dst), ntohs(udp_info->dest));
+#else
+        printf("Source: %s ---- %d\n", inet_ntoa(ip_info->ip_src), ntohs(udp_info->uh_sport));
+        printf("Destination: %s ---- %d\n", inet_ntoa(ip_info->ip_src), ntohs(udp_info->uh_dport));
+#endif
 
         total_headers_size = ethernet_header_length + ip_header_length + udp_header_length;
 
@@ -171,7 +176,11 @@ static void my_packet_handler(u_char *args, const struct pcap_pkthdr *header, co
             // }
             // printf("\n");
 
+#ifdef HAVE_DUMB_UDPHDR
             if (ntohs(udp_info->source) == port_server) {
+#else
+            if (ntohs(udp_info->uh_sport) == port_server) {
+#endif
                 if (current_size > 0) {
                     if (state->size == 0) {
                         messages* new_msg = newMsg(current_size, buffer, NULL);
@@ -234,7 +243,7 @@ static void init_interceptor(const char *device)
 
     sprintf (filter_exp, "(dst port %d and dst %s) or src port %d", port_server, ip_server, port_server);
 
-    state = newProtocol(0, NULL, NULL, 0, 0, 0);
+    state = newProtocol(0, NULL, NULL, 0);
     current_size = 0;
     buffer = NULL;
 

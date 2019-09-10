@@ -32,6 +32,9 @@
 #include "helper/alloc-inl.h"
 #include "helper/hash.h"
 
+#include "network/utilities.h"
+#include "network/state.h"
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -279,6 +282,17 @@ static u8* (*post_handler)(u8* buf, u32* len);
 static s8  interesting_8[]  = { INTERESTING_8 };
 static s16 interesting_16[] = { INTERESTING_8, INTERESTING_16 };
 static s32 interesting_32[] = { INTERESTING_8, INTERESTING_16, INTERESTING_32 };
+
+/* protocol variables */
+
+static u16 port_server;
+static u32 client_pid;
+static protocol *fuzzing_prot;
+static messages *fuzzing_msg;
+static u32 single_msg;
+u8 *libhook_path;
+u8 terminated;
+s32 prev_child_pid;
 
 /* Fuzzing stages */
 
@@ -2085,6 +2099,10 @@ EXP_ST void init_forkserver(char** argv) {
                            "allocator_may_return_null=1:"
                            "msan_track_origins=0", 0);
 
+    /* Load network hooking library */
+
+    setenv("LD_PRELOAD", libhook_path, 0);
+
     execv(target_path, argv);
 
     /* Use a distinctive bitmap signature to tell the parent about execv()
@@ -2280,7 +2298,9 @@ static u8 run_target(char** argv, u32 timeout) {
      execve(). There is a bit of code duplication between here and 
      init_forkserver(), but c'est la vie. */
 
-  if (dumb_mode == 1 || no_forkserver) {
+  if (!terminated) {
+    kill(prev_child_pid, SIGCONT);
+  } else if (dumb_mode == 1 || no_forkserver) {
 
     child_pid = fork();
 
@@ -2347,6 +2367,8 @@ static u8 run_target(char** argv, u32 timeout) {
                              "symbolize=0:"
                              "msan_track_origins=0", 0);
 
+      setenv("LD_PRELOAD", libhook_path, 0);
+
       execv(target_path, argv);
 
       /* Use a distinctive bitmap value to tell the parent about execv()
@@ -2382,6 +2404,8 @@ static u8 run_target(char** argv, u32 timeout) {
 
   }
 
+  pid_t evaluator_pid = evaluate(child_pid);
+
   /* Configure timeout, as requested by user, then wait for child to terminate. */
 
   it.it_value.tv_sec = (timeout / 1000);
@@ -2408,7 +2432,16 @@ static u8 run_target(char** argv, u32 timeout) {
 
   }
 
+  terminated = 1;
   if (!WIFSTOPPED(status)) child_pid = 0;
+  else {
+    kill_signal = WSTOPSIG(status);
+    if (kill_signal == SIGSTOP) {
+      terminated = 0;
+      prev_child_pid = child_pid;
+      return FAULT_NONE;
+    }
+  }
 
   it.it_value.tv_sec = 0;
   it.it_value.tv_usec = 0;
@@ -2438,7 +2471,6 @@ static u8 run_target(char** argv, u32 timeout) {
   if (WIFSIGNALED(status) && !stop_soon) {
 
     kill_signal = WTERMSIG(status);
-
     if (child_timed_out && kill_signal == SIGKILL) return FAULT_TMOUT;
 
     return FAULT_CRASH;
@@ -2558,8 +2590,10 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
   /* Make sure the forkserver is up before we do anything, and let's not
      count its spin-up time toward binary calibration. */
 
-  if (dumb_mode != 1 && !no_forkserver && !forksrv_pid)
+  if (dumb_mode != 1 && !no_forkserver && !forksrv_pid) {
+    setup_communications(&client_pid, out_file, port_server);
     init_forkserver(argv);
+  }
 
   if (q->exec_cksum) memcpy(first_trace, trace_bits, MAP_SIZE);
 
@@ -2571,7 +2605,13 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     if (!first_run && !(stage_cur % stats_update_freq)) show_stats();
 
-    write_to_testcase(use_mem, q->len);
+    if (single_msg) {
+      s32 len;
+      u8 *tmp_use_mem = dump_fuzzed_data(fuzzing_prot, use_mem, q->len, &len);
+      write_to_testcase(tmp_use_mem, len);
+      ck_free(tmp_use_mem);
+    } else 
+      write_to_testcase(use_mem, q->len);
 
     fault = run_target(argv, use_tmout);
 
@@ -2705,23 +2745,30 @@ static void perform_dry_run(char** argv) {
     u8* use_mem;
     u8  res;
     s32 fd;
-
+    messages *tmp_msg;
     u8* fn = strrchr(q->fname, '/') + 1;
 
     ACTF("Attempting dry run with '%s'...", fn);
 
-    fd = open(q->fname, O_RDONLY);
-    if (fd < 0) PFATAL("Unable to open '%s'", q->fname);
+    if (single_msg) {
+      fuzzing_prot = unserialize(q->fname);
+      tmp_msg = getCurMsg(fuzzing_prot);
+      use_mem = tmp_msg->data;
+      q->len = tmp_msg->size;
+      res = calibrate_case(argv, q, use_mem, 0, 1);
+      deleteProtocol(fuzzing_prot);
+    } else {
+      fd = open(q->fname, O_RDONLY);
+      if (fd < 0) PFATAL("Unable to open '%s'", q->fname);
 
-    use_mem = ck_alloc_nozero(q->len);
+      use_mem = ck_alloc_nozero(q->len);
+      if (read(fd, use_mem, q->len) != q->len)
+        FATAL("Short read from '%s'", q->fname);
 
-    if (read(fd, use_mem, q->len) != q->len)
-      FATAL("Short read from '%s'", q->fname);
-
-    close(fd);
-
-    res = calibrate_case(argv, q, use_mem, 0, 1);
-    ck_free(use_mem);
+      close(fd);
+      res = calibrate_case(argv, q, use_mem, 0, 1);
+      ck_free(use_mem);
+    }
 
     if (stop_soon) return;
 
@@ -3159,10 +3206,13 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
     if (res == FAULT_ERROR)
       FATAL("Unable to execute target application");
 
-    fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-    if (fd < 0) PFATAL("Unable to create '%s'", fn);
-    ck_write(fd, mem, len, fn);
-    close(fd);
+    if (!single_msg) {
+      fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+      if (fd < 0) PFATAL("Unable to create '%s'", fn);
+      ck_write(fd, mem, len, fn);
+      close(fd);
+    } else 
+      serialize(fuzzing_prot, fuzzing_prot->current_msg, mem, len, fn);
 
     keeping = 1;
 
@@ -3202,7 +3252,14 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
       if (exec_tmout < hang_tmout) {
 
         u8 new_fault;
-        write_to_testcase(mem, len);
+
+        if (single_msg) {
+          s32 new_len;
+          u8 *new_mem = dump_fuzzed_data(fuzzing_prot, mem, len, &new_len);
+          write_to_testcase(new_mem, new_len);
+          ck_free(new_mem);
+        } else
+          write_to_testcase(mem, len);
         new_fault = run_target(argv, hang_tmout);
 
         /* A corner case that one user reported bumping into: increasing the
@@ -3287,12 +3344,15 @@ keep_as_crash:
   /* If we're here, we apparently want to save the crash or hang
      test case, too. */
 
-  fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-  if (fd < 0) PFATAL("Unable to create '%s'", fn);
-  ck_write(fd, mem, len, fn);
-  close(fd);
+  if (!single_msg) {
+    fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (fd < 0) PFATAL("Unable to create '%s'", fn);
+    ck_write(fd, mem, len, fn);
+    close(fd);
 
-  ck_free(fn);
+    ck_free(fn);
+  } else
+    serialize(fuzzing_prot, fuzzing_prot->current_msg, mem, len, fn);
 
   return keeping;
 
@@ -4502,7 +4562,14 @@ static u8 trim_case(char** argv, struct queue_entry* q, u8* in_buf) {
       u32 trim_avail = MIN(remove_len, q->len - remove_pos);
       u32 cksum;
 
-      write_with_gap(in_buf, q->len, remove_pos, trim_avail);
+      if (single_msg) {
+        s32 len;
+        s32 last_len = getLenUntil(fuzzing_prot, fuzzing_prot->current_msg);
+        u8 *new_buf = dump_fuzzed_data(fuzzing_prot, in_buf, q->len, &len);
+        write_with_gap(new_buf, len, remove_pos + last_len, trim_avail);
+        ck_free(new_buf);
+      } else 
+        write_with_gap(in_buf, q->len, remove_pos, trim_avail);
 
       fault = run_target(argv, exec_tmout);
       trim_execs++;
@@ -4595,7 +4662,13 @@ EXP_ST u8 common_fuzz_stuff(char** argv, u8* out_buf, u32 len) {
 
   }
 
-  write_to_testcase(out_buf, len);
+  if (single_msg) {
+    s32 new_len;
+    u8 *new_out_buf = dump_fuzzed_data(fuzzing_prot, out_buf, len, &new_len);
+    write_to_testcase(new_out_buf, new_len);
+    ck_free(new_out_buf);
+  } else
+    write_to_testcase(out_buf, len);
 
   fault = run_target(argv, exec_tmout);
 
@@ -4995,18 +5068,27 @@ static u8 fuzz_one(char** argv) {
 
   /* Map the test case into memory. */
 
-  fd = open(queue_cur->fname, O_RDONLY);
+  fuzzing_prot = unserialize(queue_cur->fname);
+  
+  int random_index = UR(fuzzing_prot->size);
+  fuzzing_msg = getMsg(fuzzing_prot, random_index);
+  fuzzing_prot->current_msg = random_index;
 
-  if (fd < 0) PFATAL("Unable to open '%s'", queue_cur->fname);
+  if (single_msg) {
+    len = fuzzing_msg->size;
+    queue_cur->len = fuzzing_msg->size;
+    orig_in = in_buf = ck_alloc_nozero(queue_cur->len);
+    memcpy(orig_in, fuzzing_msg->data, queue_cur->len);
 
-  len = queue_cur->len;
-
-  orig_in = in_buf = mmap(0, len, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
-
-  if (orig_in == MAP_FAILED) PFATAL("Unable to mmap '%s'", queue_cur->fname);
-
-  close(fd);
-
+    queue_cur->trim_done = ((1 << fuzzing_prot->size) - 1) ^ fuzzing_prot->done_trim_mask ? 0 : 1;
+    queue_cur->passed_det = ((1 << fuzzing_prot->size) - 1) ^ fuzzing_prot->done_det_mask ? 0 : 1;
+  } else {
+    char *tmp = dump_data(fuzzing_prot, &len);
+    queue_cur->len = len;
+    orig_in = in_buf = ck_alloc_nozero(queue_cur->len);
+    memcpy(orig_in, tmp, queue_cur->len);
+  }
+  
   /* We could mmap() out_buf as MAP_PRIVATE, but we end up clobbering every
      single byte anyway, so it wouldn't give us any performance or memory usage
      benefits. */
@@ -5059,10 +5141,15 @@ static u8 fuzz_one(char** argv) {
 
     /* Don't retry trimming, even if it failed. */
 
-    queue_cur->trim_done = 1;
+    if (single_msg) {
+      fuzzing_msg->done_trim = 1;
+    } else {
+      queue->trim_done = 1;
+    }
 
     if (len != queue_cur->len) len = queue_cur->len;
 
+    pprint("TRIMMING", in_buf, len);
   }
 
   memcpy(out_buf, in_buf, len);
@@ -5081,10 +5168,11 @@ static u8 fuzz_one(char** argv) {
     goto havoc_stage;
 
   /* Skip deterministic fuzzing if exec path checksum puts this out of scope
-     for this master instance. */
+     for this master instance. 
 
   if (master_max && (queue_cur->exec_cksum % master_max) != master_id - 1)
     goto havoc_stage;
+  */
 
   doing_det = 1;
 
@@ -5115,6 +5203,8 @@ static u8 fuzz_one(char** argv) {
     stage_cur_byte = stage_cur >> 3;
 
     FLIP_BIT(out_buf, stage_cur);
+
+    pprint("BIT_FLIP 1/1", out_buf, len);
 
     if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
 
@@ -5209,6 +5299,8 @@ static u8 fuzz_one(char** argv) {
     FLIP_BIT(out_buf, stage_cur);
     FLIP_BIT(out_buf, stage_cur + 1);
 
+    pprint("BIT_FLIP 2/1", out_buf, len);
+
     if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
 
     FLIP_BIT(out_buf, stage_cur);
@@ -5237,6 +5329,8 @@ static u8 fuzz_one(char** argv) {
     FLIP_BIT(out_buf, stage_cur + 1);
     FLIP_BIT(out_buf, stage_cur + 2);
     FLIP_BIT(out_buf, stage_cur + 3);
+
+    pprint("BIT_FLIP 4/1", out_buf, len);
 
     if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
 
@@ -5289,6 +5383,8 @@ static u8 fuzz_one(char** argv) {
     stage_cur_byte = stage_cur;
 
     out_buf[stage_cur] ^= 0xFF;
+
+    pprint("BIT_FLIP 8/8", out_buf, len);
 
     if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
 
@@ -5368,6 +5464,8 @@ static u8 fuzz_one(char** argv) {
 
     *(u16*)(out_buf + i) ^= 0xFFFF;
 
+    pprint("BIT_FLIP 16/8", out_buf, len);
+
     if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
     stage_cur++;
 
@@ -5404,6 +5502,8 @@ static u8 fuzz_one(char** argv) {
     stage_cur_byte = i;
 
     *(u32*)(out_buf + i) ^= 0xFFFFFFFF;
+
+    pprint("BIT_FLIP 32/8", out_buf, len);
 
     if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
     stage_cur++;
@@ -5461,6 +5561,8 @@ skip_bitflip:
         stage_cur_val = j;
         out_buf[i] = orig + j;
 
+        pprint("ARITH 8/8 (+)", out_buf, len);
+
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
 
@@ -5472,6 +5574,8 @@ skip_bitflip:
 
         stage_cur_val = -j;
         out_buf[i] = orig - j;
+
+        pprint("ARITH 8/8 (-)", out_buf, len);
 
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
@@ -5532,6 +5636,8 @@ skip_bitflip:
         stage_cur_val = j;
         *(u16*)(out_buf + i) = orig + j;
 
+        pprint("ARITH 16/8 (+)", out_buf, len);
+
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
  
@@ -5541,6 +5647,8 @@ skip_bitflip:
 
         stage_cur_val = -j;
         *(u16*)(out_buf + i) = orig - j;
+
+        pprint("ARITH 16/8 (-)", out_buf, len);
 
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
@@ -5557,6 +5665,8 @@ skip_bitflip:
         stage_cur_val = j;
         *(u16*)(out_buf + i) = SWAP16(SWAP16(orig) + j);
 
+        pprint("ARITH 16/8 (be+)", out_buf, len);
+
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
 
@@ -5566,6 +5676,8 @@ skip_bitflip:
 
         stage_cur_val = -j;
         *(u16*)(out_buf + i) = SWAP16(SWAP16(orig) - j);
+
+        pprint("ARITH 16/9 (be-)", out_buf, len);
 
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
@@ -5625,6 +5737,8 @@ skip_bitflip:
         stage_cur_val = j;
         *(u32*)(out_buf + i) = orig + j;
 
+        pprint("ARITH 32/8 (+)", out_buf, len);
+
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
 
@@ -5634,6 +5748,8 @@ skip_bitflip:
 
         stage_cur_val = -j;
         *(u32*)(out_buf + i) = orig - j;
+
+        pprint("ARITH 32/8 (-)", out_buf, len);
 
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
@@ -5649,6 +5765,8 @@ skip_bitflip:
         stage_cur_val = j;
         *(u32*)(out_buf + i) = SWAP32(SWAP32(orig) + j);
 
+        pprint("ARITH 32/8 (be+)", out_buf, len);
+
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
 
@@ -5658,6 +5776,8 @@ skip_bitflip:
 
         stage_cur_val = -j;
         *(u32*)(out_buf + i) = SWAP32(SWAP32(orig) - j);
+
+        pprint("ARITH 32/8 (be-)", out_buf, len);
 
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
@@ -5718,6 +5838,8 @@ skip_arith:
       stage_cur_val = interesting_8[j];
       out_buf[i] = interesting_8[j];
 
+      pprint("INTEREST 8/8", out_buf, len);
+
       if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
 
       out_buf[i] = orig;
@@ -5771,6 +5893,8 @@ skip_arith:
 
         *(u16*)(out_buf + i) = interesting_16[j];
 
+        pprint("INTEREST 16/8", out_buf, len);
+
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
 
@@ -5784,6 +5908,9 @@ skip_arith:
         stage_val_type = STAGE_VAL_BE;
 
         *(u16*)(out_buf + i) = SWAP16(interesting_16[j]);
+
+        pprint("INTERST 16/8 (be)", out_buf, len);
+
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
 
@@ -5840,6 +5967,8 @@ skip_arith:
 
         *(u32*)(out_buf + i) = interesting_32[j];
 
+        pprint("INTEREST 32/8", out_buf, len);
+
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
 
@@ -5853,6 +5982,9 @@ skip_arith:
         stage_val_type = STAGE_VAL_BE;
 
         *(u32*)(out_buf + i) = SWAP32(interesting_32[j]);
+
+        pprint("INTEREST 32/8 (be)", out_buf, len);
+        
         if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
         stage_cur++;
 
@@ -5919,6 +6051,8 @@ skip_interest:
       last_len = extras[j].len;
       memcpy(out_buf + i, extras[j].data, last_len);
 
+      pprint("USER EXTRA (over)", out_buf, len);
+      
       if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
 
       stage_cur++;
@@ -5962,6 +6096,8 @@ skip_interest:
 
       /* Copy tail */
       memcpy(ex_tmp + i + extras[j].len, out_buf + i, len - i);
+
+      pprint("USER EXTRA (insert)", ex_tmp, len + extras[j].len);
 
       if (common_fuzz_stuff(argv, ex_tmp, len + extras[j].len)) {
         ck_free(ex_tmp);
@@ -6019,6 +6155,8 @@ skip_user_extras:
       last_len = a_extras[j].len;
       memcpy(out_buf + i, a_extras[j].data, last_len);
 
+      pprint("AUTO EXTRA (over)", out_buf, len);
+
       if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
 
       stage_cur++;
@@ -6041,7 +6179,12 @@ skip_extras:
      we're properly done with deterministic steps and can mark it as such
      in the .state/ directory. */
 
-  if (!queue_cur->passed_det) mark_as_det_done(queue_cur);
+  if (!queue_cur->passed_det) {
+    if (single_msg)
+      fuzzing_msg->done_det = 1;
+    else
+      mark_as_det_done(queue_cur);
+  }
 
   /****************
    * RANDOM HAVOC *
@@ -6465,6 +6608,8 @@ havoc_stage:
 
     }
 
+    pprint("HAVOC STAGE", out_buf, temp_len);
+
     if (common_fuzz_stuff(argv, out_buf, temp_len))
       goto abandon_entry;
 
@@ -6513,6 +6658,8 @@ havoc_stage:
      code to mutate that blob. */
 
 retry_splicing:
+  if (single_msg)
+    goto havoc_stage;
 
   if (use_splicing && splice_cycle++ < SPLICE_CYCLES &&
       queued_paths > 1 && queue_cur->len > 1) {
@@ -6608,11 +6755,13 @@ abandon_entry:
     if (queue_cur->favored) pending_favored--;
   }
 
-  munmap(orig_in, queue_cur->len);
+  ck_free(orig_in);
 
   if (in_buf != orig_in) ck_free(in_buf);
   ck_free(out_buf);
   ck_free(eff_map);
+
+  deleteProtocol(fuzzing_prot);
 
   return ret_val;
 
@@ -6765,6 +6914,7 @@ static void handle_stop_sig(int sig) {
 
   stop_soon = 1; 
 
+  if (client_pid > 0) kill(client_pid, SIGKILL);
   if (child_pid > 0) kill(child_pid, SIGKILL);
   if (forksrv_pid > 0) kill(forksrv_pid, SIGKILL);
 
@@ -7723,7 +7873,7 @@ int main(int argc, char** argv) {
   gettimeofday(&tv, &tz);
   srandom(tv.tv_sec ^ tv.tv_usec ^ getpid());
 
-  while ((opt = getopt(argc, argv, "+i:o:f:m:t:T:dnCB:S:M:x:Q")) > 0)
+  while ((opt = getopt(argc, argv, "+i:o:f:m:t:T:dnCB:S:p:x:Q:h")) > 0)
 
     switch (opt) {
 
@@ -7891,6 +8041,16 @@ int main(int argc, char** argv) {
 
         break;
 
+      case 'p': /* server's port */
+        if (port_server) FATAL("Multiple -p options not supported");
+        port_server = atoi(optarg);
+        break;
+
+      case 'h': /* libhook.so path */
+        if (libhook_path) FATAL("Multiple -h options not supported");
+        libhook_path = strdup(optarg);
+        break;
+
       default:
 
         usage(argv[0]);
@@ -7919,6 +8079,7 @@ int main(int argc, char** argv) {
   if (getenv("AFL_NO_ARITH"))      no_arith         = 1;
   if (getenv("AFL_SHUFFLE_QUEUE")) shuffle_queue    = 1;
   if (getenv("AFL_FAST_CAL"))      fast_cal         = 1;
+  if (getenv("SINGLE_MESSAGE"))    single_msg       = 1;
 
   if (getenv("AFL_HANG_TMOUT")) {
     hang_tmout = atoi(getenv("AFL_HANG_TMOUT"));
