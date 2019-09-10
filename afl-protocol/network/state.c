@@ -358,14 +358,23 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
     }
 }
 
+void handle_signal(int sig)
+{
+    write(AFL_WRITE_FAKE, "CLOSE", 5);
+    exit(0);
+}
+
 int evaluate(pid_t child_pid)
 {
     pid_t evaluator_pid = fork();
     if (!evaluator_pid) {
         char buffer[10];
+
+        signal(SIGKILL, handle_signal);
+
         read(AFL_READ_FAKE, buffer, sizeof(buffer));
         read(AFL_READ_TARGET, buffer, sizeof(buffer));
-        write(AFL_WRITE_FAKE, "CLOSE", sizeof(buffer));
+        write(AFL_WRITE_FAKE, "CLOSE", 5);
 
         kill(child_pid, SIGSTOP);
         exit(0);

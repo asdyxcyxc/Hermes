@@ -2473,6 +2473,8 @@ static u8 run_target(char** argv, u32 timeout) {
     kill_signal = WTERMSIG(status);
     if (child_timed_out && kill_signal == SIGKILL) return FAULT_TMOUT;
 
+    kill(evaluator_pid, SIGKILL);
+
     return FAULT_CRASH;
 
   }
