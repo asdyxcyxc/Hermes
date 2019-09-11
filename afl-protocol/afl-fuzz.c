@@ -2298,7 +2298,7 @@ static u8 run_target(char** argv, u32 timeout) {
      execve(). There is a bit of code duplication between here and 
      init_forkserver(), but c'est la vie. */
 
-  if (!terminated) {
+  if (!terminated && prev_child_pid) {
     kill(prev_child_pid, SIGCONT);
   } else if (dumb_mode == 1 || no_forkserver) {
 
@@ -2473,6 +2473,7 @@ static u8 run_target(char** argv, u32 timeout) {
     kill_signal = WTERMSIG(status);
     if (child_timed_out && kill_signal == SIGKILL) return FAULT_TMOUT;
 
+    if (kill_signal == SIGPIPE) return FAULT_NONE;
     kill(evaluator_pid, SIGKILL);
 
     return FAULT_CRASH;
@@ -2593,7 +2594,11 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
      count its spin-up time toward binary calibration. */
 
   if (dumb_mode != 1 && !no_forkserver && !forksrv_pid) {
+    u8 *tmp_out_file = out_file;
+    out_file = alloc_printf("%s/.cur_input", out_dir);
     setup_communications(&client_pid, out_file, port_server);
+    ck_free(out_file);
+    out_file = tmp_out_file;
     init_forkserver(argv);
   }
 
@@ -2754,6 +2759,7 @@ static void perform_dry_run(char** argv) {
 
     if (single_msg) {
       fuzzing_prot = unserialize(q->fname);
+      debugProtocol(fuzzing_prot);
       tmp_msg = getCurMsg(fuzzing_prot);
       use_mem = tmp_msg->data;
       q->len = tmp_msg->size;
@@ -7875,7 +7881,7 @@ int main(int argc, char** argv) {
   gettimeofday(&tv, &tz);
   srandom(tv.tv_sec ^ tv.tv_usec ^ getpid());
 
-  while ((opt = getopt(argc, argv, "+i:o:f:m:t:T:dnCB:S:p:x:Q:h")) > 0)
+  while ((opt = getopt(argc, argv, "+i:o:f:m:t:T:dnCB:S:p:x:Q:h:")) > 0) {
 
     switch (opt) {
 
@@ -8058,6 +8064,7 @@ int main(int argc, char** argv) {
         usage(argv[0]);
 
     }
+  }
 
   if (optind == argc || !in_dir || !out_dir) usage(argv[0]);
 
@@ -8075,6 +8082,7 @@ int main(int argc, char** argv) {
     if (qemu_mode)  FATAL("-Q and -n are mutually exclusive");
 
   }
+
 
   if (getenv("AFL_NO_FORKSRV"))    no_forkserver    = 1;
   if (getenv("AFL_NO_CPU_RED"))    no_cpu_meter_red = 1;
@@ -8142,6 +8150,8 @@ int main(int argc, char** argv) {
     use_argv = argv + optind;
 
   perform_dry_run(use_argv);
+
+  return 0;
 
   cull_queue();
 

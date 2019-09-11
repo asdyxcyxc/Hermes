@@ -1,5 +1,8 @@
 #define _GNU_SOURCE
+
+#include <errno.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/socket.h>
 #include <dlfcn.h>
 #include <unistd.h>
@@ -32,7 +35,7 @@ static __attribute__((constructor)) void init_method(void)
 
 ssize_t recv(int sockfd, void *buf, size_t len, int flags)
 {
-//     printf("[+] READY\n");
+    printf("[+] READY\n");
     struct timeval tv;
 
     tv.tv_sec = TIMEOUT;
@@ -45,11 +48,14 @@ ssize_t recv(int sockfd, void *buf, size_t len, int flags)
     
     tv.tv_sec = 0;
     setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
-    if (result == -1) {
+    printf("RESULT: %ld\n", result);
+    if (result == -1 && errno == EAGAIN) {
+      printf("RESULT: %ld --- %d ---- %s\n", result, errno, strerror(errno));
       write(TARGET_WRITE_AFL, "FINISH", 6);
+      printf("TIMEOUT!!!!\n");
       return 0;
     }
 
-//     printf("[+] FINISH\n");
+    printf("[+] FINISH\n");
     return result;
 }

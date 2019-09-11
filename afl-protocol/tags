@@ -3,255 +3,81 @@
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.8	//
-ABORT	helper/debug.h	/^#define ABORT(/;"	d
-ACTF	helper/debug.h	/^#define ACTF(/;"	d
-AFL_MAIN	afl-fuzz.c	/^#define AFL_MAIN$/;"	d	file:
-AFL_PATH	Makefile	/^AFL_PATH = \\"\/usr\/local\/lib\/afl\\"$/;"	m
-AFL_R	helper/types.h	/^#  define AFL_R(/;"	d
-ALLOC_BLK_INC	helper/alloc-inl.h	/^#define ALLOC_BLK_INC /;"	d
-ALLOC_BUCKETS	helper/alloc-inl.h	/^#define ALLOC_BUCKETS /;"	d
-ALLOC_C1	helper/alloc-inl.h	/^#define ALLOC_C1(/;"	d
-ALLOC_C2	helper/alloc-inl.h	/^#define ALLOC_C2(/;"	d
-ALLOC_CHECK_RESULT	helper/alloc-inl.h	/^#define ALLOC_CHECK_RESULT(/;"	d
-ALLOC_CHECK_SIZE	helper/alloc-inl.h	/^#define ALLOC_CHECK_SIZE(/;"	d
-ALLOC_MAGIC_C1	helper/alloc-inl.h	/^#define ALLOC_MAGIC_C1 /;"	d
-ALLOC_MAGIC_C2	helper/alloc-inl.h	/^#define ALLOC_MAGIC_C2 /;"	d
-ALLOC_MAGIC_F	helper/alloc-inl.h	/^#define ALLOC_MAGIC_F /;"	d
-ALLOC_OFF_HEAD	helper/alloc-inl.h	/^#define ALLOC_OFF_HEAD /;"	d
-ALLOC_OFF_TOTAL	helper/alloc-inl.h	/^#define ALLOC_OFF_TOTAL /;"	d
-ALLOC_S	helper/alloc-inl.h	/^#define ALLOC_S(/;"	d
-ARITH_MAX	helper/config.h	/^#define ARITH_MAX /;"	d
-AS_LOOP_ENV_VAR	helper/config.h	/^#define AS_LOOP_ENV_VAR /;"	d
-AVG_SMOOTHING	helper/config.h	/^#define AVG_SMOOTHING /;"	d
-BADF	helper/debug.h	/^#define BADF(/;"	d
-BIN_PATH	Makefile	/^BIN_PATH = \\"\/usr\/local\/bin\\"$/;"	m
-CAL_CHANCES	helper/config.h	/^#define CAL_CHANCES /;"	d
-CAL_CYCLES	helper/config.h	/^#define CAL_CYCLES /;"	d
-CAL_CYCLES_LONG	helper/config.h	/^#define CAL_CYCLES_LONG /;"	d
-CAL_TMOUT_ADD	helper/config.h	/^#define CAL_TMOUT_ADD /;"	d
-CAL_TMOUT_PERC	helper/config.h	/^#define CAL_TMOUT_PERC /;"	d
-CASE_PREFIX	afl-fuzz.c	/^#  define CASE_PREFIX /;"	d	file:
-CFLAGS	Makefile	/^CFLAGS=-O3 -funroll-loops -Wall -D_FORTIFY_SOURCE=2 -g -Wno-pointer-sign$/;"	m
-CHECK_PTR	helper/alloc-inl.h	/^#define CHECK_PTR(/;"	d
-CHECK_PTR_EXPR	helper/alloc-inl.h	/^#define CHECK_PTR_EXPR(/;"	d
-CHK_FORMAT	afl-fuzz.c	/^#define CHK_FORMAT(/;"	d	file:
-CHK_FORMAT	afl-fuzz.c	/^#undef CHK_FORMAT$/;"	d	file:
-CLANG_ENV_VAR	helper/config.h	/^#define CLANG_ENV_VAR /;"	d
-COMM_HEADER	Makefile	/^COMM_HEADER = helper\/alloc-inl.h helper\/config.h helper\/debug.h helper\/types.h$/;"	m
-CTEST_BUSY_CYCLES	helper/config.h	/^#define  CTEST_BUSY_CYCLES /;"	d
-CTEST_CORE_TRG_MS	helper/config.h	/^#define  CTEST_CORE_TRG_MS /;"	d
-CTEST_TARGET_MS	helper/config.h	/^#define  CTEST_TARGET_MS /;"	d
-CURSOR_HIDE	helper/debug.h	/^#define CURSOR_HIDE /;"	d
-CURSOR_SHOW	helper/debug.h	/^#define CURSOR_SHOW /;"	d
-DEFER_ENV_VAR	helper/config.h	/^#define DEFER_ENV_VAR /;"	d
-DEFER_SIG	helper/config.h	/^#define DEFER_SIG /;"	d
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AFL_MAIN	afl-fuzz.c	23;"	d	file:
+AFL_READ_FAKE	hook/hook.c	20;"	d	file:
+AFL_READ_TARGET	hook/hook.c	17;"	d	file:
+AFL_WRITE_FAKE	hook/hook.c	12;"	d	file:
+CASE_PREFIX	afl-fuzz.c	3003;"	d	file:
+CHK_FORMAT	afl-fuzz.c	565;"	d	file:
+CHK_FORMAT	afl-fuzz.c	676;"	d	file:
 DF	afl-fuzz.c	/^static u8* DF(double val) {$/;"	f	file:
-DFL_ck_alloc	helper/alloc-inl.h	/^static inline void* DFL_ck_alloc(u32 size) {$/;"	f
-DFL_ck_alloc_nozero	helper/alloc-inl.h	/^static inline void* DFL_ck_alloc_nozero(u32 size) {$/;"	f
-DFL_ck_free	helper/alloc-inl.h	/^static inline void DFL_ck_free(void* mem) {$/;"	f
-DFL_ck_memdup	helper/alloc-inl.h	/^static inline void* DFL_ck_memdup(void* mem, u32 size) {$/;"	f
-DFL_ck_memdup_str	helper/alloc-inl.h	/^static inline u8* DFL_ck_memdup_str(u8* mem, u32 size) {$/;"	f
-DFL_ck_realloc	helper/alloc-inl.h	/^static inline void* DFL_ck_realloc(void* orig, u32 size) {$/;"	f
-DFL_ck_realloc_block	helper/alloc-inl.h	/^static inline void* DFL_ck_realloc_block(void* orig, u32 size) {$/;"	f
-DFL_ck_strdup	helper/alloc-inl.h	/^static inline u8* DFL_ck_strdup(u8* str) {$/;"	f
 DI	afl-fuzz.c	/^static u8* DI(u64 val) {$/;"	f	file:
 DMS	afl-fuzz.c	/^static u8* DMS(u64 val) {$/;"	f	file:
-DOC_PATH	Makefile	/^DOC_PATH = \\"\/usr\/local\/share\/doc\/afl\\"$/;"	m
 DTD	afl-fuzz.c	/^static u8* DTD(u64 cur_ms, u64 event_ms) {$/;"	f	file:
-EFF_ALEN	afl-fuzz.c	/^#define EFF_ALEN(/;"	d	file:
-EFF_APOS	afl-fuzz.c	/^#define EFF_APOS(/;"	d	file:
-EFF_MAP_SCALE2	helper/config.h	/^#define EFF_MAP_SCALE2 /;"	d
-EFF_MAX_PERC	helper/config.h	/^#define EFF_MAX_PERC /;"	d
-EFF_MIN_LEN	helper/config.h	/^#define EFF_MIN_LEN /;"	d
-EFF_REM	afl-fuzz.c	/^#define EFF_REM(/;"	d	file:
-EFF_SPAN_ALEN	afl-fuzz.c	/^#define EFF_SPAN_ALEN(/;"	d	file:
-EXEC_FAIL_SIG	helper/config.h	/^#define EXEC_FAIL_SIG /;"	d
-EXEC_TIMEOUT	helper/config.h	/^#define EXEC_TIMEOUT /;"	d
-EXEC_TM_ROUND	helper/config.h	/^#define EXEC_TM_ROUND /;"	d
-EXP_ST	afl-fuzz.c	/^#  define EXP_ST /;"	d	file:
-EXP_ST	afl-fuzz.c	/^#  define EXP_ST$/;"	d	file:
-FANCY_BOXES	helper/config.h	/^#define FANCY_BOXES$/;"	d
-FATAL	helper/debug.h	/^#define FATAL(/;"	d
-FAULT_CRASH	afl-fuzz.c	/^  \/* 02 *\/ FAULT_CRASH,$/;"	e	enum:__anon5	file:
-FAULT_ERROR	afl-fuzz.c	/^  \/* 03 *\/ FAULT_ERROR,$/;"	e	enum:__anon5	file:
-FAULT_NOBITS	afl-fuzz.c	/^  \/* 05 *\/ FAULT_NOBITS$/;"	e	enum:__anon5	file:
-FAULT_NOINST	afl-fuzz.c	/^  \/* 04 *\/ FAULT_NOINST,$/;"	e	enum:__anon5	file:
-FAULT_NONE	afl-fuzz.c	/^  \/* 00 *\/ FAULT_NONE,$/;"	e	enum:__anon5	file:
-FAULT_TMOUT	afl-fuzz.c	/^  \/* 01 *\/ FAULT_TMOUT,$/;"	e	enum:__anon5	file:
-FF	afl-fuzz.c	/^#define FF(/;"	d	file:
-FLIP_BIT	afl-fuzz.c	/^#define FLIP_BIT(/;"	d	file:
-FLIP_BIT	afl-fuzz.c	/^#undef FLIP_BIT$/;"	d	file:
-FORKSRV_FD	helper/config.h	/^#define FORKSRV_FD /;"	d
-FORK_WAIT_MULT	helper/config.h	/^#define FORK_WAIT_MULT /;"	d
-HASH_CONST	helper/config.h	/^#define HASH_CONST /;"	d
-HAVE_AFFINITY	afl-fuzz.c	/^#  define HAVE_AFFINITY /;"	d	file:
-HAVOC_BLK_LARGE	helper/config.h	/^#define HAVOC_BLK_LARGE /;"	d
-HAVOC_BLK_MEDIUM	helper/config.h	/^#define HAVOC_BLK_MEDIUM /;"	d
-HAVOC_BLK_SMALL	helper/config.h	/^#define HAVOC_BLK_SMALL /;"	d
-HAVOC_BLK_XL	helper/config.h	/^#define HAVOC_BLK_XL /;"	d
-HAVOC_CYCLES	helper/config.h	/^#define HAVOC_CYCLES /;"	d
-HAVOC_CYCLES_INIT	helper/config.h	/^#define HAVOC_CYCLES_INIT /;"	d
-HAVOC_MAX_MULT	helper/config.h	/^#define HAVOC_MAX_MULT /;"	d
-HAVOC_MIN	helper/config.h	/^#define HAVOC_MIN /;"	d
-HAVOC_STACK_POW2	helper/config.h	/^#define HAVOC_STACK_POW2 /;"	d
-INTERESTING_16	helper/config.h	/^#define INTERESTING_16 /;"	d
-INTERESTING_32	helper/config.h	/^#define INTERESTING_32 /;"	d
-INTERESTING_8	helper/config.h	/^#define INTERESTING_8 /;"	d
-KEEP_UNIQUE_CRASH	helper/config.h	/^#define KEEP_UNIQUE_CRASH /;"	d
-KEEP_UNIQUE_HANG	helper/config.h	/^#define KEEP_UNIQUE_HANG /;"	d
-LDFLAGS	Makefile	/^LDFLAGS = -ldl$/;"	m
-MAP_SIZE	helper/config.h	/^#define MAP_SIZE /;"	d
-MAP_SIZE_POW2	helper/config.h	/^#define MAP_SIZE_POW2 /;"	d
-MAX	helper/types.h	/^#  define MAX(/;"	d
-MAX_ALLOC	helper/config.h	/^#define MAX_ALLOC /;"	d
-MAX_AUTO_EXTRA	helper/config.h	/^#define MAX_AUTO_EXTRA /;"	d
-MAX_AUTO_EXTRAS	helper/config.h	/^#define MAX_AUTO_EXTRAS /;"	d
-MAX_DET_EXTRAS	helper/config.h	/^#define MAX_DET_EXTRAS /;"	d
-MAX_DICT_FILE	helper/config.h	/^#define MAX_DICT_FILE /;"	d
-MAX_FILE	helper/config.h	/^#define MAX_FILE /;"	d
-MAX_LINE	helper/config.h	/^#define MAX_LINE /;"	d
-MEM_BARRIER	helper/types.h	/^#define MEM_BARRIER(/;"	d
-MEM_LIMIT	helper/config.h	/^#  define MEM_LIMIT /;"	d
-MEM_LIMIT_QEMU	helper/config.h	/^#define MEM_LIMIT_QEMU /;"	d
-MESSAGES_TO_STDOUT	afl-fuzz.c	/^#define MESSAGES_TO_STDOUT$/;"	d	file:
-MIN	helper/types.h	/^#  define MIN(/;"	d
-MIN_AUTO_EXTRA	helper/config.h	/^#define MIN_AUTO_EXTRA /;"	d
-MSAN_ERROR	helper/config.h	/^#define MSAN_ERROR /;"	d
-NETWORK_H	network/libpatched/network.h	/^#define NETWORK_H$/;"	d
-OKF	helper/debug.h	/^#define OKF(/;"	d
-OUTPUT_GRACE	helper/config.h	/^#define OUTPUT_GRACE /;"	d
-PERSIST_ENV_VAR	helper/config.h	/^#define PERSIST_ENV_VAR /;"	d
-PERSIST_SIG	helper/config.h	/^#define PERSIST_SIG /;"	d
-PFATAL	helper/debug.h	/^#define PFATAL(/;"	d
-PLOT_UPDATE_SEC	helper/config.h	/^#define PLOT_UPDATE_SEC /;"	d
-R	helper/types.h	/^#  define R(/;"	d
-RESEED_RNG	helper/config.h	/^#define RESEED_RNG /;"	d
-RESET_G1	helper/debug.h	/^#  define RESET_G1 /;"	d
-ROL32	helper/hash.h	/^#define ROL32(/;"	d
-ROL64	helper/hash.h	/^#define ROL64(/;"	d
-RPFATAL	helper/debug.h	/^#define RPFATAL(/;"	d
-SAYF	helper/debug.h	/^#  define SAYF(/;"	d
-SET_G1	helper/debug.h	/^#  define SET_G1 /;"	d
-SHM_ENV_VAR	helper/config.h	/^#define SHM_ENV_VAR /;"	d
-SKIP_NFAV_NEW_PROB	helper/config.h	/^#define SKIP_NFAV_NEW_PROB /;"	d
-SKIP_NFAV_OLD_PROB	helper/config.h	/^#define SKIP_NFAV_OLD_PROB /;"	d
-SKIP_TO_NEW_PROB	helper/config.h	/^#define SKIP_TO_NEW_PROB /;"	d
-SP10	afl-fuzz.c	/^#define SP10 /;"	d	file:
-SP20	afl-fuzz.c	/^#define SP20 /;"	d	file:
-SP5	afl-fuzz.c	/^#define SP5 /;"	d	file:
-SPLICE_CYCLES	helper/config.h	/^#define SPLICE_CYCLES /;"	d
-SPLICE_HAVOC	helper/config.h	/^#define SPLICE_HAVOC /;"	d
-STAGE_ARITH16	afl-fuzz.c	/^  \/* 07 *\/ STAGE_ARITH16,$/;"	e	enum:__anon3	file:
-STAGE_ARITH32	afl-fuzz.c	/^  \/* 08 *\/ STAGE_ARITH32,$/;"	e	enum:__anon3	file:
-STAGE_ARITH8	afl-fuzz.c	/^  \/* 06 *\/ STAGE_ARITH8,$/;"	e	enum:__anon3	file:
-STAGE_EXTRAS_AO	afl-fuzz.c	/^  \/* 14 *\/ STAGE_EXTRAS_AO,$/;"	e	enum:__anon3	file:
-STAGE_EXTRAS_UI	afl-fuzz.c	/^  \/* 13 *\/ STAGE_EXTRAS_UI,$/;"	e	enum:__anon3	file:
-STAGE_EXTRAS_UO	afl-fuzz.c	/^  \/* 12 *\/ STAGE_EXTRAS_UO,$/;"	e	enum:__anon3	file:
-STAGE_FLIP1	afl-fuzz.c	/^  \/* 00 *\/ STAGE_FLIP1,$/;"	e	enum:__anon3	file:
-STAGE_FLIP16	afl-fuzz.c	/^  \/* 04 *\/ STAGE_FLIP16,$/;"	e	enum:__anon3	file:
-STAGE_FLIP2	afl-fuzz.c	/^  \/* 01 *\/ STAGE_FLIP2,$/;"	e	enum:__anon3	file:
-STAGE_FLIP32	afl-fuzz.c	/^  \/* 05 *\/ STAGE_FLIP32,$/;"	e	enum:__anon3	file:
-STAGE_FLIP4	afl-fuzz.c	/^  \/* 02 *\/ STAGE_FLIP4,$/;"	e	enum:__anon3	file:
-STAGE_FLIP8	afl-fuzz.c	/^  \/* 03 *\/ STAGE_FLIP8,$/;"	e	enum:__anon3	file:
-STAGE_HAVOC	afl-fuzz.c	/^  \/* 15 *\/ STAGE_HAVOC,$/;"	e	enum:__anon3	file:
-STAGE_INTEREST16	afl-fuzz.c	/^  \/* 10 *\/ STAGE_INTEREST16,$/;"	e	enum:__anon3	file:
-STAGE_INTEREST32	afl-fuzz.c	/^  \/* 11 *\/ STAGE_INTEREST32,$/;"	e	enum:__anon3	file:
-STAGE_INTEREST8	afl-fuzz.c	/^  \/* 09 *\/ STAGE_INTEREST8,$/;"	e	enum:__anon3	file:
-STAGE_SPLICE	afl-fuzz.c	/^  \/* 16 *\/ STAGE_SPLICE$/;"	e	enum:__anon3	file:
-STAGE_VAL_BE	afl-fuzz.c	/^  \/* 02 *\/ STAGE_VAL_BE$/;"	e	enum:__anon4	file:
-STAGE_VAL_LE	afl-fuzz.c	/^  \/* 01 *\/ STAGE_VAL_LE,$/;"	e	enum:__anon4	file:
-STAGE_VAL_NONE	afl-fuzz.c	/^  \/* 00 *\/ STAGE_VAL_NONE,$/;"	e	enum:__anon4	file:
-STATE_H	network/state.h	/^#define STATE_H$/;"	d
-STATS_UPDATE_SEC	helper/config.h	/^#define STATS_UPDATE_SEC /;"	d
-STRINGIFY	helper/types.h	/^#define STRINGIFY(/;"	d
-STRINGIFY_INTERNAL	helper/types.h	/^#define STRINGIFY_INTERNAL(/;"	d
-SWAP16	helper/types.h	/^#define SWAP16(/;"	d
-SWAP32	helper/types.h	/^#define SWAP32(/;"	d
-SYNC_INTERVAL	helper/config.h	/^#define SYNC_INTERVAL /;"	d
-TERM_CLEAR	helper/debug.h	/^#define TERM_CLEAR /;"	d
-TERM_HOME	helper/debug.h	/^#define TERM_HOME /;"	d
-TMIN_MAX_FILE	helper/config.h	/^#define TMIN_MAX_FILE /;"	d
-TMIN_SET_MIN_SIZE	helper/config.h	/^#define TMIN_SET_MIN_SIZE /;"	d
-TMIN_SET_STEPS	helper/config.h	/^#define TMIN_SET_STEPS /;"	d
-TMOUT_LIMIT	helper/config.h	/^#define TMOUT_LIMIT /;"	d
-TRIM_END_STEPS	helper/config.h	/^#define TRIM_END_STEPS /;"	d
-TRIM_MIN_BYTES	helper/config.h	/^#define TRIM_MIN_BYTES /;"	d
-TRIM_MODE	network/utilities.h	/^#define TRIM_MODE /;"	d
-TRIM_START_STEPS	helper/config.h	/^#define TRIM_START_STEPS /;"	d
-TRK	helper/alloc-inl.h	/^struct TRK_obj* TRK[ALLOC_BUCKETS];$/;"	v	typeref:struct:TRK_obj
-TRKH	helper/alloc-inl.h	/^#define TRKH(/;"	d
-TRK_alloc_buf	helper/alloc-inl.h	/^static inline void TRK_alloc_buf(void* ptr, const char* file, const char* func,$/;"	f
-TRK_ck_alloc	helper/alloc-inl.h	/^static inline void* TRK_ck_alloc(u32 size, const char* file, const char* func,$/;"	f
-TRK_ck_free	helper/alloc-inl.h	/^static inline void TRK_ck_free(void* ptr, const char* file,$/;"	f
-TRK_ck_memdup	helper/alloc-inl.h	/^static inline void* TRK_ck_memdup(void* mem, u32 size, const char* file,$/;"	f
-TRK_ck_memdup_str	helper/alloc-inl.h	/^static inline void* TRK_ck_memdup_str(void* mem, u32 size, const char* file,$/;"	f
-TRK_ck_realloc	helper/alloc-inl.h	/^static inline void* TRK_ck_realloc(void* orig, u32 size, const char* file,$/;"	f
-TRK_ck_realloc_block	helper/alloc-inl.h	/^static inline void* TRK_ck_realloc_block(void* orig, u32 size, const char* file,$/;"	f
-TRK_ck_strdup	helper/alloc-inl.h	/^static inline void* TRK_ck_strdup(u8* str, const char* file, const char* func,$/;"	f
-TRK_cnt	helper/alloc-inl.h	/^u32 TRK_cnt[ALLOC_BUCKETS];$/;"	v
-TRK_free_buf	helper/alloc-inl.h	/^static inline void TRK_free_buf(void* ptr, const char* file, const char* func,$/;"	f
-TRK_obj	helper/alloc-inl.h	/^struct TRK_obj {$/;"	s
-TRK_report	helper/alloc-inl.h	/^static inline void TRK_report(void) {$/;"	f
-UI_TARGET_HZ	helper/config.h	/^#define UI_TARGET_HZ /;"	d
+EFF_ALEN	afl-fuzz.c	5362;"	d	file:
+EFF_APOS	afl-fuzz.c	5360;"	d	file:
+EFF_REM	afl-fuzz.c	5361;"	d	file:
+EFF_SPAN_ALEN	afl-fuzz.c	5363;"	d	file:
+EXP_ST	afl-fuzz.c	77;"	d	file:
+EXP_ST	afl-fuzz.c	79;"	d	file:
+FAKE_READ_AFL	hook/hook.c	11;"	d	file:
+FAKE_READ_TARGET	hook/hook.c	14;"	d	file:
+FAKE_WRITE_AFL	hook/hook.c	21;"	d	file:
+FAULT_CRASH	afl-fuzz.c	/^  \/* 02 *\/ FAULT_CRASH,$/;"	e	enum:__anon3	file:
+FAULT_ERROR	afl-fuzz.c	/^  \/* 03 *\/ FAULT_ERROR,$/;"	e	enum:__anon3	file:
+FAULT_NOBITS	afl-fuzz.c	/^  \/* 05 *\/ FAULT_NOBITS$/;"	e	enum:__anon3	file:
+FAULT_NOINST	afl-fuzz.c	/^  \/* 04 *\/ FAULT_NOINST,$/;"	e	enum:__anon3	file:
+FAULT_NONE	afl-fuzz.c	/^  \/* 00 *\/ FAULT_NONE,$/;"	e	enum:__anon3	file:
+FAULT_TMOUT	afl-fuzz.c	/^  \/* 01 *\/ FAULT_TMOUT,$/;"	e	enum:__anon3	file:
+FF	afl-fuzz.c	994;"	d	file:
+FLIP_BIT	afl-fuzz.c	5186;"	d	file:
+FLIP_BIT	afl-fuzz.c	6771;"	d	file:
+HAVE_AFFINITY	afl-fuzz.c	70;"	d	file:
+MESSAGES_TO_STDOUT	afl-fuzz.c	24;"	d	file:
+SP10	afl-fuzz.c	4073;"	d	file:
+SP20	afl-fuzz.c	4074;"	d	file:
+SP5	afl-fuzz.c	4072;"	d	file:
+STAGE_ARITH16	afl-fuzz.c	/^  \/* 07 *\/ STAGE_ARITH16,$/;"	e	enum:__anon1	file:
+STAGE_ARITH32	afl-fuzz.c	/^  \/* 08 *\/ STAGE_ARITH32,$/;"	e	enum:__anon1	file:
+STAGE_ARITH8	afl-fuzz.c	/^  \/* 06 *\/ STAGE_ARITH8,$/;"	e	enum:__anon1	file:
+STAGE_EXTRAS_AO	afl-fuzz.c	/^  \/* 14 *\/ STAGE_EXTRAS_AO,$/;"	e	enum:__anon1	file:
+STAGE_EXTRAS_UI	afl-fuzz.c	/^  \/* 13 *\/ STAGE_EXTRAS_UI,$/;"	e	enum:__anon1	file:
+STAGE_EXTRAS_UO	afl-fuzz.c	/^  \/* 12 *\/ STAGE_EXTRAS_UO,$/;"	e	enum:__anon1	file:
+STAGE_FLIP1	afl-fuzz.c	/^  \/* 00 *\/ STAGE_FLIP1,$/;"	e	enum:__anon1	file:
+STAGE_FLIP16	afl-fuzz.c	/^  \/* 04 *\/ STAGE_FLIP16,$/;"	e	enum:__anon1	file:
+STAGE_FLIP2	afl-fuzz.c	/^  \/* 01 *\/ STAGE_FLIP2,$/;"	e	enum:__anon1	file:
+STAGE_FLIP32	afl-fuzz.c	/^  \/* 05 *\/ STAGE_FLIP32,$/;"	e	enum:__anon1	file:
+STAGE_FLIP4	afl-fuzz.c	/^  \/* 02 *\/ STAGE_FLIP4,$/;"	e	enum:__anon1	file:
+STAGE_FLIP8	afl-fuzz.c	/^  \/* 03 *\/ STAGE_FLIP8,$/;"	e	enum:__anon1	file:
+STAGE_HAVOC	afl-fuzz.c	/^  \/* 15 *\/ STAGE_HAVOC,$/;"	e	enum:__anon1	file:
+STAGE_INTEREST16	afl-fuzz.c	/^  \/* 10 *\/ STAGE_INTEREST16,$/;"	e	enum:__anon1	file:
+STAGE_INTEREST32	afl-fuzz.c	/^  \/* 11 *\/ STAGE_INTEREST32,$/;"	e	enum:__anon1	file:
+STAGE_INTEREST8	afl-fuzz.c	/^  \/* 09 *\/ STAGE_INTEREST8,$/;"	e	enum:__anon1	file:
+STAGE_SPLICE	afl-fuzz.c	/^  \/* 16 *\/ STAGE_SPLICE$/;"	e	enum:__anon1	file:
+STAGE_VAL_BE	afl-fuzz.c	/^  \/* 02 *\/ STAGE_VAL_BE$/;"	e	enum:__anon2	file:
+STAGE_VAL_LE	afl-fuzz.c	/^  \/* 01 *\/ STAGE_VAL_LE,$/;"	e	enum:__anon2	file:
+STAGE_VAL_NONE	afl-fuzz.c	/^  \/* 00 *\/ STAGE_VAL_NONE,$/;"	e	enum:__anon2	file:
+TARGET_WRITE_AFL	hook/hook.c	18;"	d	file:
+TARGET_WRITE_FAKE	hook/hook.c	15;"	d	file:
+TIMEOUT	hook/hook.c	9;"	d	file:
 UR	afl-fuzz.c	/^static inline u32 UR(u32 limit) {$/;"	f	file:
-USE_AUTO_EXTRAS	helper/config.h	/^#define USE_AUTO_EXTRAS /;"	d
-USE_COLOR	helper/config.h	/^#define USE_COLOR$/;"	d
-UTILITIES_H	network/utilities.h	/^#define UTILITIES_H$/;"	d
-VERSION	helper/config.h	/^#define VERSION /;"	d
-WARNF	helper/debug.h	/^#define WARNF(/;"	d
-_FILE_OFFSET_BITS	afl-fuzz.c	/^#define _FILE_OFFSET_BITS /;"	d	file:
-_GNU_SOURCE	afl-fuzz.c	/^#define _GNU_SOURCE$/;"	d	file:
-_GNU_SOURCE	network/libpatched/network.c	/^#define _GNU_SOURCE$/;"	d	file:
-_HAVE_ALLOC_INL_H	helper/alloc-inl.h	/^#define _HAVE_ALLOC_INL_H$/;"	d
-_HAVE_CONFIG_H	helper/config.h	/^#define _HAVE_CONFIG_H$/;"	d
-_HAVE_DEBUG_H	helper/debug.h	/^#define _HAVE_DEBUG_H$/;"	d
-_HAVE_HASH_H	helper/hash.h	/^#define _HAVE_HASH_H$/;"	d
-_HAVE_TYPES_H	helper/types.h	/^#define _HAVE_TYPES_H$/;"	d
-__FAVOR_BSD	interceptor.c	/^#define __FAVOR_BSD /;"	d	file:
-__USE_BSD	interceptor.c	/^#define __USE_BSD /;"	d	file:
+_FILE_OFFSET_BITS	afl-fuzz.c	27;"	d	file:
+_GNU_SOURCE	afl-fuzz.c	26;"	d	file:
+_GNU_SOURCE	hook/hook.c	1;"	d	file:
+_GNU_SOURCE	network/libpatched/network.c	1;"	d	file:
+__FAVOR_BSD	interceptor.c	3;"	d	file:
+__USE_BSD	interceptor.c	1;"	d	file:
 a_extras	afl-fuzz.c	/^static struct extra_data* a_extras;   \/* Automatically selected extras    *\/$/;"	v	typeref:struct:extra_data	file:
 a_extras_cnt	afl-fuzz.c	/^static u32 a_extras_cnt;              \/* Total number of tokens available *\/$/;"	v	file:
 add_to_queue	afl-fuzz.c	/^static void add_to_queue(u8* fname, u32 len, u8 passed_det) {$/;"	f	file:
-alloc_printf	helper/alloc-inl.h	/^#define alloc_printf(/;"	d
-alloc_report	helper/alloc-inl.h	/^#  define alloc_report(/;"	d
-alloc_report	helper/alloc-inl.h	/^#define alloc_report(/;"	d
 auto_changed	afl-fuzz.c	/^           auto_changed,              \/* Auto-generated tokens changed?   *\/$/;"	v
-bH	helper/debug.h	/^#  define bH /;"	d
-bH10	afl-fuzz.c	/^#define bH10 /;"	d	file:
-bH2	afl-fuzz.c	/^#define bH2 /;"	d	file:
-bH20	afl-fuzz.c	/^#define bH20 /;"	d	file:
-bH30	afl-fuzz.c	/^#define bH30 /;"	d	file:
-bH5	afl-fuzz.c	/^#define bH5 /;"	d	file:
-bHB	helper/debug.h	/^#  define bHB /;"	d
-bHT	helper/debug.h	/^#  define bHT /;"	d
-bLB	helper/debug.h	/^#  define bLB /;"	d
-bLT	helper/debug.h	/^#  define bLT /;"	d
-bRB	helper/debug.h	/^#  define bRB /;"	d
-bRT	helper/debug.h	/^#  define bRT /;"	d
-bSTART	helper/debug.h	/^#  define bSTART /;"	d
-bSTG	afl-fuzz.c	/^#define bSTG /;"	d	file:
-bSTOP	helper/debug.h	/^#  define bSTOP /;"	d
-bV	helper/debug.h	/^#  define bV /;"	d
-bVL	helper/debug.h	/^#  define bVL /;"	d
-bVR	helper/debug.h	/^#  define bVR /;"	d
-bX	helper/debug.h	/^#  define bX /;"	d
-bgBLK	helper/debug.h	/^#  define bgBLK /;"	d
-bgBLU	helper/debug.h	/^#  define bgBLU /;"	d
-bgBRI	helper/debug.h	/^#  define bgBRI /;"	d
-bgBRN	helper/debug.h	/^#  define bgBRN /;"	d
-bgCYA	helper/debug.h	/^#  define bgCYA /;"	d
-bgGRA	helper/debug.h	/^#  define bgGRA /;"	d
-bgGRN	helper/debug.h	/^#  define bgGRN /;"	d
-bgLBL	helper/debug.h	/^#  define bgLBL /;"	d
-bgLCY	helper/debug.h	/^#  define bgLCY /;"	d
-bgLGN	helper/debug.h	/^#  define bgLGN /;"	d
-bgLGR	helper/debug.h	/^#  define bgLGR /;"	d
-bgLRD	helper/debug.h	/^#  define bgLRD /;"	d
-bgMGN	helper/debug.h	/^#  define bgMGN /;"	d
-bgPIN	helper/debug.h	/^#  define bgPIN /;"	d
-bgRED	helper/debug.h	/^#  define bgRED /;"	d
-bgYEL	helper/debug.h	/^#  define bgYEL /;"	d
+bH10	afl-fuzz.c	4069;"	d	file:
+bH2	afl-fuzz.c	4067;"	d	file:
+bH20	afl-fuzz.c	4070;"	d	file:
+bH30	afl-fuzz.c	4071;"	d	file:
+bH5	afl-fuzz.c	4068;"	d	file:
+bSTG	afl-fuzz.c	4066;"	d	file:
 bind_to_free_cpu	afl-fuzz.c	/^static void bind_to_free_cpu(void) {$/;"	f	file:
 bitmap_changed	afl-fuzz.c	/^           bitmap_changed = 1,        \/* Time to update bitmap?           *\/$/;"	v
 bitmap_size	afl-fuzz.c	/^  u32 bitmap_size,                    \/* Number of bits set in bitmap     *\/$/;"	m	struct:queue_entry	file:
@@ -260,24 +86,6 @@ blocks_eff_total	afl-fuzz.c	/^           blocks_eff_total,          \/* Blocks s
 buffer	interceptor.c	/^static char *buffer;$/;"	v	file:
 bytes_trim_in	afl-fuzz.c	/^           bytes_trim_in,             \/* Bytes coming into the trimmer    *\/$/;"	v
 bytes_trim_out	afl-fuzz.c	/^           bytes_trim_out,            \/* Bytes coming outa the trimmer    *\/$/;"	v
-cBLK	helper/debug.h	/^#  define cBLK /;"	d
-cBLU	helper/debug.h	/^#  define cBLU /;"	d
-cBRI	helper/debug.h	/^#  define cBRI /;"	d
-cBRN	helper/debug.h	/^#  define cBRN /;"	d
-cCYA	helper/debug.h	/^#  define cCYA /;"	d
-cEOL	helper/debug.h	/^#define cEOL /;"	d
-cGRA	helper/debug.h	/^#  define cGRA /;"	d
-cGRN	helper/debug.h	/^#  define cGRN /;"	d
-cLBL	helper/debug.h	/^#  define cLBL /;"	d
-cLCY	helper/debug.h	/^#  define cLCY /;"	d
-cLGN	helper/debug.h	/^#  define cLGN /;"	d
-cLGR	helper/debug.h	/^#  define cLGR /;"	d
-cLRD	helper/debug.h	/^#  define cLRD /;"	d
-cMGN	helper/debug.h	/^#  define cMGN /;"	d
-cPIN	helper/debug.h	/^#  define cPIN /;"	d
-cRED	helper/debug.h	/^#  define cRED /;"	d
-cRST	helper/debug.h	/^#  define cRST /;"	d
-cYEL	helper/debug.h	/^#  define cYEL /;"	d
 cal_failed	afl-fuzz.c	/^  u8  cal_failed,                     \/* Calibration failed?              *\/$/;"	m	struct:queue_entry	file:
 calculate_score	afl-fuzz.c	/^static u32 calculate_score(struct queue_entry* q) {$/;"	f	file:
 calibrate_case	afl-fuzz.c	/^static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,$/;"	f	file:
@@ -291,27 +99,10 @@ check_term_size	afl-fuzz.c	/^static void check_term_size(void) {$/;"	f	file:
 child_pid	afl-fuzz.c	/^           child_pid = -1,            \/* PID of the fuzzed program        *\/$/;"	v	file:
 child_timed_out	afl-fuzz.c	/^                   child_timed_out;   \/* Traced process timed out?        *\/$/;"	v	file:
 choose_block_len	afl-fuzz.c	/^static u32 choose_block_len(u32 limit) {$/;"	f	file:
-ck_alloc	helper/alloc-inl.h	/^#define ck_alloc /;"	d
-ck_alloc	helper/alloc-inl.h	/^#define ck_alloc(/;"	d
-ck_alloc_nozero	helper/alloc-inl.h	/^#define ck_alloc_nozero /;"	d
-ck_alloc_nozero	helper/alloc-inl.h	/^#define ck_alloc_nozero(/;"	d
-ck_free	helper/alloc-inl.h	/^#define ck_free /;"	d
-ck_free	helper/alloc-inl.h	/^#define ck_free(/;"	d
-ck_memdup	helper/alloc-inl.h	/^#define ck_memdup /;"	d
-ck_memdup	helper/alloc-inl.h	/^#define ck_memdup(/;"	d
-ck_memdup_str	helper/alloc-inl.h	/^#define ck_memdup_str /;"	d
-ck_memdup_str	helper/alloc-inl.h	/^#define ck_memdup_str(/;"	d
-ck_read	helper/debug.h	/^#define ck_read(/;"	d
-ck_realloc	helper/alloc-inl.h	/^#define ck_realloc /;"	d
-ck_realloc	helper/alloc-inl.h	/^#define ck_realloc(/;"	d
-ck_realloc_block	helper/alloc-inl.h	/^#define ck_realloc_block /;"	d
-ck_realloc_block	helper/alloc-inl.h	/^#define ck_realloc_block(/;"	d
-ck_strdup	helper/alloc-inl.h	/^#define ck_strdup /;"	d
-ck_strdup	helper/alloc-inl.h	/^#define ck_strdup(/;"	d
-ck_write	helper/debug.h	/^#define ck_write(/;"	d
 classify_counts	afl-fuzz.c	/^static inline void classify_counts(u32* mem) {$/;"	f	file:
 classify_counts	afl-fuzz.c	/^static inline void classify_counts(u64* mem) {$/;"	f	file:
 clear_screen	afl-fuzz.c	/^                   clear_screen = 1,  \/* Window resized?                  *\/$/;"	v	file:
+client_pid	afl-fuzz.c	/^static u32 client_pid;$/;"	v	file:
 common_fuzz_stuff	afl-fuzz.c	/^EXP_ST u8 common_fuzz_stuff(char** argv, u8* out_buf, u32 len) {$/;"	f
 compare_extras_len	afl-fuzz.c	/^static int compare_extras_len(const void* p1, const void* p2) {$/;"	f	file:
 compare_extras_use_d	afl-fuzz.c	/^static int compare_extras_use_d(const void* p1, const void* p2) {$/;"	f	file:
@@ -326,17 +117,13 @@ count_non_255_bytes	afl-fuzz.c	/^static u32 count_non_255_bytes(u8* mem) {$/;"	f
 cpu_aff	afl-fuzz.c	/^static s32 cpu_aff = -1;			  \/* Selected CPU core                *\/$/;"	v	file:
 cpu_core_count	afl-fuzz.c	/^static s32 cpu_core_count;            \/* CPU core count                   *\/$/;"	v	file:
 crash_mode	afl-fuzz.c	/^           crash_mode,                \/* Crash mode! Yeah!                *\/$/;"	v
-createNormClient	network/utilities.c	/^thread_args *createNormClient(char *ip_address, unsigned int port, protocol *state,$/;"	f
-createTrimClient	network/utilities.c	/^thread_args *createTrimClient(char *ip_address, unsigned int port, protocol *state,$/;"	f
 cull_queue	afl-fuzz.c	/^static void cull_queue(void) {$/;"	f	file:
 cur_depth	afl-fuzz.c	/^           cur_depth,                 \/* Current path depth               *\/$/;"	v
 cur_skipped_paths	afl-fuzz.c	/^           cur_skipped_paths,         \/* Abandoned inputs in cur cycle    *\/$/;"	v
 current_entry	afl-fuzz.c	/^           current_entry,             \/* Current queue entry ID           *\/$/;"	v
-current_msg	network/state.h	/^    int current_msg;$/;"	m	struct:__anon2
 current_size	interceptor.c	/^static int current_size;$/;"	v	file:
 cycles_wo_finds	afl-fuzz.c	/^           cycles_wo_finds,           \/* Cycles without any new paths     *\/$/;"	v
 data	afl-fuzz.c	/^  u8* data;                           \/* Dictionary token data            *\/$/;"	m	struct:extra_data	file:
-data	network/state.h	/^    char *data;$/;"	m	struct:messages
 debugMsg	network/state.c	/^void debugMsg(messages *obj)$/;"	f
 debugProtocol	network/state.c	/^void debugProtocol(protocol *obj)$/;"	f
 deferred_mode	afl-fuzz.c	/^           deferred_mode,             \/* Deferred forkserver mode?        *\/$/;"	v
@@ -352,7 +139,9 @@ dev_null_fd	afl-fuzz.c	/^           dev_null_fd = -1,          \/* Persistent fd
 dev_urandom_fd	afl-fuzz.c	/^           dev_urandom_fd = -1,       \/* Persistent fd for \/dev\/urandom   *\/$/;"	v	file:
 doc_path	afl-fuzz.c	/^          *doc_path,                  \/* Path to documentation dir        *\/$/;"	v
 dumb_mode	afl-fuzz.c	/^           dumb_mode,                 \/* Run in non-instrumented mode?    *\/$/;"	v
-end_msg	network/state.h	/^    messages *start_msg, *end_msg;$/;"	m	struct:__anon2
+dump_data	network/state.c	/^unsigned char *dump_data(protocol *state, int *len)$/;"	f
+dump_fuzzed_data	network/state.c	/^unsigned char *dump_fuzzed_data(protocol *state, unsigned char *data, unsigned int len, int *length)$/;"	f
+evaluate	network/state.c	/^int evaluate(pid_t child_pid)$/;"	f
 exec_cksum	afl-fuzz.c	/^      exec_cksum;                     \/* Checksum of the execution trace  *\/$/;"	m	struct:queue_entry	file:
 exec_tmout	afl-fuzz.c	/^EXP_ST u32 exec_tmout = EXEC_TIMEOUT; \/* Configurable exec timeout (ms)   *\/$/;"	v
 exec_us	afl-fuzz.c	/^  u64 exec_us,                        \/* Execution time (us)              *\/$/;"	m	struct:queue_entry	file:
@@ -361,7 +150,6 @@ extras	afl-fuzz.c	/^static struct extra_data* extras;     \/* Extra tokens to fu
 extras_cnt	afl-fuzz.c	/^static u32 extras_cnt;                \/* Total number of tokens read      *\/$/;"	v	file:
 fast_cal	afl-fuzz.c	/^           fast_cal;                  \/* Try to calibrate faster?         *\/$/;"	v
 favored	afl-fuzz.c	/^      favored,                        \/* Currently favored?               *\/$/;"	m	struct:queue_entry	file:
-file	helper/alloc-inl.h	/^  char *file, *func;$/;"	m	struct:TRK_obj
 find_start_position	afl-fuzz.c	/^static u32 find_start_position(void) {$/;"	f	file:
 find_timeout	afl-fuzz.c	/^static void find_timeout(void) {$/;"	f	file:
 fix_up_banner	afl-fuzz.c	/^static void fix_up_banner(u8* name) {$/;"	f	file:
@@ -372,10 +160,12 @@ forksrv_pid	afl-fuzz.c	/^static s32 forksrv_pid,               \/* PID of the fo
 fs_redundant	afl-fuzz.c	/^      fs_redundant;                   \/* Marked as redundant in the fs?   *\/$/;"	m	struct:queue_entry	file:
 fsrv_ctl_fd	afl-fuzz.c	/^           fsrv_ctl_fd,               \/* Fork server control pipe (write) *\/$/;"	v	file:
 fsrv_st_fd	afl-fuzz.c	/^           fsrv_st_fd;                \/* Fork server status pipe (read)   *\/$/;"	v	file:
-func	helper/alloc-inl.h	/^  char *file, *func;$/;"	m	struct:TRK_obj
-fuzz_data	network/utilities.h	/^    char *fuzz_data;$/;"	m	struct:__anon1
 fuzz_one	afl-fuzz.c	/^static u8 fuzz_one(char** argv) {$/;"	f	file:
+fuzzing_msg	afl-fuzz.c	/^static messages *fuzzing_msg;$/;"	v	file:
+fuzzing_prot	afl-fuzz.c	/^static protocol *fuzzing_prot;$/;"	v	file:
 getCurMsg	network/state.c	/^messages *getCurMsg(protocol *state)$/;"	f
+getLenUntil	network/state.c	/^int getLenUntil(protocol *state, int index)$/;"	f
+getMsg	network/state.c	/^messages *getMsg(protocol *state, int index)$/;"	f
 getNxtMsg	network/state.c	/^messages *getNxtMsg(protocol *state)$/;"	f
 get_core_count	afl-fuzz.c	/^static void get_core_count(void) {$/;"	f	file:
 get_cur_time	afl-fuzz.c	/^static u64 get_cur_time(void) {$/;"	f	file:
@@ -384,13 +174,13 @@ get_qemu_argv	afl-fuzz.c	/^static char** get_qemu_argv(u8* own_loc, char** argv,
 get_runnable_processes	afl-fuzz.c	/^static double get_runnable_processes(void) {$/;"	f	file:
 handicap	afl-fuzz.c	/^      handicap,                       \/* Number of queue cycles behind    *\/$/;"	m	struct:queue_entry	file:
 handle_resize	afl-fuzz.c	/^static void handle_resize(int sig) {$/;"	f	file:
+handle_signal	network/state.c	/^void handle_signal(int sig)$/;"	f
 handle_skipreq	afl-fuzz.c	/^static void handle_skipreq(int sig) {$/;"	f	file:
 handle_stop_sig	afl-fuzz.c	/^static void handle_stop_sig(int sig) {$/;"	f	file:
 handle_timeout	afl-fuzz.c	/^static void handle_timeout(int sig) {$/;"	f	file:
 hang_tmout	afl-fuzz.c	/^static u32 hang_tmout = EXEC_TIMEOUT; \/* Timeout used for hang det (ms)   *\/$/;"	v	file:
 has_new_bits	afl-fuzz.c	/^static inline u8 has_new_bits(u8* virgin_map) {$/;"	f	file:
 has_new_cov	afl-fuzz.c	/^      has_new_cov,                    \/* Triggers new coverage?           *\/$/;"	m	struct:queue_entry	file:
-hash32	helper/hash.h	/^static inline u32 hash32(const void* key, u32 len, u32 seed) {$/;"	f
 havoc_div	afl-fuzz.c	/^           havoc_div = 1;             \/* Cycle count divisor for havoc    *\/$/;"	v
 hit_cnt	afl-fuzz.c	/^  u32 hit_cnt;                        \/* Use count in the corpus          *\/$/;"	m	struct:extra_data	file:
 in_bitmap	afl-fuzz.c	/^          *in_bitmap,                 \/* Input bitmap                     *\/$/;"	v
@@ -399,11 +189,11 @@ in_place_resume	afl-fuzz.c	/^           in_place_resume,           \/* Attempt i
 init_count_class16	afl-fuzz.c	/^EXP_ST void init_count_class16(void) {$/;"	f
 init_forkserver	afl-fuzz.c	/^EXP_ST void init_forkserver(char** argv) {$/;"	f
 init_interceptor	interceptor.c	/^static void init_interceptor(const char *device)$/;"	f	file:
+init_method	hook/hook.c	/^static __attribute__((constructor)) void init_method(void)$/;"	f	file:
 init_method	network/libpatched/network.c	/^static __attribute__((constructor)) void init_method(void)$/;"	f	file:
 interesting_16	afl-fuzz.c	/^static s16 interesting_16[] = { INTERESTING_8, INTERESTING_16 };$/;"	v	file:
 interesting_32	afl-fuzz.c	/^static s32 interesting_32[] = { INTERESTING_8, INTERESTING_16, INTERESTING_32 };$/;"	v	file:
 interesting_8	afl-fuzz.c	/^static s8  interesting_8[]  = { INTERESTING_8 };$/;"	v	file:
-ip_address	network/utilities.h	/^    char *ip_address;$/;"	m	struct:__anon1
 ip_server	interceptor.c	/^static char *ip_server;$/;"	v	file:
 kill_signal	afl-fuzz.c	/^           kill_signal,               \/* Signal that killed the child     *\/$/;"	v
 last_crash_execs	afl-fuzz.c	/^           last_crash_execs,          \/* Exec counter at last crash       *\/$/;"	v
@@ -412,9 +202,7 @@ last_hang_time	afl-fuzz.c	/^           last_hang_time,            \/* Time for m
 last_path_time	afl-fuzz.c	/^           last_path_time,            \/* Time for most recent path (ms)   *\/$/;"	v
 len	afl-fuzz.c	/^  u32 len;                            \/* Dictionary token length          *\/$/;"	m	struct:extra_data	file:
 len	afl-fuzz.c	/^  u32 len;                            \/* Input length                     *\/$/;"	m	struct:queue_entry	file:
-len	network/utilities.h	/^    int len;$/;"	m	struct:__anon1
-likely	helper/types.h	/^#define likely(/;"	d
-line	helper/alloc-inl.h	/^  u32  line;$/;"	m	struct:TRK_obj
+libhook_path	afl-fuzz.c	/^u8 *libhook_path;$/;"	v
 link_or_copy	afl-fuzz.c	/^static void link_or_copy(u8* old_path, u8* new_path) {$/;"	f	file:
 loadFromMem	network/state.c	/^protocol *loadFromMem(char *tmp_buf, int totalSize)$/;"	f
 load_auto	afl-fuzz.c	/^static void load_auto(void) {$/;"	f	file:
@@ -434,16 +222,13 @@ maybe_delete_out_dir	afl-fuzz.c	/^static void maybe_delete_out_dir(void) {$/;"	f
 maybe_update_plot_file	afl-fuzz.c	/^static void maybe_update_plot_file(double bitmap_cvg, double eps) {$/;"	f	file:
 mem_limit	afl-fuzz.c	/^EXP_ST u64 mem_limit  = MEM_LIMIT;    \/* Memory cap for child (MB)        *\/$/;"	v
 memcmp_nocase	afl-fuzz.c	/^static inline u8 memcmp_nocase(u8* m1, u8* m2, u32 len) {$/;"	f	file:
-messages	network/state.h	/^struct messages {$/;"	s
-messages	network/state.h	/^typedef struct messages messages;$/;"	t	typeref:struct:messages
 minimize_bits	afl-fuzz.c	/^static void minimize_bits(u8* dst, u8* src) {$/;"	f	file:
-mode	network/utilities.h	/^    int mode;$/;"	m	struct:__anon1
 my_packet_handler	interceptor.c	/^static void my_packet_handler(u_char *args, const struct pcap_pkthdr *header, const u_char *packet)$/;"	f	file:
-newMsg	network/state.c	/^messages *newMsg(int size, char *data, messages *prev)$/;"	f
+newMsg	network/state.c	/^messages *newMsg(int size, char *data, messages *prev, int done_det, int done_trim)$/;"	f
 newProtocol	network/state.c	/^protocol *newProtocol(int current_msg, messages *start_msg, messages *end_msg, int size)$/;"	f
+new_connection	network/utilities.c	/^int new_connection(const char *ip, unsigned int port)$/;"	f
 next	afl-fuzz.c	/^  struct queue_entry *next,           \/* Next element, if any             *\/$/;"	m	struct:queue_entry	typeref:struct:queue_entry::queue_entry	file:
 next_100	afl-fuzz.c	/^                     *next_100;       \/* 100 elements ahead               *\/$/;"	m	struct:queue_entry	typeref:struct:queue_entry::	file:
-next_msg	network/state.h	/^    struct messages *next_msg;$/;"	m	struct:messages	typeref:struct:messages::messages
 next_p2	afl-fuzz.c	/^static u32 next_p2(u32 val) {$/;"	f	file:
 no_arith	afl-fuzz.c	/^           no_arith,                  \/* Skip most arithmetic ops         *\/$/;"	v
 no_cpu_meter_red	afl-fuzz.c	/^           no_cpu_meter_red,          \/* Feng shui on the status screen   *\/$/;"	v
@@ -451,7 +236,11 @@ no_forkserver	afl-fuzz.c	/^           no_forkserver,             \/* Disable for
 not_on_tty	afl-fuzz.c	/^           not_on_tty,                \/* stdout is not a tty              *\/$/;"	v
 nuke_resume_dir	afl-fuzz.c	/^static void nuke_resume_dir(void) {$/;"	f	file:
 orig_cmdline	afl-fuzz.c	/^          *orig_cmdline;              \/* Original command line            *\/$/;"	v
+orig_read	hook/hook.c	/^static orig_read_f orig_read = NULL;$/;"	v	file:
+orig_read_f	hook/hook.c	/^typedef ssize_t (*orig_read_f)(int fd, void *buf, size_t count);$/;"	t	file:
+orig_recv	hook/hook.c	/^static orig_recv_f orig_recv = NULL;$/;"	v	file:
 orig_recv	network/libpatched/network.c	/^static orig_recv_f orig_recv = NULL;$/;"	v	file:
+orig_recv_f	hook/hook.c	/^typedef ssize_t (*orig_recv_f)(int fd, void *buf, size_t len, int flags);$/;"	t	file:
 orig_recv_f	network/libpatched/network.c	/^typedef int (*orig_recv_f)(int fd, void *buf, size_t len, int flags);$/;"	t	file:
 orig_socket	network/libpatched/network.c	/^static orig_socket_f orig_socket = NULL;$/;"	v	file:
 orig_socket_f	network/libpatched/network.c	/^typedef int (*orig_socket_f)(int domain, int type, int protocol);$/;"	t	file:
@@ -467,12 +256,12 @@ perform_dry_run	afl-fuzz.c	/^static void perform_dry_run(char** argv) {$/;"	f	fi
 persistent_mode	afl-fuzz.c	/^           persistent_mode,           \/* Running in persistent mode?      *\/$/;"	v
 pivot_inputs	afl-fuzz.c	/^static void pivot_inputs(void) {$/;"	f	file:
 plot_file	afl-fuzz.c	/^static FILE* plot_file;               \/* Gnuplot output file              *\/$/;"	v	file:
-port	network/utilities.h	/^    unsigned int port;$/;"	m	struct:__anon1
+port_server	afl-fuzz.c	/^static u16 port_server;$/;"	v	file:
 port_server	interceptor.c	/^static int port_server;$/;"	v	file:
 post_handler	afl-fuzz.c	/^static u8* (*post_handler)(u8* buf, u32* len);$/;"	v	file:
-protocol	network/state.h	/^} protocol;$/;"	t	typeref:struct:__anon2
+pprint	network/state.c	/^void pprint(const char *prefix, char *s, int size)$/;"	f
+prev_child_pid	afl-fuzz.c	/^s32 prev_child_pid;$/;"	v
 protocol_server	interceptor.c	/^static u_char protocol_server;$/;"	v	file:
-ptr	helper/alloc-inl.h	/^  void *ptr;$/;"	m	struct:TRK_obj
 q_prev100	afl-fuzz.c	/^                          *q_prev100; \/* Previous 100 marker              *\/$/;"	v	typeref:struct:	file:
 qemu_mode	afl-fuzz.c	/^           qemu_mode,                 \/* Running in QEMU mode?            *\/$/;"	v
 queue	afl-fuzz.c	/^static struct queue_entry *queue,     \/* Fuzzing queue (linked list)      *\/$/;"	v	typeref:struct:queue_entry	file:
@@ -490,24 +279,20 @@ queued_with_cov	afl-fuzz.c	/^           queued_with_cov,           \/* Paths wit
 rand_cnt	afl-fuzz.c	/^static u32 rand_cnt;                  \/* Random number counter            *\/$/;"	v	file:
 read_bitmap	afl-fuzz.c	/^EXP_ST void read_bitmap(u8* fname) {$/;"	f
 read_testcases	afl-fuzz.c	/^static void read_testcases(void) {$/;"	f	file:
+recv	hook/hook.c	/^ssize_t recv(int sockfd, void *buf, size_t len, int flags)$/;"	f
 recv	network/libpatched/network.c	/^ssize_t recv(int fd, void *buf, size_t len, int flags)$/;"	f
 recvAll	network/utilities.c	/^int recvAll(int sockfd) {$/;"	f
-remove_pos	network/utilities.h	/^    unsigned int remove_pos;$/;"	m	struct:__anon1
 remove_shm	afl-fuzz.c	/^static void remove_shm(void) {$/;"	f	file:
 resuming_fuzz	afl-fuzz.c	/^           resuming_fuzz,             \/* Resuming an older fuzzing job?   *\/$/;"	v
 run_over10m	afl-fuzz.c	/^           run_over10m,               \/* Run time over 10 minutes?        *\/$/;"	v
 run_target	afl-fuzz.c	/^static u8 run_target(char** argv, u32 timeout) {$/;"	f	file:
-s16	helper/types.h	/^typedef int16_t  s16;$/;"	t
-s32	helper/types.h	/^typedef int32_t  s32;$/;"	t
-s64	helper/types.h	/^typedef int64_t  s64;$/;"	t
-s8	helper/types.h	/^typedef int8_t   s8;$/;"	t
 save_auto	afl-fuzz.c	/^static void save_auto(void) {$/;"	f	file:
 save_cmdline	afl-fuzz.c	/^static void save_cmdline(u32 argc, char** argv) {$/;"	f	file:
 save_if_interesting	afl-fuzz.c	/^static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {$/;"	f	file:
 score_changed	afl-fuzz.c	/^           score_changed,             \/* Scoring for favorites changed?   *\/$/;"	v
-sendAll	network/utilities.c	/^void sendAll(int sockfd, char *msg, int len)$/;"	f
-send_state	network/utilities.c	/^int send_state(thread_args *args, int *flag, pid_t frksrv, pid_t server, int done_st)$/;"	f
+sendAll	network/utilities.c	/^void sendAll(int sockfd, unsigned char *msg, int len)$/;"	f
 serialize	network/state.c	/^void serialize(protocol *state, int cur_index, char *msg, int len, char *filename)$/;"	f
+setup_communications	network/state.c	/^void setup_communications(u32 *client_fd, const char *out_file, u16 port)$/;"	f
 setup_dirs_fds	afl-fuzz.c	/^EXP_ST void setup_dirs_fds(void) {$/;"	f
 setup_post	afl-fuzz.c	/^static void setup_post(void) {$/;"	f	file:
 setup_shm	afl-fuzz.c	/^EXP_ST void setup_shm(void) {$/;"	f
@@ -522,8 +307,7 @@ sig_handler	interceptor.c	/^static void sig_handler(int sig)$/;"	f	file:
 simplify_lookup	afl-fuzz.c	/^static const u8 simplify_lookup[256] = { $/;"	v	file:
 simplify_trace	afl-fuzz.c	/^static void simplify_trace(u32* mem) {$/;"	f	file:
 simplify_trace	afl-fuzz.c	/^static void simplify_trace(u64* mem) {$/;"	f	file:
-size	network/state.h	/^    int size;$/;"	m	struct:__anon2
-size	network/state.h	/^    int size;$/;"	m	struct:messages
+single_msg	afl-fuzz.c	/^static u32 single_msg;$/;"	v	file:
 skip_deterministic	afl-fuzz.c	/^EXP_ST u8  skip_deterministic,        \/* Skip deterministic stages?       *\/$/;"	v
 skip_requested	afl-fuzz.c	/^           skip_requested,            \/* Skip request, via SIGUSR1        *\/$/;"	v
 socket	network/libpatched/network.c	/^int socket(int domain, int type, int protocol)$/;"	f
@@ -537,10 +321,8 @@ stage_max	afl-fuzz.c	/^static s32 stage_cur, stage_max;      \/* Stage progressi
 stage_name	afl-fuzz.c	/^static u8 *stage_name = "init",       \/* Name of the current fuzz stage   *\/$/;"	v	file:
 stage_short	afl-fuzz.c	/^          *stage_short,               \/* Short stage name                 *\/$/;"	v	file:
 stage_val_type	afl-fuzz.c	/^static u8  stage_val_type;            \/* Value type (STAGE_VAL_*)         *\/$/;"	v	file:
-start_msg	network/state.h	/^    messages *start_msg, *end_msg;$/;"	m	struct:__anon2
 start_time	afl-fuzz.c	/^           start_time,                \/* Unix start time (ms)             *\/$/;"	v
 state	interceptor.c	/^static protocol *state;$/;"	v	file:
-state	network/utilities.h	/^    protocol *state;$/;"	m	struct:__anon1
 stats_update_freq	afl-fuzz.c	/^static u32 stats_update_freq = 1;     \/* Stats update frequency (execs)   *\/$/;"	v	file:
 stop_soon	afl-fuzz.c	/^static volatile u8 stop_soon,         \/* Ctrl-C pressed?                  *\/$/;"	v	file:
 subseq_tmouts	afl-fuzz.c	/^static u32 subseq_tmouts;             \/* Number of timeouts in a row      *\/$/;"	v	file:
@@ -552,7 +334,7 @@ syncing_party	afl-fuzz.c	/^          *syncing_party;             \/* Currently s
 target_path	afl-fuzz.c	/^          *target_path,               \/* Path to target binary            *\/$/;"	v
 tc_ref	afl-fuzz.c	/^  u32 tc_ref;                         \/* Trace bytes ref count            *\/$/;"	m	struct:queue_entry	file:
 term_too_small	afl-fuzz.c	/^           term_too_small,            \/* terminal dimensions too small    *\/$/;"	v
-thread_args	network/utilities.h	/^} thread_args;$/;"	t	typeref:struct:__anon1
+terminated	afl-fuzz.c	/^u8 terminated;$/;"	v
 timeout_given	afl-fuzz.c	/^           timeout_given,             \/* Specific timeout given?          *\/$/;"	v
 top_rated	afl-fuzz.c	/^  top_rated[MAP_SIZE];                \/* Top entries for bitmap bytes     *\/$/;"	v	typeref:struct:queue_entry	file:
 total_bitmap_entries	afl-fuzz.c	/^           total_bitmap_entries;      \/* Number of bitmaps counted        *\/$/;"	v	file:
@@ -564,19 +346,12 @@ total_execs	afl-fuzz.c	/^           total_execs,               \/* Total execve(
 total_tmouts	afl-fuzz.c	/^           total_tmouts,              \/* Total number of timeouts         *\/$/;"	v
 trace_bits	afl-fuzz.c	/^EXP_ST u8* trace_bits;                \/* SHM with instrumentation bitmap  *\/$/;"	v
 trace_mini	afl-fuzz.c	/^  u8* trace_mini;                     \/* Trace bytes, if kept             *\/$/;"	m	struct:queue_entry	file:
-trim_avail	network/utilities.h	/^    unsigned int trim_avail;$/;"	m	struct:__anon1
 trim_case	afl-fuzz.c	/^static u8 trim_case(char** argv, struct queue_entry* q, u8* in_buf) {$/;"	f	file:
 trim_done	afl-fuzz.c	/^      trim_done,                      \/* Trimmed?                         *\/$/;"	m	struct:queue_entry	file:
 trim_execs	afl-fuzz.c	/^           trim_execs,                \/* Execs done to trim input files   *\/$/;"	v
-u16	helper/types.h	/^typedef uint16_t u16;$/;"	t
-u32	helper/types.h	/^typedef uint32_t u32;$/;"	t
-u64	helper/types.h	/^typedef uint64_t u64;$/;"	t
-u64	helper/types.h	/^typedef unsigned long long u64;$/;"	t
-u8	helper/types.h	/^typedef uint8_t  u8;$/;"	t
 unique_crashes	afl-fuzz.c	/^           unique_crashes,            \/* Crashes with unique signatures   *\/$/;"	v
 unique_hangs	afl-fuzz.c	/^           unique_hangs,              \/* Hangs with unique signatures     *\/$/;"	v
 unique_tmouts	afl-fuzz.c	/^           unique_tmouts,             \/* Timeouts with unique signatures  *\/$/;"	v
-unlikely	helper/types.h	/^#define unlikely(/;"	d
 unserialize	network/state.c	/^protocol *unserialize(char *filename)$/;"	f
 update_bitmap_score	afl-fuzz.c	/^static void update_bitmap_score(struct queue_entry* q) {$/;"	f	file:
 usage	afl-fuzz.c	/^static void usage(u8* argv0) {$/;"	f	file:

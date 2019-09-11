@@ -156,10 +156,12 @@ void serialize(protocol *state, int cur_index, char *msg, int len, char *filenam
         if (cnt == cur_index) {
             ck_write(fd, &len, sizeof(int), filename);
             ck_write(fd, &cur->done_det, sizeof(int), filename);
+            ck_write(fd, &cur->done_trim, sizeof(int), filename);
             ck_write(fd, msg, len, filename);
         } else {
             ck_write(fd, &cur->size, sizeof(int), filename);
             ck_write(fd, &cur->done_det, sizeof(int), filename);
+            ck_write(fd, &cur->done_trim, sizeof(int), filename);
             ck_write(fd, cur->data, cur->size, filename);
         }
         cur = cur->next_msg;
@@ -184,13 +186,14 @@ int getLenUntil(protocol *state, int index)
 
 unsigned char *dump_data(protocol *state, int *len)
 {
-    unsigned char *result;
+    unsigned char *result = NULL;
     messages *cur = state->start_msg;
     int total_size = 0;
 
     while (cur != NULL) {
         result = ck_realloc(result, total_size + cur->size);
         memcpy(result + total_size, cur->data, cur->size);
+        total_size += cur->size;
         cur = cur->next_msg;
     }
 
@@ -200,7 +203,7 @@ unsigned char *dump_data(protocol *state, int *len)
 
 unsigned char *dump_fuzzed_data(protocol *state, unsigned char *data, unsigned int len, int *length)
 {
-    unsigned char *result;
+    unsigned char *result = NULL;
     messages *cur = state->start_msg;
     int total_size = 0;
     int cnt = 0;
@@ -213,6 +216,7 @@ unsigned char *dump_fuzzed_data(protocol *state, unsigned char *data, unsigned i
             result = ck_realloc(result, total_size + cur->size);
             memcpy(result + total_size, cur->data, cur->size);
         }
+        total_size += cur->size;
         cnt ++;
         cur = cur->next_msg;
     }
@@ -287,13 +291,13 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
     s32 pipe_afl_fake[2], pipe_target_afl[2], pipe_target_fake[2], pipe_fake_afl[2];
     char tmp_buf[10];
 
-    ACTF("Setting up fake client ...");
+    ACTF("Making pipes ...");
 
     if (pipe(pipe_afl_fake) || pipe(pipe_target_afl) || pipe(pipe_target_fake) || pipe(pipe_fake_afl))
         PFATAL("pipe() for setup communications failed");
     cfd = fork();
 
-    if (cfd > 0) PFATAL("fork() fake client failed");
+    if (cfd < 0) PFATAL("fork() fake client failed");
 
     if (!cfd) {
         /* FAKE CLIENT */
@@ -303,6 +307,7 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
             PFATAL("dup2() for read from target to client failed");
         if (dup2(pipe_afl_fake[0], FAKE_READ_AFL) < 0)
             PFATAL("dup2() for read from afl to client failed");
+
 
         close(pipe_afl_fake[0]);
         close(pipe_afl_fake[1]);
@@ -317,7 +322,12 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
             s32 sockfd = new_connection("127.0.0.1", port);
             if (sockfd < 0) PFATAL("Cannot connect to target");
 
+            if (getenv("DEBUG_MODE"))
+                printf("[+] Client has been connected\n");
+
             read(FAKE_READ_TARGET, tmp_buf, sizeof(tmp_buf));
+            if (getenv("DEBUG_MODE"))
+                printf("[+] Client recv: %s\n", tmp_buf);
 
             s32 fd = open(out_file, O_RDONLY);
             if (fd < 0) PFATAL("Unable to open %s", out_file);
@@ -325,12 +335,18 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
             u8 *buffer = mmap(0, size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
             close(fd);
 
+            if (getenv("DEBUG_MODE"))
+                pprint("CLIENT", (char *)buffer, size);
             sendAll(sockfd, buffer, size);
 
             write(FAKE_WRITE_AFL, "FINISH", 6);
             read(FAKE_READ_AFL, tmp_buf, sizeof(tmp_buf));
+            if (getenv("DEBUG_MODE"))
+                printf("[+] Client recv: %s\n", tmp_buf);
+
 
             close(sockfd);
+            sleep(3);
         }
         exit(0);
     } else {
@@ -373,7 +389,13 @@ int evaluate(pid_t child_pid)
         signal(SIGKILL, handle_signal);
 
         read(AFL_READ_FAKE, buffer, sizeof(buffer));
+        if (getenv("DEBUG_MODE"))
+            printf("[+] Evaluator recv from client: %s\n", buffer);
+
         read(AFL_READ_TARGET, buffer, sizeof(buffer));
+        if (getenv("DEBUG_MODE"))
+            printf("[+] Evaluator recv from target: %s\n", buffer);
+
         write(AFL_WRITE_FAKE, "CLOSE", 5);
 
         kill(child_pid, SIGSTOP);

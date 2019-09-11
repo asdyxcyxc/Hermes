@@ -72,8 +72,10 @@ int main(int argc, char *argv[])
             if (buf[3] == 't')
               return 1 / 0;
       err = send(client_fd, buf, read, 0);
-      if (err < 0)
-        on_error("Client write failed\n");
+      if (err < 0) {
+        printf("Client write failed\n");
+        break;
+      }
     }
   }
 
