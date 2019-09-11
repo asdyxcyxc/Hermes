@@ -34,12 +34,12 @@ static void sig_handler(int sig)
     if (sig == SIGINT) {
         if (current_size > 0) {
             if (state->size == 0) {
-                messages* new_msg = newMsg(current_size, buffer, NULL);
+                messages* new_msg = newMsg(current_size, buffer, NULL, 0, 0);
                 state->start_msg = new_msg;
                 state->end_msg = new_msg;
                 state->size = 1;
             } else {
-                state->end_msg = newMsg(current_size, buffer, state->end_msg);
+                state->end_msg = newMsg(current_size, buffer, state->end_msg, 0, 0);
                 state->size ++;
             }
         }
@@ -126,12 +126,12 @@ static void my_packet_handler(u_char *args, const struct pcap_pkthdr *header, co
             if (ntohs(tcp_info->th_sport) == port_server) {
                 if (current_size > 0) {
                     if (state->size == 0) {
-                        messages* new_msg = newMsg(current_size, buffer, NULL);
+                        messages* new_msg = newMsg(current_size, buffer, NULL, 0, 0);
                         state->start_msg = new_msg;
                         state->end_msg = new_msg;
                         state->size = 1;
                     } else {
-                        state->end_msg = newMsg(current_size, buffer, state->end_msg);
+                        state->end_msg = newMsg(current_size, buffer, state->end_msg, 0, 0);
                         state->size ++;
                     }
                 }
@@ -183,12 +183,12 @@ static void my_packet_handler(u_char *args, const struct pcap_pkthdr *header, co
 #endif
                 if (current_size > 0) {
                     if (state->size == 0) {
-                        messages* new_msg = newMsg(current_size, buffer, NULL);
+                        messages* new_msg = newMsg(current_size, buffer, NULL, 0, 0);
                         state->start_msg = new_msg;
                         state->end_msg = new_msg;
                         state->size = 1;
                     } else {
-                        state->end_msg = newMsg(current_size, buffer, state->end_msg);
+                        state->end_msg = newMsg(current_size, buffer, state->end_msg, 0, 0);
                         state->size ++;
                     }
                 }

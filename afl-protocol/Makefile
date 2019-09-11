@@ -8,7 +8,7 @@ LDFLAGS = -ldl
 
 COMM_HEADER = helper/alloc-inl.h helper/config.h helper/debug.h helper/types.h
 
-all: afl-fuzz interceptor lib afl-protocol
+all: afl-fuzz interceptor lib
 
 afl-fuzz: afl-fuzz.c $(COMM_HEADER)
 	$(CC) $(CFLAGS) -DAFL_PATH=$(AFL_PATH) -DDOC_PATH=$(DOC_PATH) -DBIN_PATH=$(BIN_PATH) $@.c network/*.c -o $@ $(LDFLAGS) $(INCLUDE) 
@@ -20,9 +20,6 @@ lib: afl-fuzz.c $(COMM_HEADER)
 	$(CC) -Wl,--export-dynamic -c -DAFL_PATH=$(AFL_PATH) -DDOC_PATH=$(DOC_PATH) -DBIN_PATH=$(BIN_PATH) -fpic -DAFL_LIB=1 afl-fuzz.c
 	$(CC) -shared -o libafl.so afl-fuzz.o
 	rm afl-fuzz.o
-
-afl-protocol: afl-protocol.c $(COMM_HEADER)
-	$(CC) -L. -Wl,-rpath,. -o $@ $@.c -lafl -ldl
 
 clean:
 	rm -f afl-fuzz interceptor

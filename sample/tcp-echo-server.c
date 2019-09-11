@@ -57,14 +57,15 @@ int main(int argc, char *argv[])
 
     while (1)
     {
+      memset(buf, 0, BUFFER_SIZE);
       int read = recv(client_fd, buf, BUFFER_SIZE, 0);
 
       if (!read)
         break;
-      if (read < 5) 
-        on_error("Client read failed\n");
-      
-      printf("%c %c %c %c\n", buf[0], buf[1], buf[2], buf[3]);
+//       if (read < 5) 
+//         on_error("Client read failed\n");
+//       
+      printf("RECV: %s\n", buf);
       if (buf[0] == 'e')
         if (buf[1] == 'x')
           if (buf[2] == 'i')
