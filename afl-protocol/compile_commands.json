@@ -1,0 +1,71 @@
+[
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-g",
+            "-o",
+            "interceptor",
+            "network/state.c"
+        ],
+        "directory": "/home/vagrant/Fuzzers/protocol_fuzzer/afl-protocol",
+        "file": "network/state.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-O3",
+            "-funroll-loops",
+            "-D_FORTIFY_SOURCE=2",
+            "-g",
+            "-Wno-pointer-sign",
+            "-DAFL_PATH=\"/usr/local/lib/afl\"",
+            "-DDOC_PATH=\"/usr/local/share/doc/afl\"",
+            "-DBIN_PATH=\"/usr/local/bin\"",
+            "-o",
+            "afl-fuzz",
+            "afl-fuzz.c"
+        ],
+        "directory": "/home/vagrant/Fuzzers/protocol_fuzzer/afl-protocol",
+        "file": "afl-fuzz.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-DAFL_PATH=\"/usr/local/lib/afl\"",
+            "-DDOC_PATH=\"/usr/local/share/doc/afl\"",
+            "-DBIN_PATH=\"/usr/local/bin\"",
+            "-fpic",
+            "-DAFL_LIB=1",
+            "afl-fuzz.c"
+        ],
+        "directory": "/home/vagrant/Fuzzers/protocol_fuzzer/afl-protocol",
+        "file": "afl-fuzz.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-g",
+            "-o",
+            "interceptor",
+            "interceptor.c"
+        ],
+        "directory": "/home/vagrant/Fuzzers/protocol_fuzzer/afl-protocol",
+        "file": "interceptor.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-g",
+            "-o",
+            "interceptor",
+            "network/utilities.c"
+        ],
+        "directory": "/home/vagrant/Fuzzers/protocol_fuzzer/afl-protocol",
+        "file": "network/utilities.c"
+    }
+]
