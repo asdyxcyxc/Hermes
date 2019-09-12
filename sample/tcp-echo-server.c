@@ -5,6 +5,7 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <string.h>
+#include <errno.h>
 
 #define EXIT_SIGNAL "exit"
 #define BUFFER_SIZE 1024
@@ -53,15 +54,17 @@ int main(int argc, char *argv[])
     client_fd = accept(server_fd, (struct sockaddr *)&client, &client_len);
 
     if (client_fd < 0)
-      on_error("Could not establish new connection\n");
+      on_error("Could not establish new connection due to (%d): %s\n", errno, strerror(errno));
 
     while (1)
     {
       memset(buf, 0, BUFFER_SIZE);
       int read = recv(client_fd, buf, BUFFER_SIZE, 0);
 
-      if (!read)
+      if (!read) {
+        printf("=====> Client disconnected\n");
         break;
+      }
 //       if (read < 5) 
 //         on_error("Client read failed\n");
 //       
@@ -73,7 +76,7 @@ int main(int argc, char *argv[])
               return 1 / 0;
       err = send(client_fd, buf, read, 0);
       if (err < 0) {
-        printf("Client write failed\n");
+        printf("Client write failed due to (%d): %s\n", errno, strerror(errno));
         break;
       }
     }

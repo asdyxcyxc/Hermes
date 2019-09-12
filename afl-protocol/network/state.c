@@ -300,6 +300,7 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
     if (cfd < 0) PFATAL("fork() fake client failed");
 
     if (!cfd) {
+        s32 sockfd = 1337;
         /* FAKE CLIENT */
         if (dup2(pipe_fake_afl[1], FAKE_WRITE_AFL) < 0)
             PFATAL("dup2() for write from client to afl failed");
@@ -319,15 +320,22 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
         close(pipe_fake_afl[1]);
 
         while (1) {
-            s32 sockfd = new_connection("127.0.0.1", port);
+//             read(FAKE_READ_AFL, tmp_buf, sizeof(tmp_buf));
+//             if (getenv("DEBUG_MODE"))
+//                 printf("[+] Client recv allow accept: %s\n", tmp_buf);
+
+            int child_pid;
+            read(FAKE_READ_AFL, &child_pid, sizeof(int));
+            if (getenv("DEBUG_MODE"))
+                printf("[+] Client recv child_pid: %d\n", child_pid);
+
+//             close(sockfd);
+            sockfd = new_connection("127.0.0.1", port);
             if (sockfd < 0) PFATAL("Cannot connect to target");
 
             if (getenv("DEBUG_MODE"))
                 printf("[+] Client has been connected\n");
 
-            read(FAKE_READ_TARGET, tmp_buf, sizeof(tmp_buf));
-            if (getenv("DEBUG_MODE"))
-                printf("[+] Client recv: %s\n", tmp_buf);
 
             s32 fd = open(out_file, O_RDONLY);
             if (fd < 0) PFATAL("Unable to open %s", out_file);
@@ -338,15 +346,15 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
             if (getenv("DEBUG_MODE"))
                 pprint("CLIENT", (char *)buffer, size);
             sendAll(sockfd, buffer, size);
+            munmap(buffer, size);
 
-            write(FAKE_WRITE_AFL, "FINISH", 6);
-            read(FAKE_READ_AFL, tmp_buf, sizeof(tmp_buf));
-            if (getenv("DEBUG_MODE"))
-                printf("[+] Client recv: %s\n", tmp_buf);
+//             write(FAKE_WRITE_AFL, "FINISH", 6);
+//             read(FAKE_READ_TARGET, tmp_buf, sizeof(tmp_buf));
+//             if (getenv("DEBUG_MODE"))
+//                 printf("[+] Client recv allow close: %s\n", tmp_buf);
 
 
-            close(sockfd);
-            sleep(3);
+//             kill(child_pid, SIGSTOP);
         }
         exit(0);
     } else {
@@ -396,9 +404,11 @@ int evaluate(pid_t child_pid)
         if (getenv("DEBUG_MODE"))
             printf("[+] Evaluator recv from target: %s\n", buffer);
 
+        int result = kill(child_pid, SIGSTOP);
+        if (getenv("DEBUG_MODE"))
+            printf("Result of killing: %d\n", result);
         write(AFL_WRITE_FAKE, "CLOSE", 5);
 
-        kill(child_pid, SIGSTOP);
         exit(0);
     }
     return evaluator_pid;

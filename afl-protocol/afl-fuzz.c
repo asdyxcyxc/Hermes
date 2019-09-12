@@ -2049,8 +2049,8 @@ EXP_ST void init_forkserver(char** argv) {
 
     setsid();
 
-    dup2(dev_null_fd, 1);
-    dup2(dev_null_fd, 2);
+//     dup2(dev_null_fd, 1);
+//     dup2(dev_null_fd, 2);
 
     if (out_file) {
 
@@ -2298,10 +2298,19 @@ static u8 run_target(char** argv, u32 timeout) {
      execve(). There is a bit of code duplication between here and 
      init_forkserver(), but c'est la vie. */
 
+//   getchar();
+
   if (!terminated && prev_child_pid) {
+    if (getenv("DEBUG_MODE"))
+      printf("AFL send continue signal\n");
     kill(prev_child_pid, SIGCONT);
+    child_pid = prev_child_pid;
   } else if (dumb_mode == 1 || no_forkserver) {
 
+    if (getenv("DEBUG_MODE")) {
+      printf("[+] Need a new child\n");
+      getchar();
+    }
     child_pid = fork();
 
     if (child_pid < 0) PFATAL("fork() failed");
@@ -2404,7 +2413,7 @@ static u8 run_target(char** argv, u32 timeout) {
 
   }
 
-  pid_t evaluator_pid = evaluate(child_pid);
+  write(AFL_WRITE_FAKE, &child_pid, sizeof(int));
 
   /* Configure timeout, as requested by user, then wait for child to terminate. */
 
@@ -2417,7 +2426,7 @@ static u8 run_target(char** argv, u32 timeout) {
 
   if (dumb_mode == 1 || no_forkserver) {
 
-    if (waitpid(child_pid, &status, 0) <= 0) PFATAL("waitpid() failed");
+    if (waitpid(child_pid, &status, WUNTRACED) <= 0) PFATAL("waitpid() failed");
 
   } else {
 
@@ -2432,17 +2441,13 @@ static u8 run_target(char** argv, u32 timeout) {
 
   }
 
-  terminated = 1;
-  if (!WIFSTOPPED(status)) child_pid = 0;
-  else {
-    kill_signal = WSTOPSIG(status);
-    if (kill_signal == SIGSTOP) {
-      terminated = 0;
-      prev_child_pid = child_pid;
-      return FAULT_NONE;
-    }
-  }
+    terminated = 1;
+  if (getenv("DEBUG_MODE"))
+    printf("-----------> WIFSTOPPED = %d, WIFSIGNALED = %d\n", WIFSTOPPED(status), WIFSIGNALED(status));
 
+  prev_child_pid = child_pid;
+  if (!WIFSTOPPED(status)) child_pid = 0;
+  
   it.it_value.tv_sec = 0;
   it.it_value.tv_usec = 0;
 
@@ -2467,14 +2472,24 @@ static u8 run_target(char** argv, u32 timeout) {
   prev_timed_out = child_timed_out;
 
   /* Report outcome to caller. */
+  if (getenv("USE_SIGSTOP")) {
+    if (WIFSTOPPED(status)) {
+      kill_signal = WSTOPSIG(status);
+      if (kill_signal == SIGSTOP) {
+        if (getenv("DEBUG_MODE"))
+          printf("[+] Client has been SIGSTOP\n");
+        terminated = 0;
+        return FAULT_NONE;
+      }
+    }
+  }
 
   if (WIFSIGNALED(status) && !stop_soon) {
 
     kill_signal = WTERMSIG(status);
     if (child_timed_out && kill_signal == SIGKILL) return FAULT_TMOUT;
 
-    if (kill_signal == SIGPIPE) return FAULT_NONE;
-    kill(evaluator_pid, SIGKILL);
+    if (!getenv("USE_SIGSTOP") && kill_signal == SIGUSR2) return FAULT_NONE;
 
     return FAULT_CRASH;
 
@@ -2593,12 +2608,14 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
   /* Make sure the forkserver is up before we do anything, and let's not
      count its spin-up time toward binary calibration. */
 
-  if (dumb_mode != 1 && !no_forkserver && !forksrv_pid) {
+  if (!client_pid) {
     u8 *tmp_out_file = out_file;
     out_file = alloc_printf("%s/.cur_input", out_dir);
     setup_communications(&client_pid, out_file, port_server);
     ck_free(out_file);
     out_file = tmp_out_file;
+  }
+  if (dumb_mode != 1 && !no_forkserver && !forksrv_pid) {
     init_forkserver(argv);
   }
 
@@ -2612,6 +2629,8 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     if (!first_run && !(stage_cur % stats_update_freq)) show_stats();
 
+    if (getenv("DEBUG_MODE"))
+      printf("Stage: %d\n", stage_cur);
     if (single_msg) {
       s32 len;
       u8 *tmp_use_mem = dump_fuzzed_data(fuzzing_prot, use_mem, q->len, &len);
@@ -2757,23 +2776,17 @@ static void perform_dry_run(char** argv) {
 
     ACTF("Attempting dry run with '%s'...", fn);
 
+    fuzzing_prot = unserialize(q->fname);
     if (single_msg) {
-      fuzzing_prot = unserialize(q->fname);
-      debugProtocol(fuzzing_prot);
       tmp_msg = getCurMsg(fuzzing_prot);
       use_mem = tmp_msg->data;
       q->len = tmp_msg->size;
       res = calibrate_case(argv, q, use_mem, 0, 1);
       deleteProtocol(fuzzing_prot);
     } else {
-      fd = open(q->fname, O_RDONLY);
-      if (fd < 0) PFATAL("Unable to open '%s'", q->fname);
-
-      use_mem = ck_alloc_nozero(q->len);
-      if (read(fd, use_mem, q->len) != q->len)
-        FATAL("Short read from '%s'", q->fname);
-
-      close(fd);
+      int len;
+      use_mem = dump_data(fuzzing_prot, &len);
+      q->len = len;
       res = calibrate_case(argv, q, use_mem, 0, 1);
       ck_free(use_mem);
     }
@@ -3214,13 +3227,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
     if (res == FAULT_ERROR)
       FATAL("Unable to execute target application");
 
-    if (!single_msg) {
-      fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-      if (fd < 0) PFATAL("Unable to create '%s'", fn);
-      ck_write(fd, mem, len, fn);
-      close(fd);
-    } else 
-      serialize(fuzzing_prot, fuzzing_prot->current_msg, mem, len, fn);
+    serialize(fuzzing_prot, fuzzing_prot->current_msg, mem, len, fn);
 
     keeping = 1;
 
@@ -3352,15 +3359,7 @@ keep_as_crash:
   /* If we're here, we apparently want to save the crash or hang
      test case, too. */
 
-  if (!single_msg) {
-    fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-    if (fd < 0) PFATAL("Unable to create '%s'", fn);
-    ck_write(fd, mem, len, fn);
-    close(fd);
-
-    ck_free(fn);
-  } else
-    serialize(fuzzing_prot, fuzzing_prot->current_msg, mem, len, fn);
+  serialize(fuzzing_prot, fuzzing_prot->current_msg, mem, len, fn);
 
   return keeping;
 
@@ -4631,16 +4630,10 @@ static u8 trim_case(char** argv, struct queue_entry* q, u8* in_buf) {
 
   if (needs_write) {
 
-    s32 fd;
 
     unlink(q->fname); /* ignore errors */
 
-    fd = open(q->fname, O_WRONLY | O_CREAT | O_EXCL, 0600);
-
-    if (fd < 0) PFATAL("Unable to create '%s'", q->fname);
-
-    ck_write(fd, in_buf, q->len, q->fname);
-    close(fd);
+    serialize(fuzzing_prot, fuzzing_prot->current_msg, in_buf, q->len, q->fname);
 
     memcpy(trace_bits, clean_trace, MAP_SIZE);
     update_bitmap_score(q);
@@ -5077,6 +5070,11 @@ static u8 fuzz_one(char** argv) {
   /* Map the test case into memory. */
 
   fuzzing_prot = unserialize(queue_cur->fname);
+  if (getenv("DEBUG_MODE")) {
+    printf("Filename: %s\n", queue_cur->fname);
+    debugProtocol(fuzzing_prot);
+    getchar();
+  }
   
   int random_index = UR(fuzzing_prot->size);
   fuzzing_msg = getMsg(fuzzing_prot, random_index);
@@ -5095,6 +5093,7 @@ static u8 fuzz_one(char** argv) {
     queue_cur->len = len;
     orig_in = in_buf = ck_alloc_nozero(queue_cur->len);
     memcpy(orig_in, tmp, queue_cur->len);
+    ck_free(tmp);
   }
   
   /* We could mmap() out_buf as MAP_PRIVATE, but we end up clobbering every
@@ -6666,10 +6665,8 @@ havoc_stage:
      code to mutate that blob. */
 
 retry_splicing:
-  if (single_msg)
-    goto havoc_stage;
 
-  if (use_splicing && splice_cycle++ < SPLICE_CYCLES &&
+  if (!single_msg && use_splicing && splice_cycle++ < SPLICE_CYCLES &&
       queued_paths > 1 && queue_cur->len > 1) {
 
     struct queue_entry* target;
@@ -8151,7 +8148,7 @@ int main(int argc, char** argv) {
 
   perform_dry_run(use_argv);
 
-  return 0;
+//   return 0;
 
   cull_queue();
 
