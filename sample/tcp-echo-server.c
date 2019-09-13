@@ -80,6 +80,7 @@ int main(int argc, char *argv[])
         break;
       }
     }
+    close(client_fd);
   }
 
   return 0;

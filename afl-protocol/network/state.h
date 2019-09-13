@@ -30,6 +30,9 @@
 #define AFL_READ_FAKE 993
 #define FAKE_WRITE_AFL 992
 
+#define TARGET_READ_AFL 991
+#define AFL_WRITE_TARGET 990
+
 struct messages {
     int size;
     char *data;

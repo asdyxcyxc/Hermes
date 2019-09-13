@@ -291,8 +291,10 @@ static protocol *fuzzing_prot;
 static messages *fuzzing_msg;
 static u32 single_msg;
 u8 *libhook_path;
-u8 terminated;
+u8 terminated = 1;
 s32 prev_child_pid;
+u8 *new_prev_loc;
+static s32 prev_id;
 
 /* Fuzzing stages */
 
@@ -1215,7 +1217,7 @@ static inline void classify_counts(u32* mem) {
 static void remove_shm(void) {
 
   shmctl(shm_id, IPC_RMID, NULL);
-
+  shmctl(prev_id, IPC_RMID, NULL);
 }
 
 
@@ -1355,7 +1357,7 @@ static void cull_queue(void) {
 
 EXP_ST void setup_shm(void) {
 
-  u8* shm_str;
+  u8* shm_str, *prev_str;
 
   if (!in_bitmap) memset(virgin_bits, 255, MAP_SIZE);
 
@@ -1363,25 +1365,34 @@ EXP_ST void setup_shm(void) {
   memset(virgin_crash, 255, MAP_SIZE);
 
   shm_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
+  prev_id = shmget(IPC_PRIVATE, 8, IPC_CREAT | IPC_EXCL | 0600);
 
   if (shm_id < 0) PFATAL("shmget() failed");
+  if (prev_id < 0) PFATAL("shmget() failed for prev");
 
   atexit(remove_shm);
 
   shm_str = alloc_printf("%d", shm_id);
+  prev_str = alloc_printf("%d", prev_id);
 
   /* If somebody is asking us to fuzz instrumented binaries in dumb mode,
      we don't want them to detect instrumentation, since we won't be sending
      fork server commands. This should be replaced with better auto-detection
      later on, perhaps? */
 
-  if (!dumb_mode) setenv(SHM_ENV_VAR, shm_str, 1);
+  if (!dumb_mode) {
+    setenv("PREV_ENV_VAR", prev_str, 1);
+    setenv(SHM_ENV_VAR, shm_str, 1);
+  }
 
   ck_free(shm_str);
+  ck_free(prev_str);
 
   trace_bits = shmat(shm_id, NULL, 0);
+  new_prev_loc = shmat(prev_id, NULL, 0);
   
   if (!trace_bits) PFATAL("shmat() failed");
+  if (!new_prev_loc) PFATAL("shmat() failed for new_prev_loc");
 
 }
 
@@ -2291,6 +2302,7 @@ static u8 run_target(char** argv, u32 timeout) {
      territory. */
 
   memset(trace_bits, 0, MAP_SIZE);
+  memset(new_prev_loc, 0, sizeof(u64));
   MEM_BARRIER();
 
   /* If we're running in "dumb" mode, we can't rely on the fork server
@@ -2298,13 +2310,12 @@ static u8 run_target(char** argv, u32 timeout) {
      execve(). There is a bit of code duplication between here and 
      init_forkserver(), but c'est la vie. */
 
-//   getchar();
-
   if (!terminated && prev_child_pid) {
     if (getenv("DEBUG_MODE"))
       printf("AFL send continue signal\n");
     kill(prev_child_pid, SIGCONT);
     child_pid = prev_child_pid;
+
   } else if (dumb_mode == 1 || no_forkserver) {
 
     if (getenv("DEBUG_MODE")) {
@@ -2414,6 +2425,14 @@ static u8 run_target(char** argv, u32 timeout) {
   }
 
   write(AFL_WRITE_FAKE, &child_pid, sizeof(int));
+
+  char tmp_buf[10];
+  read(AFL_READ_TARGET, tmp_buf, sizeof(tmp_buf));
+
+  memset(trace_bits, 0, MAP_SIZE);
+  memset(new_prev_loc, 0, sizeof(u64));
+  
+  write(AFL_WRITE_TARGET, "DONE", 4);
 
   /* Configure timeout, as requested by user, then wait for child to terminate. */
 
@@ -2625,12 +2644,11 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
   for (stage_cur = 0; stage_cur < stage_max; stage_cur++) {
 
+//     if (stage_cur > 1) break;
     u32 cksum;
 
     if (!first_run && !(stage_cur % stats_update_freq)) show_stats();
 
-    if (getenv("DEBUG_MODE"))
-      printf("Stage: %d\n", stage_cur);
     if (single_msg) {
       s32 len;
       u8 *tmp_use_mem = dump_fuzzed_data(fuzzing_prot, use_mem, q->len, &len);
@@ -2663,7 +2681,6 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
         u32 i;
 
         for (i = 0; i < MAP_SIZE; i++) {
-
           if (!var_bytes[i] && first_trace[i] != trace_bits[i]) {
 
             var_bytes[i] = 1;
@@ -6704,15 +6721,14 @@ retry_splicing:
 
     /* Read the testcase into a new buffer. */
 
-    fd = open(target->fname, O_RDONLY);
-
-    if (fd < 0) PFATAL("Unable to open '%s'", target->fname);
+    protocol *tmp_prot = unserialize(target->fname);
 
     new_buf = ck_alloc_nozero(target->len);
 
-    ck_read(fd, new_buf, target->len, target->fname);
+    messages *tmp_msg = getCurMsg(tmp_prot);
+    memcpy(new_buf, tmp_msg->data, tmp_msg->size);
 
-    close(fd);
+    deleteProtocol(tmp_prot);
 
     /* Find a suitable splicing location, somewhere between the first and
        the last differing byte. Bail out if the difference is just a single

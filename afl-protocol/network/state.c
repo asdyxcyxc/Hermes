@@ -288,12 +288,12 @@ void pprint(const char *prefix, char *s, int size)
 void setup_communications(u32 *client_fd, const char *out_file, u16 port)
 {
     pid_t cfd;
-    s32 pipe_afl_fake[2], pipe_target_afl[2], pipe_target_fake[2], pipe_fake_afl[2];
+    s32 pipe_afl_fake[2], pipe_target_afl[2], pipe_target_fake[2], pipe_fake_afl[2], pipe_afl_target[2];
     char tmp_buf[10];
 
     ACTF("Making pipes ...");
 
-    if (pipe(pipe_afl_fake) || pipe(pipe_target_afl) || pipe(pipe_target_fake) || pipe(pipe_fake_afl))
+    if (pipe(pipe_afl_fake) || pipe(pipe_target_afl) || pipe(pipe_target_fake) || pipe(pipe_fake_afl) || pipe(pipe_afl_target))
         PFATAL("pipe() for setup communications failed");
     cfd = fork();
 
@@ -318,6 +318,8 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
         close(pipe_target_fake[1]);
         close(pipe_fake_afl[0]);
         close(pipe_fake_afl[1]);
+        close(pipe_afl_target[0]);
+        close(pipe_afl_target[1]);
 
         while (1) {
 //             read(FAKE_READ_AFL, tmp_buf, sizeof(tmp_buf));
@@ -329,7 +331,7 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
             if (getenv("DEBUG_MODE"))
                 printf("[+] Client recv child_pid: %d\n", child_pid);
 
-//             close(sockfd);
+            close(sockfd);
             sockfd = new_connection("127.0.0.1", port);
             if (sockfd < 0) PFATAL("Cannot connect to target");
 
@@ -368,6 +370,10 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
             PFATAL("dup2() for read from target to afl failed");
         if (dup2(pipe_target_afl[1], TARGET_WRITE_AFL) < 0)
             PFATAL("dup2() for write from target to afl failed");
+        if (dup2(pipe_afl_target[0], TARGET_READ_AFL) < 0)
+            PFATAL("dup2() for read from afl to target failed");
+        if (dup2(pipe_afl_target[1], AFL_WRITE_TARGET) < 0)
+            PFATAL("dup2() for read from afl to target failed");
 
         close(pipe_afl_fake[0]);
         close(pipe_afl_fake[1]);
@@ -377,6 +383,8 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
         close(pipe_target_fake[1]);
         close(pipe_fake_afl[0]);
         close(pipe_fake_afl[1]);
+        close(pipe_afl_target[0]);
+        close(pipe_afl_target[1]);
 
         *client_fd = cfd;
     }
