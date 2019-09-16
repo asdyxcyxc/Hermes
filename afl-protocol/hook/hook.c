@@ -87,12 +87,13 @@ int socket(int domain, int type, int protocol)
 int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
 {
     int result = orig_accept(sockfd, addr, addrlen);
-    write(TARGET_WRITE_AFL, "CLEAR", 5);
-    char tmp_buf[10];
-    read(TARGET_READ_AFL, tmp_buf, sizeof(tmp_buf));
+    pid_t pid = getpid();
+    write(TARGET_WRITE_FAKE, &pid, sizeof(pid_t));
+//     char tmp_buf[10];
+//     read(TARGET_READ_AFL, tmp_buf, sizeof(tmp_buf));
 
-    if (getenv("DEBUG_MODE"))
-        printf("TARGET recv: %s\n", tmp_buf);
+//     if (getenv("DEBUG_MODE"))
+//         printf("TARGET recv: %s\n", tmp_buf);
 
     return result;
 }

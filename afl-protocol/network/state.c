@@ -285,7 +285,7 @@ void pprint(const char *prefix, char *s, int size)
  * - From afl to client: should close socket now
  * We should separate them ito 4 pipes for easier debugging and avoiding race */
 
-void setup_communications(u32 *client_fd, const char *out_file, u16 port)
+void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *trace_bits, u8 *new_prev_loc)
 {
     pid_t cfd;
     s32 pipe_afl_fake[2], pipe_target_afl[2], pipe_target_fake[2], pipe_fake_afl[2], pipe_afl_target[2];
@@ -326,13 +326,17 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port)
 //             if (getenv("DEBUG_MODE"))
 //                 printf("[+] Client recv allow accept: %s\n", tmp_buf);
 
+            close(sockfd);
+            sockfd = new_connection("127.0.0.1", port);
+            
             int child_pid;
-            read(FAKE_READ_AFL, &child_pid, sizeof(int));
+            read(FAKE_READ_TARGET, &child_pid, sizeof(int));
             if (getenv("DEBUG_MODE"))
                 printf("[+] Client recv child_pid: %d\n", child_pid);
 
-            close(sockfd);
-            sockfd = new_connection("127.0.0.1", port);
+            memset(trace_bits, 0, MAP_SIZE);
+            memset(new_prev_loc, 0, sizeof(u64));
+
             if (sockfd < 0) PFATAL("Cannot connect to target");
 
             if (getenv("DEBUG_MODE"))

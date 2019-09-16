@@ -2424,15 +2424,15 @@ static u8 run_target(char** argv, u32 timeout) {
 
   }
 
-  write(AFL_WRITE_FAKE, &child_pid, sizeof(int));
+//   write(AFL_WRITE_FAKE, &child_pid, sizeof(int));
 
-  char tmp_buf[10];
-  read(AFL_READ_TARGET, tmp_buf, sizeof(tmp_buf));
+//   char tmp_buf[10];
+//   read(AFL_READ_TARGET, tmp_buf, sizeof(tmp_buf));
 
-  memset(trace_bits, 0, MAP_SIZE);
-  memset(new_prev_loc, 0, sizeof(u64));
+//   memset(trace_bits, 0, MAP_SIZE);
+//   memset(new_prev_loc, 0, sizeof(u64));
   
-  write(AFL_WRITE_TARGET, "DONE", 4);
+//   write(AFL_WRITE_TARGET, "DONE", 4);
 
   /* Configure timeout, as requested by user, then wait for child to terminate. */
 
@@ -2630,7 +2630,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
   if (!client_pid) {
     u8 *tmp_out_file = out_file;
     out_file = alloc_printf("%s/.cur_input", out_dir);
-    setup_communications(&client_pid, out_file, port_server);
+    setup_communications(&client_pid, out_file, port_server, trace_bits, new_prev_loc);
     ck_free(out_file);
     out_file = tmp_out_file;
   }

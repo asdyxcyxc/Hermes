@@ -66,7 +66,7 @@ void pprint(const char *, char *, int);
 messages *getCurMsg(protocol *);
 messages *getNxtMsg(protocol *);
 messages *getMsg(protocol *, int);
-void setup_communications(unsigned int *, const char *, uint16_t);
+void setup_communications(unsigned int *, const char *, uint16_t, unsigned char *, unsigned char *);
 int evaluate(pid_t);
 
 #endif /* STATE_H */
