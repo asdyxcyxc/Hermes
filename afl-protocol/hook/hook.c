@@ -28,6 +28,9 @@
 #define TARGET_READ_AFL 991
 #define AFL_WRITE_TARGET 990
 
+#define TARGET_READ_FAKE 989
+#define FAKE_WRITE_TARGET 988
+
 typedef ssize_t (*orig_recv_f)(int fd, void *buf, size_t len, int flags);
 typedef int (*orig_socket_f)(int domain, int type, int protocol);
 typedef int (*orig_accept_f)(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
@@ -89,8 +92,8 @@ int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
     int result = orig_accept(sockfd, addr, addrlen);
     pid_t pid = getpid();
     write(TARGET_WRITE_FAKE, &pid, sizeof(pid_t));
-//     char tmp_buf[10];
-//     read(TARGET_READ_AFL, tmp_buf, sizeof(tmp_buf));
+    char tmp_buf[10];
+    read(TARGET_READ_FAKE, tmp_buf, sizeof(tmp_buf));
 
 //     if (getenv("DEBUG_MODE"))
 //         printf("TARGET recv: %s\n", tmp_buf);

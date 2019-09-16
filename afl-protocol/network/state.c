@@ -337,6 +337,8 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
             memset(trace_bits, 0, MAP_SIZE);
             memset(new_prev_loc, 0, sizeof(u64));
 
+            write(FAKE_WRITE_TARGET, "DONE", 4);
+
             if (sockfd < 0) PFATAL("Cannot connect to target");
 
             if (getenv("DEBUG_MODE"))

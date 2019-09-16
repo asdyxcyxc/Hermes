@@ -2740,6 +2740,10 @@ abort_calibration:
 
     var_byte_count = count_bytes(var_bytes);
 
+    if (getenv("DEBUG_MODE"))
+        printf("VAR DETECTED: %d/%d\n", var_byte_count,count_non_255_bytes(virgin_bits)); 
+
+
     if (!q->var_behavior) {
       mark_as_variable(q);
       queued_variable++;
