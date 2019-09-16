@@ -371,7 +371,7 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
 
             close(sockfd);
 //             write(FAKE_WRITE_AFL, "FINISH", 6);
-            read(FAKE_READ_TARGET, tmp_buf, sizeof(tmp_buf));
+//             read(FAKE_READ_TARGET, tmp_buf, sizeof(tmp_buf));
             if (getenv("DEBUG_MODE"))
                 printf("[+] Client recv allow close: %s\n", tmp_buf);
 

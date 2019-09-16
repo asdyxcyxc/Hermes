@@ -2355,8 +2355,8 @@ static u8 run_target(char** argv, u32 timeout) {
 
       setsid();
 
-//       dup2(dev_null_fd, 1);
-//       dup2(dev_null_fd, 2);
+      dup2(dev_null_fd, 1);
+      dup2(dev_null_fd, 2);
 
       if (out_file) {
 
@@ -2423,16 +2423,6 @@ static u8 run_target(char** argv, u32 timeout) {
     if (child_pid <= 0) FATAL("Fork server is misbehaving (OOM?)");
 
   }
-
-//   write(AFL_WRITE_FAKE, &child_pid, sizeof(int));
-
-//   char tmp_buf[10];
-//   read(AFL_READ_TARGET, tmp_buf, sizeof(tmp_buf));
-
-//   memset(trace_bits, 0, MAP_SIZE);
-//   memset(new_prev_loc, 0, sizeof(u64));
-  
-//   write(AFL_WRITE_TARGET, "DONE", 4);
 
   /* Configure timeout, as requested by user, then wait for child to terminate. */
 
@@ -2639,7 +2629,6 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
   }
 
   if (getenv("DEBUG_MODE")) {
-    printf("[+] Client recv child_pid: %d\n", child_pid);
     printf("[************* DEBUG AFTER RUN *************]\n");
     u32 i;
 

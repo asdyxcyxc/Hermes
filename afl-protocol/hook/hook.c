@@ -54,7 +54,7 @@ ssize_t recv(int sockfd, void *buf, size_t len, int flags)
     ssize_t result = orig_recv(sockfd, buf, len, flags);
     if (result <= 0) {
         close(sockfd);
-        write(TARGET_WRITE_FAKE, "CLOSE", 5);
+//         write(TARGET_WRITE_FAKE, "CLOSE", 5);
         if (getenv("USE_SIGSTOP"))
           kill(getpid(), SIGSTOP);
         else
