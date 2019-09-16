@@ -2320,7 +2320,7 @@ static u8 run_target(char** argv, u32 timeout) {
 
     if (getenv("DEBUG_MODE")) {
       printf("[+] Need a new child\n");
-      getchar();
+//       getchar();
     }
     child_pid = fork();
 
@@ -2355,8 +2355,8 @@ static u8 run_target(char** argv, u32 timeout) {
 
       setsid();
 
-      dup2(dev_null_fd, 1);
-      dup2(dev_null_fd, 2);
+//       dup2(dev_null_fd, 1);
+//       dup2(dev_null_fd, 2);
 
       if (out_file) {
 
@@ -2638,7 +2638,21 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
     init_forkserver(argv);
   }
 
-  if (q->exec_cksum) memcpy(first_trace, trace_bits, MAP_SIZE);
+  if (getenv("DEBUG_MODE")) {
+    printf("[+] Client recv child_pid: %d\n", child_pid);
+    printf("[************* DEBUG AFTER RUN *************]\n");
+    u32 i;
+
+    for (i=0; i<MAP_SIZE; ++i)
+      if (trace_bits[i])
+        printf("[---] 0x%x: trace bit %d\n", i, trace_bits[i]);
+    printf("[++++] Final prev: %llu\n", *(u64 *)new_prev_loc);
+    printf("[*********************************]\n");
+  }
+
+  if (q->exec_cksum) {
+    memcpy(first_trace, trace_bits, MAP_SIZE);
+  }
 
   start_us = get_cur_time_us();
 
@@ -2671,6 +2685,18 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     cksum = hash32(trace_bits, MAP_SIZE, HASH_CONST);
 
+//     if (getenv("DEBUG_MODE")) {
+//         printf("[+] Client recv child_pid: %d\n", child_pid);
+//         printf("[************* DEBUG *************]\n");
+//         u32 i;
+// 
+//         for (i=0; i<MAP_SIZE; ++i)
+//             if (trace_bits[i])
+//                 printf("[---] 0x%x: trace bit %d\n", i, trace_bits[i]);
+//         printf("[++++] Final prev: %llu\n", *(u64 *)new_prev_loc);
+//         printf("[*********************************]\n");
+//     }
+
     if (q->exec_cksum != cksum) {
 
       u8 hnb = has_new_bits(virgin_bits);
@@ -2691,6 +2717,13 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
         }
 
         var_detected = 1;
+
+        if (getenv("DEBUG_MODE")) {
+            for (i=0; i < MAP_SIZE; ++i)
+                if (trace_bits[i] || first_trace[i])
+                    printf("[---] 0x%x: First trace: %d, trace bit %d\n", i, first_trace[i], trace_bits[i]);
+            printf("[++++] Final prev: %llu\n", *(u64 *)new_prev_loc);
+        }
 
       } else {
 
@@ -2740,9 +2773,10 @@ abort_calibration:
 
     var_byte_count = count_bytes(var_bytes);
 
-    if (getenv("DEBUG_MODE"))
+    if (getenv("DEBUG_MODE")) { 
         printf("VAR DETECTED: %d/%d\n", var_byte_count,count_non_255_bytes(virgin_bits)); 
-
+        getchar();
+    }
 
     if (!q->var_behavior) {
       mark_as_variable(q);
@@ -8168,7 +8202,7 @@ int main(int argc, char** argv) {
 
   perform_dry_run(use_argv);
 
-//   return 0;
+//   kill(getpid(), SIGINT);
 
   cull_queue();
 

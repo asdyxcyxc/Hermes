@@ -288,12 +288,12 @@ void pprint(const char *prefix, char *s, int size)
 void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *trace_bits, u8 *new_prev_loc)
 {
     pid_t cfd;
-    s32 pipe_afl_fake[2], pipe_target_afl[2], pipe_target_fake[2], pipe_fake_afl[2], pipe_afl_target[2];
+    s32 pipe_afl_fake[2], pipe_target_afl[2], pipe_target_fake[2], pipe_fake_afl[2], pipe_afl_target[2], pipe_fake_target[2];
     char tmp_buf[10];
 
     ACTF("Making pipes ...");
 
-    if (pipe(pipe_afl_fake) || pipe(pipe_target_afl) || pipe(pipe_target_fake) || pipe(pipe_fake_afl) || pipe(pipe_afl_target))
+    if (pipe(pipe_afl_fake) || pipe(pipe_target_afl) || pipe(pipe_target_fake) || pipe(pipe_fake_afl) || pipe(pipe_afl_target) || pipe(pipe_fake_target))
         PFATAL("pipe() for setup communications failed");
     cfd = fork();
 
@@ -308,6 +308,8 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
             PFATAL("dup2() for read from target to client failed");
         if (dup2(pipe_afl_fake[0], FAKE_READ_AFL) < 0)
             PFATAL("dup2() for read from afl to client failed");
+        if (dup2(pipe_fake_target[1], FAKE_WRITE_TARGET) < 0)
+            PFATAL("dup2() for write from fake to target failed");
 
 
         close(pipe_afl_fake[0]);
@@ -320,19 +322,30 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
         close(pipe_fake_afl[1]);
         close(pipe_afl_target[0]);
         close(pipe_afl_target[1]);
+        close(pipe_fake_target[0]);
+        close(pipe_fake_target[1]);
 
         while (1) {
 //             read(FAKE_READ_AFL, tmp_buf, sizeof(tmp_buf));
 //             if (getenv("DEBUG_MODE"))
 //                 printf("[+] Client recv allow accept: %s\n", tmp_buf);
 
-            close(sockfd);
             sockfd = new_connection("127.0.0.1", port);
             
             int child_pid;
             read(FAKE_READ_TARGET, &child_pid, sizeof(int));
-            if (getenv("DEBUG_MODE"))
+
+            if (getenv("DEBUG_MODE")) {
                 printf("[+] Client recv child_pid: %d\n", child_pid);
+                printf("[************* DEBUG BEOFRE RESET *************]\n");
+                u32 i;
+
+                for (i=0; i<MAP_SIZE; ++i)
+                    if (trace_bits[i])
+                        printf("[---] 0x%x: trace bit %d\n", i, trace_bits[i]);
+                printf("[++++] Final prev: %llu\n", *(u64 *)new_prev_loc);
+                printf("[*********************************]\n");
+            }
 
             memset(trace_bits, 0, MAP_SIZE);
             memset(new_prev_loc, 0, sizeof(u64));
@@ -356,10 +369,11 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
             sendAll(sockfd, buffer, size);
             munmap(buffer, size);
 
+            close(sockfd);
 //             write(FAKE_WRITE_AFL, "FINISH", 6);
-//             read(FAKE_READ_TARGET, tmp_buf, sizeof(tmp_buf));
-//             if (getenv("DEBUG_MODE"))
-//                 printf("[+] Client recv allow close: %s\n", tmp_buf);
+            read(FAKE_READ_TARGET, tmp_buf, sizeof(tmp_buf));
+            if (getenv("DEBUG_MODE"))
+                printf("[+] Client recv allow close: %s\n", tmp_buf);
 
 
 //             kill(child_pid, SIGSTOP);
@@ -380,6 +394,8 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
             PFATAL("dup2() for read from afl to target failed");
         if (dup2(pipe_afl_target[1], AFL_WRITE_TARGET) < 0)
             PFATAL("dup2() for read from afl to target failed");
+        if (dup2(pipe_fake_target[0], TARGET_READ_FAKE) < 0)
+            PFATAL("dup2() for read from fake to target failed");
 
         close(pipe_afl_fake[0]);
         close(pipe_afl_fake[1]);
@@ -391,6 +407,8 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
         close(pipe_fake_afl[1]);
         close(pipe_afl_target[0]);
         close(pipe_afl_target[1]);
+        close(pipe_fake_target[0]);
+        close(pipe_fake_target[1]);
 
         *client_fd = cfd;
     }

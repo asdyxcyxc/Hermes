@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
     if (client_fd < 0)
       on_error("Could not establish new connection due to (%d): %s\n", errno, strerror(errno));
 
+    printf("[ server ] Client connected!\n");
     while (1)
     {
       memset(buf, 0, BUFFER_SIZE);
