@@ -2312,14 +2312,14 @@ static u8 run_target(char** argv, u32 timeout) {
 
   if (!terminated && prev_child_pid) {
     if (getenv("DEBUG_MODE"))
-      printf("AFL send continue signal\n");
+      printf("[ AFL ] Send continue signal\n");
     kill(prev_child_pid, SIGCONT);
     child_pid = prev_child_pid;
 
   } else if (dumb_mode == 1 || no_forkserver) {
 
     if (getenv("DEBUG_MODE")) {
-      printf("[+] Need a new child\n");
+      printf("[ AFL ] Need a new child\n");
 //       getchar();
     }
     child_pid = fork();
@@ -2355,8 +2355,10 @@ static u8 run_target(char** argv, u32 timeout) {
 
       setsid();
 
-      dup2(dev_null_fd, 1);
-      dup2(dev_null_fd, 2);
+      if (!getenv("DEBUG_MODE")) {
+        dup2(dev_null_fd, 1);
+        dup2(dev_null_fd, 2);
+      }
 
       if (out_file) {
 
@@ -2450,9 +2452,9 @@ static u8 run_target(char** argv, u32 timeout) {
 
   }
 
-    terminated = 1;
-  if (getenv("DEBUG_MODE"))
-    printf("-----------> WIFSTOPPED = %d, WIFSIGNALED = %d\n", WIFSTOPPED(status), WIFSIGNALED(status));
+  terminated = 1;
+//   if (getenv("DEBUG_MODE"))
+//     printf("-----------> WIFSTOPPED = %d, WIFSIGNALED = %d\n", WIFSTOPPED(status), WIFSIGNALED(status));
 
   prev_child_pid = child_pid;
   if (!WIFSTOPPED(status)) child_pid = 0;
@@ -2485,8 +2487,8 @@ static u8 run_target(char** argv, u32 timeout) {
     if (WIFSTOPPED(status)) {
       kill_signal = WSTOPSIG(status);
       if (kill_signal == SIGSTOP) {
-        if (getenv("DEBUG_MODE"))
-          printf("[+] Client has been SIGSTOP\n");
+//         if (getenv("DEBUG_MODE"))
+//           printf("[+] Client has been SIGSTOP\n");
         terminated = 0;
         return FAULT_NONE;
       }
@@ -2647,7 +2649,6 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
   for (stage_cur = 0; stage_cur < stage_max; stage_cur++) {
 
-//     if (stage_cur > 1) break;
     u32 cksum;
 
     if (!first_run && !(stage_cur % stats_update_freq)) show_stats();
@@ -2707,12 +2708,12 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
         var_detected = 1;
 
-        if (getenv("DEBUG_MODE")) {
-            for (i=0; i < MAP_SIZE; ++i)
-                if (trace_bits[i] || first_trace[i])
-                    printf("[---] 0x%x: First trace: %d, trace bit %d\n", i, first_trace[i], trace_bits[i]);
-            printf("[++++] Final prev: %llu\n", *(u64 *)new_prev_loc);
-        }
+//         if (getenv("DEBUG_MODE")) {
+//             for (i=0; i < MAP_SIZE; ++i)
+//                 if (trace_bits[i] || first_trace[i])
+//                     printf("[---] 0x%x: First trace: %d, trace bit %d\n", i, first_trace[i], trace_bits[i]);
+//             printf("[++++] Final prev: %llu\n", *(u64 *)new_prev_loc);
+//         }
 
       } else {
 
@@ -2762,10 +2763,10 @@ abort_calibration:
 
     var_byte_count = count_bytes(var_bytes);
 
-    if (getenv("DEBUG_MODE")) { 
-        printf("VAR DETECTED: %d/%d\n", var_byte_count,count_non_255_bytes(virgin_bits)); 
-        getchar();
-    }
+//     if (getenv("DEBUG_MODE")) { 
+//         printf("VAR DETECTED: %d/%d\n", var_byte_count,count_non_255_bytes(virgin_bits)); 
+//         getchar();
+//     }
 
     if (!q->var_behavior) {
       mark_as_variable(q);
@@ -8125,6 +8126,8 @@ int main(int argc, char** argv) {
 
 
   if (getenv("AFL_NO_FORKSRV"))    no_forkserver    = 1;
+  no_forkserver = 1;
+
   if (getenv("AFL_NO_CPU_RED"))    no_cpu_meter_red = 1;
   if (getenv("AFL_NO_ARITH"))      no_arith         = 1;
   if (getenv("AFL_SHUFFLE_QUEUE")) shuffle_queue    = 1;

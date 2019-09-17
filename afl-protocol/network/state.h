@@ -18,20 +18,8 @@
 
 #include "utilities.h"
 
-#define FAKE_READ_AFL 999
-#define AFL_WRITE_FAKE 998
-
 #define FAKE_READ_TARGET 997
 #define TARGET_WRITE_FAKE 996
-
-#define AFL_READ_TARGET 995
-#define TARGET_WRITE_AFL 994
-
-#define AFL_READ_FAKE 993
-#define FAKE_WRITE_AFL 992
-
-#define TARGET_READ_AFL 991
-#define AFL_WRITE_TARGET 990
 
 #define TARGET_READ_FAKE 989
 #define FAKE_WRITE_TARGET 988
@@ -70,6 +58,5 @@ messages *getCurMsg(protocol *);
 messages *getNxtMsg(protocol *);
 messages *getMsg(protocol *, int);
 void setup_communications(unsigned int *, const char *, uint16_t, unsigned char *, unsigned char *);
-int evaluate(pid_t);
 
 #endif /* STATE_H */
