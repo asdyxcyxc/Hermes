@@ -30,6 +30,7 @@ typedef int (*orig_pthread_mutex_lock_f)(pthread_mutex_t *mutex);
 typedef int (*orig_pthread_mutex_unlock_f)(pthread_mutex_t *mutex);
 typedef unsigned int (*orig_sleep_f)(unsigned int seconds);
 typedef int (*orig_pthread_detach_f)(pthread_t thread);
+typedef int (*orig_close_f)(int fd);
 
 static orig_recv_f orig_recv = NULL;
 static orig_socket_f orig_socket = NULL;
@@ -40,6 +41,7 @@ static orig_pthread_mutex_lock_f orig_pthread_mutex_lock = NULL;
 static orig_pthread_mutex_unlock_f orig_pthread_mutex_unlock = NULL;
 static orig_sleep_f orig_sleep = NULL;
 static orig_pthread_detach_f orig_pthread_detach = NULL;
+static orig_close_f orig_close = NULL;
 
 static __attribute__((constructor)) void init_method(void)
 {
@@ -52,6 +54,7 @@ static __attribute__((constructor)) void init_method(void)
   orig_pthread_mutex_unlock = (orig_pthread_mutex_unlock_f)dlsym(RTLD_NEXT, "pthread_mutex_unlock");
   orig_sleep = (orig_sleep_f)dlsym(RTLD_NEXT, "sleep");
   orig_pthread_detach = (orig_pthread_detach_f)dlsym(RTLD_NEXT, "pthread_detach");
+  orig_close = (orig_close_f)dlsym(RTLD_NEXT, "close");
 
 }
 
@@ -62,16 +65,37 @@ ssize_t recv(int sockfd, void *buf, size_t len, int flags)
     if (getenv("DEBUG_MODE"))
       printf("[ target %d ] Done processing\n", getpid());
 
-    close(sockfd);
+    unsetenv("CLIENT_FD");
+
+    orig_close(sockfd);
     if (getenv("USE_SIGSTOP")) {
       int tmp = kill(getpid(), SIGSTOP);
       if (getenv("DEBUG_MODE"))
         printf("[ target ] Kill myself: %d\n", tmp);
-    }
-    else
+    } else
       kill(getpid(), SIGUSR2);
   }
   return result;
+}
+
+int close(int fd)
+{
+  char *cfd_buf = getenv("CLIENT_FD");
+  if (cfd_buf) {
+
+    int client_fd = atoi(cfd_buf);
+    if (client_fd == fd) {
+      if (getenv("DEBUG_MODE"))
+        printf("[ target ] Closing socket fd\n");
+      if (getenv("USE_SIGSTOP")) {
+        int tmp = kill(getpid(), SIGSTOP);
+        if (getenv("DEBUG_MODE"))
+          printf("[ target ] Kill myself: %d\n", tmp);
+      } else
+        kill(getpid(), SIGUSR2);
+    }
+  }
+  return orig_close(fd);
 }
 
 int socket(int domain, int type, int protocol)
@@ -96,6 +120,9 @@ int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
 
   if (getenv("DEBUG_MODE"))
     printf("TARGET recv: %s\n", tmp_buf);
+
+  sprintf(tmp_buf, "%d", result);
+  setenv("CLIENT_FD", tmp_buf, 1);
 
   return result;
 }
