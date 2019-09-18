@@ -209,7 +209,7 @@ void *handle_client(void *arg){
         buff_out[0] = '\0';
         strip_newline(buff_in);
 
-        printf("[ server  ] Recv: %s", buff_in);
+        printf("[ server  ] Recv: %s\n", buff_in);
         /* Ignore empty buffer */
         if (!strlen(buff_in)) {
             continue;
