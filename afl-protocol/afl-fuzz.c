@@ -2430,7 +2430,9 @@ static u8 run_target(char** argv, u32 timeout) {
 
   char tmp_buf[10];
 
-  read(AFL_READ_TARGET, tmp_buf, sizeof(tmp_buf));
+  if (read(AFL_READ_TARGET, tmp_buf, sizeof(tmp_buf)) < 0)
+      PFATAL("[ AFL ] Cannot read from target due to (%d): %s\n", errno, strerror(errno));
+
   if (getenv("DEBUG_MODE"))
     printf("[ AFL ] Recv from target: %s\n", tmp_buf);
 
