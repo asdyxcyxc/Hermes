@@ -9,6 +9,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <signal.h>
+#include <sys/socket.h>
 
 #include "../helper/debug.h"
 #include "../helper/config.h"

@@ -67,6 +67,7 @@ ssize_t recv(int sockfd, void *buf, size_t len, int flags)
 
     unsetenv("CLIENT_FD");
 
+    shutdown(sockfd, SHUT_RDWR);
     orig_close(sockfd);
     if (getenv("USE_SIGSTOP")) {
       int tmp = kill(getpid(), SIGSTOP);
@@ -93,8 +94,10 @@ int close(int fd)
           printf("[ target ] Kill myself: %d\n", tmp);
       } else
         kill(getpid(), SIGUSR2);
+      shutdown(fd, SHUT_RDWR);
     }
   }
+
   return orig_close(fd);
 }
 
