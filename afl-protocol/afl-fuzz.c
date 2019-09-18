@@ -2428,6 +2428,10 @@ static u8 run_target(char** argv, u32 timeout) {
 
   /* Configure timeout, as requested by user, then wait for child to terminate. */
 
+  char tmp_buf[10];
+
+  read(AFL_READ_TARGET, tmp_buf, sizeof(tmp_buf));
+
   it.it_value.tv_sec = (timeout / 1000);
   it.it_value.tv_usec = (timeout % 1000) * 1000;
 
@@ -2499,8 +2503,10 @@ static u8 run_target(char** argv, u32 timeout) {
 
     kill_signal = WTERMSIG(status);
     if (child_timed_out && kill_signal == SIGKILL) {
-		if (getenv("DEBUG_MODE"))
+		if (getenv("DEBUG_MODE")) {
 			printf("[ AFL ] Timeout child\n");
+            getchar();
+        }
 		return FAULT_TMOUT;
 	}
 

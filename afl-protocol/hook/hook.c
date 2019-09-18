@@ -14,6 +14,9 @@
 #define FAKE_READ_TARGET 997
 #define TARGET_WRITE_FAKE 996
 
+#define AFL_READ_TARGET 995
+#define TARGET_WRITE_AFL 994
+
 #define TARGET_READ_FAKE 989
 #define FAKE_WRITE_TARGET 988
 
@@ -88,6 +91,8 @@ int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
   write(TARGET_WRITE_FAKE, &pid, sizeof(pid_t));
   char tmp_buf[10];
   read(TARGET_READ_FAKE, tmp_buf, sizeof(tmp_buf));
+
+  write(TARGET_WRITE_AFL, "TIME", 4);
 
   if (getenv("DEBUG_MODE"))
     printf("TARGET recv: %s\n", tmp_buf);

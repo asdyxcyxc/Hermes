@@ -281,12 +281,12 @@ void pprint(const char *prefix, char *s, int size)
 void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *trace_bits, u8 *new_prev_loc)
 {
     pid_t cfd;
-    s32 pipe_target_fake[2], pipe_fake_target[2];
+    s32 pipe_target_fake[2], pipe_fake_target[2], pipe_afl_target[2];
     char tmp_buf[10];
 
     ACTF("Making pipes ...");
 
-    if (pipe(pipe_target_fake) || pipe(pipe_fake_target))
+    if (pipe(pipe_target_fake) || pipe(pipe_fake_target) || pipe(pipe_afl_target))
         PFATAL("pipe() for setup communications failed");
     cfd = fork();
 
@@ -304,6 +304,8 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
         close(pipe_target_fake[1]);
         close(pipe_fake_target[0]);
         close(pipe_fake_target[1]);
+        close(pipe_afl_target[0]);
+        close(pipe_afl_target[1]);
 
         while (1) {
             sockfd = new_connection("127.0.0.1", port);
@@ -353,11 +355,17 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
             PFATAL("dup2() for write from target to client failed");
         if (dup2(pipe_fake_target[0], TARGET_READ_FAKE) < 0)
             PFATAL("dup2() for read from fake to target failed");
+        if (dup2(pipe_afl_target[0], AFL_READ_TARGET) < 0)
+            PFATAL("dup2() for read from target to afl failed");
+        if (dup2(pipe_afl_target[1], TARGET_WRITE_AFL) < 0)
+            PFATAL("dup2() for write from target to afl failed");
 
         close(pipe_target_fake[0]);
         close(pipe_target_fake[1]);
         close(pipe_fake_target[0]);
         close(pipe_fake_target[1]);
+        close(pipe_afl_target[0]);
+        close(pipe_afl_target[1]);
 
         *client_fd = cfd;
     }
