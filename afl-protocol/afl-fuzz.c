@@ -2507,7 +2507,7 @@ static u8 run_target(char** argv, u32 timeout) {
     if (child_timed_out && kill_signal == SIGKILL) {
 		if (getenv("DEBUG_MODE")) {
 			printf("[ AFL ] Timeout child\n");
-//             getchar();
+            getchar();
         }
 		return FAULT_TMOUT;
 	}

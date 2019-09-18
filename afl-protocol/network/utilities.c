@@ -60,6 +60,11 @@ int new_connection(const char *ip, unsigned int port)
     servaddr.sin_addr.s_addr = inet_addr(ip); 
     servaddr.sin_port = htons(port); 
     
-    while (connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr)) != 0);
+    while (connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr)) != 0) {
+		if (getenv("DEBUG_MODE")) {
+			printf("[ fake ] Cannot connect to server due to (%d): %s\n", errno, strerror(errno));
+			sleep(1);
+		}
+	}
     return sockfd;
 }
