@@ -2459,8 +2459,8 @@ static u8 run_target(char** argv, u32 timeout) {
   }
 
   terminated = 1;
-//   if (getenv("DEBUG_MODE"))
-//     printf("-----------> WIFSTOPPED = %d, WIFSIGNALED = %d\n", WIFSTOPPED(status), WIFSIGNALED(status));
+  if (getenv("DEBUG_MODE"))
+    printf("-----------> WIFSTOPPED = %d, WIFSIGNALED = %d\n", WIFSTOPPED(status), WIFSIGNALED(status));
 
   prev_child_pid = child_pid;
   if (!WIFSTOPPED(status)) child_pid = 0;
@@ -2507,7 +2507,7 @@ static u8 run_target(char** argv, u32 timeout) {
     if (child_timed_out && kill_signal == SIGKILL) {
 		if (getenv("DEBUG_MODE")) {
 			printf("[ AFL ] Timeout child\n");
-//             getchar();
+            getchar();
         }
 		return FAULT_TMOUT;
 	}
@@ -6985,6 +6985,7 @@ static void handle_stop_sig(int sig) {
   if (child_pid > 0) kill(child_pid, SIGKILL);
   if (forksrv_pid > 0) kill(forksrv_pid, SIGKILL);
 
+  close(AFL_READ_TARGET);
 }
 
 
