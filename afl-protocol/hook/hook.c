@@ -26,6 +26,7 @@ typedef int (*orig_pthread_create_f)(pthread_t *thread, const pthread_attr_t *at
 typedef int (*orig_pthread_mutex_lock_f)(pthread_mutex_t *mutex);
 typedef int (*orig_pthread_mutex_unlock_f)(pthread_mutex_t *mutex);
 typedef unsigned int (*orig_sleep_f)(unsigned int seconds);
+typedef int (*orig_pthread_detach_f)(pthread_t thread);
 
 static orig_recv_f orig_recv = NULL;
 static orig_socket_f orig_socket = NULL;
@@ -35,6 +36,7 @@ static orig_pthread_create_f orig_pthread_create = NULL;
 static orig_pthread_mutex_lock_f orig_pthread_mutex_lock = NULL;
 static orig_pthread_mutex_unlock_f orig_pthread_mutex_unlock = NULL;
 static orig_sleep_f orig_sleep = NULL;
+static orig_pthread_detach_f orig_pthread_detach = NULL;
 
 static __attribute__((constructor)) void init_method(void)
 {
@@ -46,6 +48,7 @@ static __attribute__((constructor)) void init_method(void)
   orig_pthread_mutex_lock = (orig_pthread_mutex_lock_f)dlsym(RTLD_NEXT, "pthread_mutex_lock");
   orig_pthread_mutex_unlock = (orig_pthread_mutex_unlock_f)dlsym(RTLD_NEXT, "pthread_mutex_unlock");
   orig_sleep = (orig_sleep_f)dlsym(RTLD_NEXT, "sleep");
+  orig_pthread_detach = (orig_pthread_detach_f)dlsym(RTLD_NEXT, "pthread_detach");
 
 }
 
@@ -114,6 +117,11 @@ int pthread_mutex_unlock(pthread_mutex_t *mutex)
 }
 
 unsigned int sleep(unsigned int seconds)
+{
+  return 0;
+}
+
+int pthread_detach(pthread_t thread)
 {
   return 0;
 }
