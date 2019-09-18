@@ -2487,8 +2487,8 @@ static u8 run_target(char** argv, u32 timeout) {
     if (WIFSTOPPED(status)) {
       kill_signal = WSTOPSIG(status);
       if (kill_signal == SIGSTOP) {
-//         if (getenv("DEBUG_MODE"))
-//           printf("[+] Client has been SIGSTOP\n");
+        if (getenv("DEBUG_MODE"))
+          printf("[ AFL ] Client has been SIGSTOP\n");
         terminated = 0;
         return FAULT_NONE;
       }
@@ -2498,9 +2498,16 @@ static u8 run_target(char** argv, u32 timeout) {
   if (WIFSIGNALED(status) && !stop_soon) {
 
     kill_signal = WTERMSIG(status);
-    if (child_timed_out && kill_signal == SIGKILL) return FAULT_TMOUT;
+    if (child_timed_out && kill_signal == SIGKILL) {
+		if (getenv("DEBUG_MODE"))
+			printf("[ AFL ] Timeout child\n");
+		return FAULT_TMOUT;
+	}
 
     if (!getenv("USE_SIGSTOP") && kill_signal == SIGUSR2) return FAULT_NONE;
+
+	if (getenv("DEBUG_MODE"))
+		printf("[ AFL ] Crashed child\n");
 
     return FAULT_CRASH;
 
@@ -4701,6 +4708,9 @@ EXP_ST u8 common_fuzz_stuff(char** argv, u8* out_buf, u32 len) {
 
   u8 fault;
 
+	if (getenv("DEBUG_MODE"))
+		printf("[ AFL EXECUTION ] Total exec: %lld\n", total_execs);
+
   if (post_handler) {
 
     out_buf = post_handler(out_buf, &len);
@@ -5118,7 +5128,7 @@ static u8 fuzz_one(char** argv) {
   if (getenv("DEBUG_MODE")) {
     printf("Filename: %s\n", queue_cur->fname);
     debugProtocol(fuzzing_prot);
-    getchar();
+//     getchar();
   }
   
   int random_index = UR(fuzzing_prot->size);

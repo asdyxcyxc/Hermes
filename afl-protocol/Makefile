@@ -27,3 +27,4 @@ afl-showmap: afl-showmap.c $(COMM_HEADER)
 clean:
 	rm -f afl-fuzz interceptor
 	rm -f libhook.so
+	rm -f afl-showmap
