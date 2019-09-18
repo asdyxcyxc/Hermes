@@ -10,6 +10,7 @@
 #include <signal.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <sys/un.h>
 
 #define FAKE_READ_TARGET 997
 #define TARGET_WRITE_FAKE 996
@@ -31,6 +32,8 @@ typedef int (*orig_pthread_mutex_unlock_f)(pthread_mutex_t *mutex);
 typedef unsigned int (*orig_sleep_f)(unsigned int seconds);
 typedef int (*orig_pthread_detach_f)(pthread_t thread);
 typedef int (*orig_close_f)(int fd);
+typedef int (*orig_bind_f)(int sockfd, const struct sockaddr *addr,
+                socklen_t addrlen);
 
 static orig_recv_f orig_recv = NULL;
 static orig_socket_f orig_socket = NULL;
@@ -42,6 +45,7 @@ static orig_pthread_mutex_unlock_f orig_pthread_mutex_unlock = NULL;
 static orig_sleep_f orig_sleep = NULL;
 static orig_pthread_detach_f orig_pthread_detach = NULL;
 static orig_close_f orig_close = NULL;
+static orig_bind_f orig_bind = NULL;
 
 static __attribute__((constructor)) void init_method(void)
 {
@@ -55,7 +59,25 @@ static __attribute__((constructor)) void init_method(void)
   orig_sleep = (orig_sleep_f)dlsym(RTLD_NEXT, "sleep");
   orig_pthread_detach = (orig_pthread_detach_f)dlsym(RTLD_NEXT, "pthread_detach");
   orig_close = (orig_close_f)dlsym(RTLD_NEXT, "close");
+  orig_bind = (orig_bind_f)dlsym(RTLD_NEXT, "bind");
 
+}
+
+int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
+{
+  char *using_unix = getenv("USE_UNIX");
+  if (using_unix) {
+    unlink(using_unix);
+    if (getenv("DEBUG_MODE"))
+      printf("[ target ] Going in to bind\n");
+
+    struct sockaddr_un un_addr;
+    memset(&un_addr, 0, sizeof(un_addr));
+    un_addr.sun_family = AF_UNIX;
+    strncpy(un_addr.sun_path, using_unix, sizeof(un_addr.sun_path)-1);
+    return orig_bind(sockfd, (struct sockaddr*)&un_addr, addrlen);
+  } else
+    return orig_bind(sockfd, addr, addrlen);
 }
 
 ssize_t recv(int sockfd, void *buf, size_t len, int flags)
@@ -103,7 +125,7 @@ int close(int fd)
 
 int socket(int domain, int type, int protocol)
 {
-  int result = orig_socket(domain, type, protocol);
+  int result = orig_socket(AF_UNIX, type, protocol);
   if (result >= 0) {
     int opt_val = 1;
     setsockopt(result, SOL_SOCKET, SO_REUSEADDR, &opt_val, sizeof opt_val);

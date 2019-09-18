@@ -52,22 +52,37 @@ int recvAll(int sockfd) {
 int new_connection(const char *ip, unsigned int port)
 {
     int sockfd;
-    struct sockaddr_in servaddr;
 
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
 	int opt_val = 1;
 	setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &opt_val, sizeof opt_val);
 
-    bzero(&servaddr, sizeof(servaddr)); 
-    servaddr.sin_family = AF_INET; 
-    servaddr.sin_addr.s_addr = inet_addr(ip); 
-    servaddr.sin_port = htons(port); 
-    
-    while (connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr)) != 0) {
-		if (getenv("DEBUG_MODE")) {
-			printf("[ fake ] Cannot connect to server due to (%d): %s\n", errno, strerror(errno));
-			sleep(1);
-		}
-	}
+    char *using_unix = getenv("USE_UNIX");
+    if (using_unix) {
+        struct sockaddr_un un_addr;
+        memset(&un_addr, 0, sizeof(un_addr));
+        un_addr.sun_family = AF_UNIX;
+        strncpy(un_addr.sun_path, using_unix, sizeof(un_addr.sun_path)-1);
+
+        while (connect(sockfd, (struct sockaddr *)&un_addr, sizeof(un_addr)) != 0) {
+            if (getenv("DEBUG_MODE")) {
+                printf("[ fake ] Cannot connect to server due to (%d): %s\n", errno, strerror(errno));
+                sleep(1);
+            }
+        }
+    } else {
+        struct sockaddr_in servaddr;
+        bzero(&servaddr, sizeof(servaddr)); 
+        servaddr.sin_family = AF_UNIX; 
+        servaddr.sin_addr.s_addr = inet_addr(ip); 
+        servaddr.sin_port = htons(port); 
+        
+        while (connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr)) != 0) {
+            if (getenv("DEBUG_MODE")) {
+                printf("[ fake ] Cannot connect to server due to (%d): %s\n", errno, strerror(errno));
+                sleep(1);
+            }
+        }
+    }
     return sockfd;
 }
