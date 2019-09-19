@@ -34,6 +34,7 @@ typedef int (*orig_pthread_detach_f)(pthread_t thread);
 typedef int (*orig_close_f)(int fd);
 typedef int (*orig_bind_f)(int sockfd, const struct sockaddr *addr,
                 socklen_t addrlen);
+typedef int (*orig_listen_f)(int sockfd, int backlog);
 
 static orig_recv_f orig_recv = NULL;
 static orig_socket_f orig_socket = NULL;
@@ -46,6 +47,7 @@ static orig_sleep_f orig_sleep = NULL;
 static orig_pthread_detach_f orig_pthread_detach = NULL;
 static orig_close_f orig_close = NULL;
 static orig_bind_f orig_bind = NULL;
+static orig_listen_f orig_listen = NULL;
 
 static __attribute__((constructor)) void init_method(void)
 {
@@ -60,24 +62,41 @@ static __attribute__((constructor)) void init_method(void)
   orig_pthread_detach = (orig_pthread_detach_f)dlsym(RTLD_NEXT, "pthread_detach");
   orig_close = (orig_close_f)dlsym(RTLD_NEXT, "close");
   orig_bind = (orig_bind_f)dlsym(RTLD_NEXT, "bind");
+  orig_listen = (orig_listen_f)dlsym(RTLD_NEXT, "listen");
 
+}
+
+int listen(int sockfd, int backlog)
+{
+  if (getenv("DEBUG_MODE"))
+    printf("[ target %d ] Going in to listen\n", sockfd);
+
+  char *bind_dir = getenv("BIND_DIR");
+  if (getenv("SHOW_SOCKFD") && bind_dir)
+    printf("[ target ] Listening on sock file: %s/sock_%d\n", bind_dir, sockfd);
+  return orig_listen(sockfd, backlog);
 }
 
 int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
 {
-  char *using_unix = getenv("USE_UNIX");
-  if (using_unix) {
-    unlink(using_unix);
+  char *bind_dir = getenv("BIND_DIR");
+  if (bind_dir) {
+    unsigned char *new_sock = malloc(strlen(bind_dir) + 6 + 10);
+    snprintf(new_sock, strlen(bind_dir) + 6 + 10, "%s/sock_%d", bind_dir, sockfd);
+    unlink(new_sock);
     if (getenv("DEBUG_MODE"))
-      printf("[ target ] Going in to bind\n");
-
+      printf("[ target ] Sockfile: %s\n", new_sock);
     struct sockaddr_un un_addr;
     memset(&un_addr, 0, sizeof(un_addr));
     un_addr.sun_family = AF_UNIX;
-    strncpy(un_addr.sun_path, using_unix, sizeof(un_addr.sun_path)-1);
+    strncpy(un_addr.sun_path, new_sock, sizeof(un_addr.sun_path)-1);
+    free(new_sock);
     return orig_bind(sockfd, (struct sockaddr*)&un_addr, addrlen);
-  } else
+  } else {
+    if (getenv("DEBUG_MODE"))
+      printf("[ target ] Going in to normal bind for fd: %d\n", sockfd);
     return orig_bind(sockfd, addr, addrlen);
+  }
 }
 
 ssize_t recv(int sockfd, void *buf, size_t len, int flags)
@@ -125,11 +144,21 @@ int close(int fd)
 
 int socket(int domain, int type, int protocol)
 {
-  int result = orig_socket(AF_UNIX, type, protocol);
-  if (result >= 0) {
-    int opt_val = 1;
-    setsockopt(result, SOL_SOCKET, SO_REUSEADDR, &opt_val, sizeof opt_val);
+  int result;
+  if (getenv("BIND_DIR"))
+    result = orig_socket(AF_UNIX, type, protocol);
+  else {
+    result = orig_socket(domain, type, protocol);
+
+    if (result >= 0) {
+      int opt_val = 1;
+      setsockopt(result, SOL_SOCKET, SO_REUSEADDR, &opt_val, sizeof opt_val);
+    }
   }
+  
+  if (getenv("DEBUG_MODE"))
+    printf("[ target ] Socket created: %d\n", result);
+
   return result;
 }
 

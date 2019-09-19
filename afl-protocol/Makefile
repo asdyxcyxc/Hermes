@@ -31,3 +31,5 @@ clean:
 	rm -f afl-fuzz interceptor
 	rm -f libhook.so
 	rm -f afl-showmap
+	rm -f client
+

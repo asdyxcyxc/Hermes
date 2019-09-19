@@ -162,7 +162,7 @@ static void setup_shm(void) {
   prev_str = alloc_printf("%d", prev_id);
 
   setenv(SHM_ENV_VAR, shm_str, 1);
-  setenv("PREV_ENV_VAR", prev_str, 1);
+  setenv("PREV_ENV", prev_str, 1);
 
   ck_free(shm_str);
   ck_free(prev_str);
@@ -346,14 +346,31 @@ static void run_target(char** argv) {
   close(pipe_fake_target[0]);
   close(pipe_fake_target[1]);
 
-  int sockfd = new_connection("127.0.0.1", port);
+  char *bind_dir = getenv("BIND_DIR");
+  char *sub_addr = getenv("USE_SOCKFD");
+  char *sockfile = NULL;
+  int sockfd;
+
+
+  if (bind_dir && sub_addr) {
+    sockfile = malloc(strlen(bind_dir) + 6 + 10);
+    snprintf(sockfile, strlen(bind_dir) + 6 + 10, "%s/sock_%s", bind_dir, sub_addr);
+    sockfd = new_unix(sockfile);
+  } else
+    sockfd = new_socket("127.0.0.1", port);
+
 
   if (getenv("DEBUG_MODE"))
     printf("[+] Client has been connected\n");
 
   int tmp_pid;
-  read(FAKE_READ_TARGET, &tmp_pid, sizeof(int));
-  write(FAKE_WRITE_TARGET, "DONE", 4);
+  if (read(FAKE_READ_TARGET, &tmp_pid, sizeof(int)) < 0) {
+    PFATAL("Cannot read from target due to (%d): %s\n", errno, strerror(errno));
+  }
+
+  if (write(FAKE_WRITE_TARGET, "DONE", 4) < 0) {
+    PFATAL("Cannot write to target due to (%d): %s\n", errno, strerror(errno));
+  }
 
   if (sockfd < 0) PFATAL("Cannot connect to target");
 
@@ -364,7 +381,7 @@ static void run_target(char** argv) {
   if (getenv("DEBUG_MODE"))
     pprint("CLIENT", (char *)buffer, size);
   sendAll(sockfd, buffer, size);
-  
+
   ck_free(buffer);
   deleteProtocol(tmp_prot);
   close(sockfd);
@@ -431,7 +448,7 @@ static void handle_stop_sig(int sig) {
   stop_soon = 1;
 
   if (child_pid > 0) kill(child_pid, SIGKILL);
-
+  exit(0);
 }
 
 

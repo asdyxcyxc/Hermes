@@ -1,22 +1,16 @@
 /*
-   american fuzzy lop - fuzzer code
+   american fuzzy lop - network fuzzer
    --------------------------------
 
-   Written and maintained by Michal Zalewski <lcamtuf@google.com>
+   Written and maintained by Do Minh Tuan <tuanit96@gmail.com>
 
-   Forkserver design by Jann Horn <jannhorn@googlemail.com>
-
-   Copyright 2013, 2014, 2015, 2016, 2017 Google Inc. All rights reserved.
+   Code is based on AFL written by Michal Zalewski <lcamtuf@google.com>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at:
 
      http://www.apache.org/licenses/LICENSE-2.0
-
-   This is the real deal: the program takes an instrumented binary and
-   attempts a variety of basic fuzzing tricks, paying close attention to
-   how they affect the execution path.
 
  */
 
@@ -7936,7 +7930,7 @@ int main(int argc, char** argv) {
   struct timeval tv;
   struct timezone tz;
 
-  SAYF(cCYA "afl-fuzz " cBRI VERSION cRST " by <lcamtuf@google.com>\n");
+  SAYF(cCYA "afl-protocol " cBRI VERSION cRST " by <tuanit96@gmail.com>\n");
 
   doc_path = access(DOC_PATH, F_OK) ? "docs" : DOC_PATH;
 

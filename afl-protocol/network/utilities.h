@@ -6,6 +6,7 @@
 
 void sendAll(int, unsigned char *, int);
 int recvAll(int);
-int new_connection(const char *, unsigned int);
+int new_socket(const char *, unsigned int);
+int new_unix(const char *);
 
 #endif /* UTILITIES_H */

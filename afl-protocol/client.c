@@ -15,9 +15,18 @@ void process(char *filename, unsigned int port)
   protocol *tmp_prot = unserialize(filename);
   int size;
   char *buffer = dump_data(tmp_prot, &size);
+  int sockfd;
 
-  int sockfd = new_connection("127.0.0.1", port);
+  char *sockfile = getenv("SOCK_FILE");
+  if (sockfile)
+    sockfd = new_unix(sockfile);
+  else
+    sockfd = new_socket("127.0.0.1", port);
+
+  close(sockfd);
   sendAll(sockfd, buffer, size);
+  recvAll(sockfd);
+  sleep(2);
   ck_free(buffer);
 
   deleteProtocol(tmp_prot);

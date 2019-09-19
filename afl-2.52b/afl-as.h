@@ -434,12 +434,11 @@ static const u8* main_payload_64 =
   "  /* Calculate and store hit for the code location specified in rcx. */\n"
   "\n"
 #ifndef COVERAGE_ONLY
-  "  pushq %r8\n"
-  "  movq __afl_new_prev_loc(%rip), %r8\n"
+  "  movq __afl_prev_loc(%rip), %r8\n"
   "  xorq 0(%r8), %rcx\n"
   "  xorq %rcx, 0(%r8)\n"
   "  shrq $1, 0(%r8)\n"
-  "  popq %r8\n"
+  "\n"
 #endif /* ^!COVERAGE_ONLY */
   "\n"
 #ifdef SKIP_COUNTS
@@ -524,7 +523,9 @@ static const u8* main_payload_64 =
   "  subq  $16, %rsp\n"
   "  andq  $0xfffffffffffffff0, %rsp\n"
   "\n"
-  "  leaq .PREV_ENV_VAR(%rip), %rdi\n"
+  "  leaq __afl_prev_loc(%rip), %rdi\n"
+  "  movq $0x56455250, 0(%rdi)\n"
+  "  movq $0x564e455f, 4(%rdi)\n"
   CALL_L64("getenv")
   "\n"
   "  testq %rax, %rax\n"
@@ -541,7 +542,7 @@ static const u8* main_payload_64 =
   "  cmpq $-1, %rax\n"
   "  je   __afl_setup_abort\n"
   "\n"
-  "  movq %rax, __afl_new_prev_loc(%rip)\n"
+  "  movq %rax, __afl_prev_loc(%rip)\n"
   "\n"
   "  leaq .AFL_SHM_ENV(%rip), %rdi\n"
   CALL_L64("getenv")
@@ -751,7 +752,6 @@ static const u8* main_payload_64 =
   "  .lcomm   __afl_area_ptr, 8\n"
 #ifndef COVERAGE_ONLY
   "  .lcomm   __afl_prev_loc, 8\n"
-  "  .lcomm   __afl_new_prev_loc, 8\n"
 #endif /* !COVERAGE_ONLY */
   "  .lcomm   __afl_fork_pid, 4\n"
   "  .lcomm   __afl_temp, 4\n"
@@ -764,8 +764,6 @@ static const u8* main_payload_64 =
   ".AFL_SHM_ENV:\n"
   "  .asciz \"" SHM_ENV_VAR "\"\n"
   "\n"
-  ".PREV_ENV_VAR:\n"
-  "  .asciz \"PREV_ENV_VAR\"\n"
   "/* --- END --- */\n"
   "\n";
 
