@@ -2720,6 +2720,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
         var_detected = 1;
 
         if (getenv("DEBUG_MODE")) {
+            printf("[********** DEBUG VAR DETECTED ***********\n");
             for (i=0; i < MAP_SIZE; ++i)
                 if (trace_bits[i] || first_trace[i])
                     printf("[---] 0x%x: First trace: %d, trace bit %d\n", i, first_trace[i], trace_bits[i]);
