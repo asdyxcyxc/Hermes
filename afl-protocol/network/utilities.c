@@ -16,8 +16,11 @@ void sendAll(int sockfd, unsigned char *msg, int len)
 
     while (1) {
         res = send(sockfd, buffer, tmp_len, 0);
-        if ( res < 0 )
-            PFATAL("Error while sending to socket");
+        if ( res < 0 ) {
+          if (getenv("DEBUG_MODE"))
+            printf("[ client ] Failed to send data due to (%d): %s\n", errno, strerror(errno));
+          return;
+        }
         else {
             if ( res == tmp_len )
                 break;
