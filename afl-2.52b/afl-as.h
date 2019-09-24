@@ -434,10 +434,12 @@ static const u8* main_payload_64 =
   "  /* Calculate and store hit for the code location specified in rcx. */\n"
   "\n"
 #ifndef COVERAGE_ONLY
-  "  movq __afl_prev_loc(%rip), %r8\n"
+  "  pushq %r8\n"
+  "  movq __afl_new_prev_loc(%rip), %r8\n"
   "  xorq 0(%r8), %rcx\n"
   "  xorq %rcx, 0(%r8)\n"
   "  shrq $1, 0(%r8)\n"
+  "  popq  %r8\n"
   "\n"
 #endif /* ^!COVERAGE_ONLY */
   "\n"
@@ -542,7 +544,7 @@ static const u8* main_payload_64 =
   "  cmpq $-1, %rax\n"
   "  je   __afl_setup_abort\n"
   "\n"
-  "  movq %rax, __afl_prev_loc(%rip)\n"
+  "  movq %rax, __afl_new_prev_loc(%rip)\n"
   "\n"
   "  leaq .AFL_SHM_ENV(%rip), %rdi\n"
   CALL_L64("getenv")
@@ -741,7 +743,6 @@ static const u8* main_payload_64 =
   "  .comm   __afl_area_ptr, 8\n"
 #ifndef COVERAGE_ONLY
   "  .comm   __afl_prev_loc, 8\n"
-  "  .comm   __afl_new_prev_loc, 8\n"
 #endif /* !COVERAGE_ONLY */
   "  .comm   __afl_fork_pid, 4\n"
   "  .comm   __afl_temp, 4\n"
@@ -760,6 +761,7 @@ static const u8* main_payload_64 =
 #endif /* ^__APPLE__ */
 
   "  .comm    __afl_global_area_ptr, 8, 8\n"
+  "  .comm    __afl_new_prev_loc, 8, 8\n"
   "\n"
   ".AFL_SHM_ENV:\n"
   "  .asciz \"" SHM_ENV_VAR "\"\n"
