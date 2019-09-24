@@ -1,0 +1,987 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BASE64_ENCODE_BODY	mongoose.c	309;"	d	file:
+BASE64_FLUSH	mongoose.c	339;"	d	file:
+BASE64_FLUSH	mongoose.c	349;"	d	file:
+BASE64_FLUSH	mongoose.c	358;"	d	file:
+BASE64_FLUSH	mongoose.c	365;"	d	file:
+BASE64_OUT	mongoose.c	334;"	d	file:
+BASE64_OUT	mongoose.c	348;"	d	file:
+BASE64_OUT	mongoose.c	352;"	d	file:
+BASE64_OUT	mongoose.c	364;"	d	file:
+BIG_ENDIAN	mongoose.c	1018;"	d	file:
+BYTE_ORDER	mongoose.c	1013;"	d	file:
+CONSOLE_UART	mongoose.c	13225;"	d	file:
+CONTENT_DISPOSITION	mongoose.c	6728;"	d	file:
+CS_COMMON_CS_DBG_H_	mongoose.c	451;"	d	file:
+CS_COMMON_CS_DIRENT_H_	mongoose.c	738;"	d	file:
+CS_COMMON_CS_ENDIAN_H_	mongoose.c	1001;"	d	file:
+CS_COMMON_MG_MEM_H_	mongoose.c	183;"	d	file:
+CS_COMMON_PLATFORMS_LWIP_MG_NET_IF_LWIP_H_	mongoose.c	14968;"	d	file:
+CS_COMMON_PLATFORMS_PIC32_NET_IF_H_	mongoose.c	16019;"	d	file:
+CS_COMMON_PLATFORMS_SIMPLELINK_SL_FS_SLFS_H_	mongoose.c	13385;"	d	file:
+CS_COMMON_PLATFORMS_SIMPLELINK_SL_NET_IF_H_	mongoose.c	14239;"	d	file:
+CS_ENABLE_DEBUG	mongoose.c	460;"	d	file:
+CS_LOG_ENABLE_TS_DIFF	mongoose.c	464;"	d	file:
+CS_MONGOOSE_SRC_INTERNAL_H_	mongoose.c	11;"	d	file:
+CS_MONGOOSE_SRC_NET_IF_SOCKET_H_	mongoose.c	3497;"	d	file:
+CS_MONGOOSE_SRC_NET_IF_SOCKS_H_	mongoose.c	3525;"	d	file:
+C_DISABLE_BUILTIN_SNPRINTF	mongoose.c	1799;"	d	file:
+C_SNPRINTF_APPEND_CHAR	mongoose.c	1812;"	d	file:
+C_SNPRINTF_FLAG_ZERO	mongoose.c	1818;"	d	file:
+DATA_FILE	mongoose.c	/^enum mg_http_proto_data_type { DATA_NONE, DATA_FILE, DATA_PUT };$/;"	e	enum:mg_http_proto_data_type	file:
+DATA_NONE	mongoose.c	/^enum mg_http_proto_data_type { DATA_NONE, DATA_FILE, DATA_PUT };$/;"	e	enum:mg_http_proto_data_type	file:
+DATA_PUT	mongoose.c	/^enum mg_http_proto_data_type { DATA_NONE, DATA_FILE, DATA_PUT };$/;"	e	enum:mg_http_proto_data_type	file:
+DBG	mongoose.c	578;"	d	file:
+DBG	mongoose.c	582;"	d	file:
+DBG	mongoose.c	589;"	d	file:
+DIR	mongoose.c	/^typedef struct { int dummy; } DIR;$/;"	t	typeref:struct:__anon1	file:
+F1	mongoose.c	1070;"	d	file:
+F2	mongoose.c	1071;"	d	file:
+F3	mongoose.c	1072;"	d	file:
+F4	mongoose.c	1073;"	d	file:
+FD_INVALID	mongoose.c	/^  FD_INVALID,$/;"	e	enum:fd_type	file:
+FD_SLFS	mongoose.c	/^  FD_SLFS$/;"	e	enum:fd_type	file:
+FD_SPIFFS	mongoose.c	/^  FD_SPIFFS,$/;"	e	enum:fd_type	file:
+FD_SYS	mongoose.c	/^  FD_SYS,$/;"	e	enum:fd_type	file:
+FLAGS_MASK_FIN	mongoose.c	9838;"	d	file:
+FLAGS_MASK_OP	mongoose.c	9839;"	d	file:
+FS_SLFS_MAX_FILE_SIZE	mongoose.c	13469;"	d	file:
+HEXTOI	mongoose.c	7287;"	d	file:
+HOSTtime	mongoose.c	/^time_t HOSTtime() {$/;"	f
+IPADDR_NTOA	mongoose.c	15072;"	d	file:
+IPADDR_NTOA	mongoose.c	15080;"	d	file:
+LITTLE_ENDIAN	mongoose.c	1015;"	d	file:
+LL_DEBUG	mongoose.c	/^  LL_DEBUG = 3,$/;"	e	enum:cs_log_level	file:
+LL_ERROR	mongoose.c	/^  LL_ERROR = 0,$/;"	e	enum:cs_log_level	file:
+LL_INFO	mongoose.c	/^  LL_INFO = 2,$/;"	e	enum:cs_log_level	file:
+LL_NONE	mongoose.c	/^  LL_NONE = -1,$/;"	e	enum:cs_log_level	file:
+LL_VERBOSE_DEBUG	mongoose.c	/^  LL_VERBOSE_DEBUG = 4,$/;"	e	enum:cs_log_level	file:
+LL_WARN	mongoose.c	/^  LL_WARN = 1,$/;"	e	enum:cs_log_level	file:
+LOG	mongoose.c	562;"	d	file:
+LOG	mongoose.c	569;"	d	file:
+LOG	mongoose.c	588;"	d	file:
+MAX	mongoose.c	10356;"	d	file:
+MAX_OPEN_SLFS_FILES	mongoose.c	13395;"	d	file:
+MBUF_FREE	mongoose.c	1528;"	d	file:
+MBUF_FREE	mongoose.c	20;"	d	file:
+MBUF_REALLOC	mongoose.c	1524;"	d	file:
+MBUF_REALLOC	mongoose.c	16;"	d	file:
+MD5STEP	mongoose.c	1075;"	d	file:
+MG_CALLOC	mongoose.c	194;"	d	file:
+MG_COPY_COMMON_CONNECTION_OPTIONS	mongoose.c	2343;"	d	file:
+MG_CTL_MSG_MESSAGE_SIZE	mongoose.c	41;"	d	file:
+MG_DEFAULT_NAMESERVER	mongoose.c	11850;"	d	file:
+MG_DISABLE_PFS	mongoose.c	34;"	d	file:
+MG_ENABLE_NET_IF_LWIP_LOW_LEVEL	mongoose.c	14971;"	d	file:
+MG_ENABLE_NET_IF_PIC32	mongoose.c	16028;"	d	file:
+MG_ENABLE_NET_IF_SIMPLELINK	mongoose.c	14248;"	d	file:
+MG_ENABLE_NET_IF_SOCKET	mongoose.c	3506;"	d	file:
+MG_ENV_EXPORT_TO_CGI	mongoose.c	8857;"	d	file:
+MG_FREE	mongoose.c	202;"	d	file:
+MG_F_HTTP_CGI_PARSE_HEADERS	mongoose.c	8860;"	d	file:
+MG_INTERNAL	mongoose.c	29;"	d	file:
+MG_LWIP_IFACE_VTABLE	mongoose.c	15708;"	d	file:
+MG_MALLOC	mongoose.c	190;"	d	file:
+MG_MAX_CGI_ENVIR_VARS	mongoose.c	8853;"	d	file:
+MG_MAX_HOST_LEN	mongoose.c	2334;"	d	file:
+MG_MQTT_ERROR_INCOMPLETE_MSG	mongoose.c	72;"	d	file:
+MG_MQTT_ERROR_MALFORMED_MSG	mongoose.c	73;"	d	file:
+MG_NULL_IFACE_VTABLE	mongoose.c	3726;"	d	file:
+MG_PIC32_IFACE_VTABLE	mongoose.c	16318;"	d	file:
+MG_Q_MSG_CB	mongoose.c	/^  MG_Q_MSG_CB,$/;"	e	enum:mg_q_msg_type	file:
+MG_REALLOC	mongoose.c	198;"	d	file:
+MG_SET_PTRPTR	mongoose.c	23;"	d	file:
+MG_SIG_ACCEPT	mongoose.c	/^  MG_SIG_ACCEPT = 5,$/;"	e	enum:mg_sig_type	file:
+MG_SIG_CLOSE_CONN	mongoose.c	/^  MG_SIG_CLOSE_CONN = 3,$/;"	e	enum:mg_sig_type	file:
+MG_SIG_CONNECT_RESULT	mongoose.c	/^  MG_SIG_CONNECT_RESULT = 1,$/;"	e	enum:mg_sig_type	file:
+MG_SIG_QUEUE_LEN	mongoose.c	15759;"	d	file:
+MG_SIG_RECV	mongoose.c	/^  MG_SIG_RECV = 2,$/;"	e	enum:mg_sig_type	file:
+MG_SIG_TOMBSTONE	mongoose.c	/^  MG_SIG_TOMBSTONE = 4,$/;"	e	enum:mg_sig_type	file:
+MG_SL_IFACE_VTABLE	mongoose.c	14665;"	d	file:
+MG_SOCKET_IFACE_VTABLE	mongoose.c	4298;"	d	file:
+MG_SSL_IF_SIMPLELINK_SLFS_PREFIX	mongoose.c	14718;"	d	file:
+MG_SSL_IF_SIMPLELINK_SLFS_PREFIX_LEN	mongoose.c	14721;"	d	file:
+MG_TCP_IO_SIZE	mongoose.c	2337;"	d	file:
+MG_TCP_RECV_BUFFER_SIZE	mongoose.c	14285;"	d	file:
+MG_UART_CHAR_PUT	mongoose.c	13754;"	d	file:
+MG_UART_WRITE	mongoose.c	13756;"	d	file:
+MG_UDP_IO_SIZE	mongoose.c	2340;"	d	file:
+MG_UDP_RECV_BUFFER_SIZE	mongoose.c	14286;"	d	file:
+MG_WEBSOCKET_PING_INTERVAL_SECONDS	mongoose.c	9835;"	d	file:
+MIME_ENTRY	mongoose.c	6010;"	d	file:
+MIN	mongoose.c	83;"	d	file:
+MPS_BEGIN	mongoose.c	/^  MPS_BEGIN,$/;"	e	enum:mg_http_multipart_stream_state	file:
+MPS_FINALIZE	mongoose.c	/^  MPS_FINALIZE,$/;"	e	enum:mg_http_multipart_stream_state	file:
+MPS_FINISHED	mongoose.c	/^  MPS_FINISHED$/;"	e	enum:mg_http_multipart_stream_state	file:
+MPS_GOT_BOUNDARY	mongoose.c	/^  MPS_GOT_BOUNDARY,$/;"	e	enum:mg_http_multipart_stream_state	file:
+MPS_WAITING_FOR_BOUNDARY	mongoose.c	/^  MPS_WAITING_FOR_BOUNDARY,$/;"	e	enum:mg_http_multipart_stream_state	file:
+MPS_WAITING_FOR_CHUNK	mongoose.c	/^  MPS_WAITING_FOR_CHUNK,$/;"	e	enum:mg_http_multipart_stream_state	file:
+NO_LIBC	mongoose.c	33;"	d	file:
+NUM_DIGITS	mongoose.c	242;"	d	file:
+NUM_LETTERS	mongoose.c	241;"	d	file:
+NUM_SYS_FDS	mongoose.c	13743;"	d	file:
+NUM_UPPERCASES	mongoose.c	240;"	d	file:
+R0	mongoose.c	1276;"	d	file:
+R0	mongoose.c	1286;"	d	file:
+R1	mongoose.c	1277;"	d	file:
+R1	mongoose.c	1289;"	d	file:
+R2	mongoose.c	1278;"	d	file:
+R2	mongoose.c	1292;"	d	file:
+R3	mongoose.c	1279;"	d	file:
+R3	mongoose.c	1295;"	d	file:
+R4	mongoose.c	1280;"	d	file:
+R4	mongoose.c	1298;"	d	file:
+SET_ADDR	mongoose.c	15073;"	d	file:
+SET_ADDR	mongoose.c	15081;"	d	file:
+SHA1HANDSOFF	mongoose.c	1253;"	d	file:
+SLFS_FD_BASE	mongoose.c	13745;"	d	file:
+SNTP_ATTEMPTS	mongoose.c	12752;"	d	file:
+SNTP_TIMEOUT	mongoose.c	12748;"	d	file:
+SNTP_TIME_OFFSET	mongoose.c	12745;"	d	file:
+SPIFFS_FD_BASE	mongoose.c	13744;"	d	file:
+TCP_BIND	mongoose.c	15070;"	d	file:
+TCP_BIND	mongoose.c	15078;"	d	file:
+TCP_NEW	mongoose.c	15069;"	d	file:
+TCP_NEW	mongoose.c	15077;"	d	file:
+UDP_BIND	mongoose.c	15071;"	d	file:
+UDP_BIND	mongoose.c	15079;"	d	file:
+WEAK	mongoose.c	/^FILE *cs_log_file WEAK = NULL;$/;"	v
+WEAK	mongoose.c	/^double cs_log_ts WEAK;$/;"	v
+WEAK	mongoose.c	/^enum cs_log_level cs_log_cur_msg_level WEAK = LL_NONE;$/;"	v	typeref:enum:cs_log_cur_msg_level
+WEAK	mongoose.c	/^enum cs_log_level cs_log_threshold WEAK =$/;"	v	typeref:enum:cs_log_threshold
+_LL_MAX	mongoose.c	/^  _LL_MAX = 5,$/;"	e	enum:cs_log_level	file:
+_LL_MIN	mongoose.c	/^  _LL_MIN = -2,$/;"	e	enum:cs_log_level	file:
+_MG_ALLOWED_CONNECT_FLAGS_MASK	mongoose.c	2347;"	d	file:
+_MG_CALLBACK_MODIFIABLE_FLAGS_MASK	mongoose.c	2351;"	d	file:
+_MG_F_FD_CAN_READ	mongoose.c	14451;"	d	file:
+_MG_F_FD_CAN_READ	mongoose.c	3956;"	d	file:
+_MG_F_FD_CAN_WRITE	mongoose.c	14452;"	d	file:
+_MG_F_FD_CAN_WRITE	mongoose.c	3957;"	d	file:
+_MG_F_FD_ERROR	mongoose.c	14453;"	d	file:
+_MG_F_FD_ERROR	mongoose.c	3958;"	d	file:
+_exit	mongoose.c	/^void _exit(int status) {$/;"	f
+_fstat	mongoose.c	/^int _fstat(int fd, struct stat *s) {$/;"	f
+_getpid	mongoose.c	/^int _getpid() {$/;"	f
+_isatty	mongoose.c	/^int _isatty(int fd) {$/;"	f
+_kill	mongoose.c	/^int _kill(int pid, int sig) {$/;"	f
+_not_implemented	mongoose.c	/^void _not_implemented(const char *what) {$/;"	f
+_stat	mongoose.c	/^int _stat(const char *pathname, struct stat *st) {$/;"	f
+_wstati64	mongoose.c	/^int _wstati64(const wchar_t *path, cs_stat_t *st) {$/;"	f
+altbuf	mongoose.c	/^struct altbuf {$/;"	s	file:
+altbuf_append	mongoose.c	/^MG_INTERNAL void altbuf_append(struct altbuf *ab, char c) {$/;"	f
+altbuf_get_buf	mongoose.c	/^MG_INTERNAL char *altbuf_get_buf(struct altbuf *ab, int trim) {$/;"	f
+altbuf_init	mongoose.c	/^MG_INTERNAL void altbuf_init(struct altbuf *ab, char *buf, size_t buf_size) {$/;"	f
+altbuf_reallocated	mongoose.c	/^MG_INTERNAL int altbuf_reallocated(struct altbuf *ab) {$/;"	f
+altbuf_reset	mongoose.c	/^MG_INTERNAL void altbuf_reset(struct altbuf *ab) {$/;"	f
+arg	mongoose.c	/^  void *arg;$/;"	m	struct:mg_q_msg	file:
+asprintf	mongoose.c	/^int asprintf(char **strp, const char *fmt, ...) {$/;"	f
+auth_domain	mongoose.c	/^  char *auth_domain;         \/* owned *\/$/;"	m	struct:mg_http_endpoint	file:
+auth_file	mongoose.c	/^  char *auth_file;           \/* owned *\/$/;"	m	struct:mg_http_endpoint	file:
+blk	mongoose.c	1275;"	d	file:
+blk	mongoose.c	1282;"	d	file:
+blk0	mongoose.c	/^static uint32_t blk0(union char64long16 *block, int i) {$/;"	f	file:
+body_len	mongoose.c	/^  int64_t body_len; \/* How many bytes of chunked body was reassembled. *\/$/;"	m	struct:mg_http_proto_data_chuncked	file:
+boundary	mongoose.c	/^  const char *boundary;$/;"	m	struct:mg_http_multipart_stream	file:
+boundary_len	mongoose.c	/^  int boundary_len;$/;"	m	struct:mg_http_multipart_stream	file:
+buf	mongoose.c	/^  char buf[MG_CGI_ENVIRONMENT_SIZE];       \/* Environment buffer *\/$/;"	m	struct:mg_cgi_env_block	file:
+byteReverse	mongoose.c	/^static void byteReverse(unsigned char *buf, unsigned longs) {$/;"	f	file:
+c	mongoose.c	/^  struct mg_connection *c; \/* Connection to the client *\/$/;"	m	struct:socksdata	typeref:struct:socksdata::mg_connection	file:
+c	mongoose.c	/^  unsigned char c[64];$/;"	m	union:char64long16	file:
+c_itoa	mongoose.c	/^static int c_itoa(char *buf, size_t buf_size, int64_t num, int base, int flags,$/;"	f	file:
+c_snprintf	mongoose.c	/^int c_snprintf(char *buf, size_t buf_size, const char *fmt, ...) {$/;"	f
+c_strnlen	mongoose.c	/^size_t c_strnlen(const char *s, size_t maxlen) {$/;"	f
+c_strnstr	mongoose.c	/^const char *c_strnstr(const char *s, const char *find, size_t slen) {$/;"	f
+c_vsnprintf	mongoose.c	/^int c_vsnprintf(char *buf, size_t buf_size, const char *fmt, va_list ap) {$/;"	f
+ca_cert	mongoose.c	/^  mbedtls_x509_crt *ca_cert;$/;"	m	struct:mg_ssl_if_ctx	file:
+callback	mongoose.c	/^  mg_event_handler_t callback;$/;"	m	struct:ctl_msg	file:
+callback	mongoose.c	/^  mg_resolve_callback_t callback;$/;"	m	struct:mg_resolve_async_request	file:
+cb	mongoose.c	/^  void (*cb)(struct mg_mgr *mgr, void *arg);$/;"	m	struct:mg_q_msg	file:
+cert	mongoose.c	/^  mbedtls_x509_crt *cert;$/;"	m	struct:mg_ssl_if_ctx	file:
+cgi	mongoose.c	/^  struct mg_http_proto_data_cgi cgi;$/;"	m	struct:mg_http_proto_data	typeref:struct:mg_http_proto_data::mg_http_proto_data_cgi	file:
+cgi_nc	mongoose.c	/^  struct mg_connection *cgi_nc;$/;"	m	struct:mg_http_proto_data_cgi	typeref:struct:mg_http_proto_data_cgi::mg_connection	file:
+char64long16	mongoose.c	/^union char64long16 {$/;"	u	file:
+chunk	mongoose.c	/^  struct mg_http_proto_data_chuncked chunk;$/;"	m	struct:mg_http_proto_data	typeref:struct:mg_http_proto_data::mg_http_proto_data_chuncked	file:
+cipher_suites	mongoose.c	/^  struct mbuf cipher_suites;$/;"	m	struct:mg_ssl_if_ctx	typeref:struct:mg_ssl_if_ctx::mbuf	file:
+cl	mongoose.c	/^  int64_t cl;    \/* Content-Length. How many bytes to send. *\/$/;"	m	struct:mg_http_proto_data_file	file:
+close	mongoose.c	/^int close(int fd) {$/;"	f
+closedir	mongoose.c	/^int closedir(DIR *d) {$/;"	f
+closedir	mongoose.c	/^int closedir(DIR *dir) {$/;"	f
+coap_add_opt_info	mongoose.c	/^static char *coap_add_opt_info(char *ptr, uint16_t val, size_t len) {$/;"	f	file:
+coap_add_uint16	mongoose.c	/^static char *coap_add_uint16(char *ptr, uint16_t val) {$/;"	f	file:
+coap_calculate_packet_size	mongoose.c	/^static uint32_t coap_calculate_packet_size(struct mg_coap_message *cm,$/;"	f	file:
+coap_get_ext_opt	mongoose.c	/^static int coap_get_ext_opt(char *ptr, struct mbuf *io, uint16_t *opt_info) {$/;"	f	file:
+coap_get_ext_opt_size	mongoose.c	/^static size_t coap_get_ext_opt_size(uint32_t value) {$/;"	f	file:
+coap_get_options	mongoose.c	/^static char *coap_get_options(char *ptr, struct mbuf *io,$/;"	f	file:
+coap_get_token	mongoose.c	/^static char *coap_get_token(char *ptr, struct mbuf *io,$/;"	f	file:
+coap_handler	mongoose.c	/^static void coap_handler(struct mg_connection *nc, int ev,$/;"	f	file:
+coap_parse_header	mongoose.c	/^static char *coap_parse_header(char *ptr, struct mbuf *io,$/;"	f	file:
+coap_split_opt	mongoose.c	/^static int coap_split_opt(uint32_t value, uint8_t *base, uint16_t *ext) {$/;"	f	file:
+conf	mongoose.c	/^  mbedtls_ssl_config *conf;$/;"	m	struct:mg_ssl_if_ctx	file:
+count	mongoose.c	/^  int count;$/;"	m	struct:sntp_data	file:
+cs_base64_decode	mongoose.c	/^int cs_base64_decode(const unsigned char *s, int len, char *dst, int *dec_len) {$/;"	f
+cs_base64_emit_chunk	mongoose.c	/^static void cs_base64_emit_chunk(struct cs_base64_ctx *ctx) {$/;"	f	file:
+cs_base64_emit_code	mongoose.c	/^static void cs_base64_emit_code(struct cs_base64_ctx *ctx, int v) {$/;"	f	file:
+cs_base64_encode	mongoose.c	/^void cs_base64_encode(const unsigned char *src, int src_len, char *dst) {$/;"	f
+cs_base64_finish	mongoose.c	/^void cs_base64_finish(struct cs_base64_ctx *ctx) {$/;"	f
+cs_base64_init	mongoose.c	/^void cs_base64_init(struct cs_base64_ctx *ctx, cs_base64_putc_t b64_putc,$/;"	f
+cs_base64_update	mongoose.c	/^void cs_base64_update(struct cs_base64_ctx *ctx, const char *str, size_t len) {$/;"	f
+cs_dirent_dummy	mongoose.c	/^typedef int cs_dirent_dummy;$/;"	t	file:
+cs_fprint_base64	mongoose.c	/^void cs_fprint_base64(FILE *f, const unsigned char *src, int src_len) {$/;"	f
+cs_from_hex	mongoose.c	/^void cs_from_hex(char *to, const char *p, size_t len) {$/;"	f
+cs_hmac_sha1	mongoose.c	/^void cs_hmac_sha1(const unsigned char *key, size_t keylen,$/;"	f
+cs_log_level	mongoose.c	/^enum cs_log_level {$/;"	g	file:
+cs_log_print_prefix	mongoose.c	/^int cs_log_print_prefix(enum cs_log_level level, const char *func,$/;"	f
+cs_log_printf	mongoose.c	/^void cs_log_printf(const char *fmt, ...) {$/;"	f
+cs_log_set_file	mongoose.c	/^void cs_log_set_file(FILE *file) {$/;"	f
+cs_log_set_filter	mongoose.c	/^void cs_log_set_filter(const char *pattern) {$/;"	f
+cs_log_set_level	mongoose.c	/^void cs_log_set_level(enum cs_log_level level) {$/;"	f
+cs_md5	mongoose.c	/^void cs_md5(char buf[33], ...) {$/;"	f
+cs_md5_final	mongoose.c	/^void cs_md5_final(unsigned char digest[16], cs_md5_ctx *ctx) {$/;"	f
+cs_md5_init	mongoose.c	/^void cs_md5_init(cs_md5_ctx *ctx) {$/;"	f
+cs_md5_transform	mongoose.c	/^static void cs_md5_transform(uint32_t buf[4], uint32_t const in[16]) {$/;"	f	file:
+cs_md5_update	mongoose.c	/^void cs_md5_update(cs_md5_ctx *ctx, const unsigned char *buf, size_t len) {$/;"	f
+cs_sha1_final	mongoose.c	/^void cs_sha1_final(unsigned char digest[20], cs_sha1_ctx *context) {$/;"	f
+cs_sha1_init	mongoose.c	/^void cs_sha1_init(cs_sha1_ctx *context) {$/;"	f
+cs_sha1_transform	mongoose.c	/^void cs_sha1_transform(uint32_t state[5], const unsigned char buffer[64]) {$/;"	f
+cs_sha1_update	mongoose.c	/^void cs_sha1_update(cs_sha1_ctx *context, const unsigned char *data,$/;"	f
+cs_time	mongoose.c	/^double cs_time(void) {$/;"	f
+cs_timegm	mongoose.c	/^double cs_timegm(const struct tm *tm) {$/;"	f
+cs_to64	mongoose.c	/^int64_t cs_to64(const char *s) {$/;"	f
+cs_to_hex	mongoose.c	/^void cs_to_hex(char *to, const unsigned char *p, size_t len) {$/;"	f
+ctl_msg	mongoose.c	/^struct ctl_msg {$/;"	s	file:
+d	mongoose.c	/^  DIR d;$/;"	m	struct:win32_dir	file:
+d_ino	mongoose.c	/^  int d_ino;$/;"	m	struct:dirent	file:
+d_name	mongoose.c	/^  char d_name[256];$/;"	m	struct:dirent	file:
+d_name	mongoose.c	/^  char d_name[MAX_PATH];$/;"	m	struct:dirent	file:
+data	mongoose.c	/^  const void *data;$/;"	m	struct:mg_lwip_tcp_write_ctx	file:
+data	mongoose.c	/^  void *data;$/;"	m	struct:mg_resolve_async_request	file:
+deliver_chunk	mongoose.c	/^static void deliver_chunk(struct mg_connection *c, struct http_message *hm,$/;"	f	file:
+dirent	mongoose.c	/^struct dirent {$/;"	s	file:
+disband	mongoose.c	/^static void disband(struct mg_connection *c) {$/;"	f	file:
+dns_handler	mongoose.c	/^static void dns_handler(struct mg_connection *nc, int ev,$/;"	f	file:
+do_ssi_exec	mongoose.c	/^static void do_ssi_exec(struct mg_connection *nc, char *tag) {$/;"	f	file:
+draining_rx_chain	mongoose.c	/^  int draining_rx_chain;$/;"	m	struct:mg_lwip_conn_state	file:
+drop_dir	mongoose.c	/^const char *drop_dir(const char *fname, bool *is_slfs) {$/;"	f
+dummy	mongoose.c	/^typedef struct { int dummy; } DIR;$/;"	m	struct:__anon1	file:
+endpoint_handler	mongoose.c	/^  mg_event_handler_t endpoint_handler;$/;"	m	struct:mg_http_proto_data	file:
+endpoints	mongoose.c	/^  struct mg_http_endpoint *endpoints;$/;"	m	struct:mg_http_proto_data	typeref:struct:mg_http_proto_data::mg_http_endpoint	file:
+err	mongoose.c	/^  enum mg_resolve_err err;$/;"	m	struct:mg_resolve_async_request	typeref:enum:mg_resolve_async_request::mg_resolve_err	file:
+err	mongoose.c	/^  err_t err;$/;"	m	struct:mg_lwip_conn_state	file:
+ev_handler	mqtt_broker.c	/^static void ev_handler(struct mg_connection *c, int ev, void *ev_data) {$/;"	f	file:
+ext_len	mongoose.c	/^  size_t ext_len;$/;"	m	struct:__anon2	file:
+extension	mongoose.c	/^  const char *extension;$/;"	m	struct:__anon2	file:
+fd_type	mongoose.c	/^enum fd_type {$/;"	g	file:
+fd_type	mongoose.c	/^static int fd_type(int fd) {$/;"	f	file:
+fh	mongoose.c	/^  _i32 fh;$/;"	m	struct:sl_fd_info	file:
+file	mongoose.c	/^  struct mg_http_proto_data_file file;$/;"	m	struct:mg_http_proto_data	typeref:struct:mg_http_proto_data::mg_http_proto_data_file	file:
+file_name	mongoose.c	/^  const char *file_name;$/;"	m	struct:mg_http_multipart_stream	file:
+file_upload_state	mongoose.c	/^struct file_upload_state {$/;"	s	file:
+flags	mongoose.c	/^  uint16_t flags;$/;"	m	struct:mg_dns_header	file:
+fourbit	mongoose.c	/^static int fourbit(int ch) {$/;"	f	file:
+fp	mongoose.c	/^  FILE *fp;      \/* Opened file. *\/$/;"	m	struct:mg_http_proto_data_file	file:
+fp	mongoose.c	/^  FILE *fp;$/;"	m	struct:file_upload_state	file:
+fprint_str	mongoose.c	/^void fprint_str(FILE *fp, const char *str) {$/;"	f
+from_b64	mongoose.c	/^static unsigned char from_b64(unsigned char ch) {$/;"	f	file:
+fs_slfs_close	mongoose.c	/^int fs_slfs_close(int fd) {$/;"	f
+fs_slfs_fstat	mongoose.c	/^int fs_slfs_fstat(int fd, struct stat *s) {$/;"	f
+fs_slfs_lseek	mongoose.c	/^off_t fs_slfs_lseek(int fd, off_t offset, int whence) {$/;"	f
+fs_slfs_open	mongoose.c	/^int fs_slfs_open(const char *pathname, int flags, mode_t mode) {$/;"	f
+fs_slfs_read	mongoose.c	/^ssize_t fs_slfs_read(int fd, void *buf, size_t count) {$/;"	f
+fs_slfs_rename	mongoose.c	/^int fs_slfs_rename(const char *from, const char *to) {$/;"	f
+fs_slfs_set_new_file_size	mongoose.c	/^void fs_slfs_set_new_file_size(const char *name, size_t size) {$/;"	f
+fs_slfs_stat	mongoose.c	/^int fs_slfs_stat(const char *pathname, struct stat *s) {$/;"	f
+fs_slfs_unlink	mongoose.c	/^int fs_slfs_unlink(const char *pathname) {$/;"	f
+fs_slfs_write	mongoose.c	/^ssize_t fs_slfs_write(int fd, const void *buf, size_t count) {$/;"	f
+gettimeofday	mongoose.c	/^int gettimeofday(struct timeval *tp, void *tzp) {$/;"	f
+getu16	mongoose.c	/^static uint16_t getu16(const char *p) {$/;"	f	file:
+hPipe	mongoose.c	/^  HANDLE hPipe;$/;"	m	struct:mg_threadparam	file:
+hander	mongoose.c	/^  mg_event_handler_t hander;$/;"	m	struct:sntp_data	file:
+handle	mongoose.c	/^  HANDLE handle;$/;"	m	struct:win32_dir	file:
+handler	mongoose.c	/^  mg_event_handler_t handler;$/;"	m	struct:mg_http_endpoint	file:
+identity_len	mongoose.c	/^  size_t identity_len;$/;"	m	struct:mg_ssl_if_ctx	file:
+inet_ntoa	mongoose.c	/^char *inet_ntoa(struct in_addr in) {$/;"	f
+inet_ntoa	mongoose.c	/^char *inet_ntoa(struct in_addr n) {$/;"	f
+inet_ntop	mongoose.c	/^const char *inet_ntop(int af, const void *src, char *dst, socklen_t size) {$/;"	f
+inet_pton	mongoose.c	/^int inet_pton(int af, const char *src, void *dst) {$/;"	f
+info	mongoose.c	/^  WIN32_FIND_DATAW info;$/;"	m	struct:win32_dir	file:
+intptr_t	mongoose.c	2357;"	d	file:
+ip	mongoose.c	/^  ip_addr_t *ip;$/;"	m	struct:udp_sendto_ctx	file:
+ip_2_ip4	mongoose.c	15058;"	d	file:
+ip_2_ip4	mongoose.c	15060;"	d	file:
+isbyte	mongoose.c	/^static int isbyte(int n) {$/;"	f	file:
+keepalive	mongoose.c	/^  int keepalive; \/* Keep connection open after sending. *\/$/;"	m	struct:mg_http_proto_data_file	file:
+key	mongoose.c	/^  mbedtls_pk_context *key;$/;"	m	struct:mg_ssl_if_ctx	file:
+l	mongoose.c	/^  uint32_t l[16];$/;"	m	union:char64long16	file:
+last_ssl_write_size	mongoose.c	/^  int last_ssl_write_size;$/;"	m	struct:mg_lwip_conn_state	file:
+last_time	mongoose.c	/^  time_t last_time;$/;"	m	struct:mg_resolve_async_request	file:
+lc	mongoose.c	/^  struct mg_connection *lc;$/;"	m	struct:mg_lwip_conn_state	typeref:struct:mg_lwip_conn_state::mg_connection	file:
+len	mongoose.c	/^  int len;                                 \/* Space taken *\/$/;"	m	struct:mg_cgi_env_block	file:
+len	mongoose.c	/^  size_t len;$/;"	m	struct:altbuf	file:
+len	mongoose.c	/^  size_t len;$/;"	m	struct:tcp_recved_ctx	file:
+len	mongoose.c	/^  uint16_t len;$/;"	m	struct:mg_lwip_tcp_write_ctx	file:
+lfn	mongoose.c	/^  char *lfn;$/;"	m	struct:file_upload_state	file:
+linked_conn	mongoose.c	/^  struct mg_connection *linked_conn;$/;"	m	struct:mg_reverse_proxy_data	typeref:struct:mg_reverse_proxy_data::mg_connection	file:
+lseek	mongoose.c	/^off_t lseek(int fd, off_t offset, int whence) {$/;"	f
+m	mongoose.c	/^  struct mbuf m;$/;"	m	struct:altbuf	typeref:struct:altbuf::mbuf	file:
+main	mqtt_broker.c	/^int main(void) {$/;"	f
+mask	mongoose.c	/^  uint32_t mask;$/;"	m	struct:ws_mask_ctx	file:
+max_retries	mongoose.c	/^  int max_retries;$/;"	m	struct:mg_resolve_async_request	file:
+mbuf_append	mongoose.c	/^size_t mbuf_append(struct mbuf *a, const void *buf, size_t len) {$/;"	f
+mbuf_free	mongoose.c	/^void mbuf_free(struct mbuf *mbuf) {$/;"	f
+mbuf_init	mongoose.c	/^void mbuf_init(struct mbuf *mbuf, size_t initial_size) {$/;"	f
+mbuf_insert	mongoose.c	/^size_t mbuf_insert(struct mbuf *a, size_t off, const void *buf, size_t len) {$/;"	f
+mbuf_remove	mongoose.c	/^void mbuf_remove(struct mbuf *mb, size_t n) {$/;"	f
+mbuf_resize	mongoose.c	/^void mbuf_resize(struct mbuf *a, size_t new_size) {$/;"	f
+mbuf_trim	mongoose.c	/^void mbuf_trim(struct mbuf *mbuf) {$/;"	f
+message	mongoose.c	/^  char message[MG_CTL_MSG_MESSAGE_SIZE];$/;"	m	struct:ctl_msg	file:
+mg_abs_path	mongoose.c	/^static void mg_abs_path(const char *utf8_path, char *abs_path, size_t len) {$/;"	f	file:
+mg_accept_conn	mongoose.c	/^static int mg_accept_conn(struct mg_connection *lc) {$/;"	f	file:
+mg_add_conn	mongoose.c	/^MG_INTERNAL void mg_add_conn(struct mg_mgr *mgr, struct mg_connection *c) {$/;"	f
+mg_add_sock	mongoose.c	/^struct mg_connection *mg_add_sock(struct mg_mgr *s, sock_t sock,$/;"	f
+mg_add_sock_opt	mongoose.c	/^struct mg_connection *mg_add_sock_opt(struct mg_mgr *s, sock_t sock,$/;"	f
+mg_add_to_set	mongoose.c	/^void mg_add_to_set(sock_t sock, fd_set *set, sock_t *max_fd) {$/;"	f
+mg_addenv	mongoose.c	/^static char *mg_addenv(struct mg_cgi_env_block *block, const char *fmt, ...) {$/;"	f	file:
+mg_addenv2	mongoose.c	/^static void mg_addenv2(struct mg_cgi_env_block *blk, const char *name) {$/;"	f	file:
+mg_asprintf	mongoose.c	/^int mg_asprintf(char **buf, size_t size, const char *fmt, ...) {$/;"	f
+mg_assemble_uri	mongoose.c	/^int mg_assemble_uri(const struct mg_str *scheme, const struct mg_str *user_info,$/;"	f
+mg_avprintf	mongoose.c	/^int mg_avprintf(char **buf, size_t size, const char *fmt, va_list ap) {$/;"	f
+mg_base64_decode	mongoose.c	/^int mg_base64_decode(const unsigned char *s, int len, char *dst) {$/;"	f
+mg_base64_encode	mongoose.c	/^void mg_base64_encode(const unsigned char *src, int src_len, char *dst) {$/;"	f
+mg_basic_auth_header	mongoose.c	/^void mg_basic_auth_header(const struct mg_str user, const struct mg_str pass,$/;"	f
+mg_bind	mongoose.c	/^struct mg_connection *mg_bind(struct mg_mgr *srv, const char *address,$/;"	f
+mg_bind_opt	mongoose.c	/^struct mg_connection *mg_bind_opt(struct mg_mgr *mgr, const char *address,$/;"	f
+mg_broadcast	mongoose.c	/^void mg_broadcast(struct mg_mgr *mgr, mg_event_handler_t cb, void *data,$/;"	f
+mg_calculate_delay	mongoose.c	/^static uint64_t mg_calculate_delay(uint64_t t1, uint64_t t2, uint64_t t3) {$/;"	f	file:
+mg_call	mongoose.c	/^MG_INTERNAL void mg_call(struct mg_connection *nc,$/;"	f
+mg_casecmp	mongoose.c	/^int mg_casecmp(const char *s1, const char *s2) {$/;"	f
+mg_cgi_env_block	mongoose.c	/^struct mg_cgi_env_block {$/;"	s	file:
+mg_cgi_ev_handler	mongoose.c	/^static void mg_cgi_ev_handler(struct mg_connection *cgi_nc, int ev,$/;"	f	file:
+mg_check_digest_auth	mongoose.c	/^int mg_check_digest_auth(struct mg_str method, struct mg_str uri,$/;"	f
+mg_check_ip_acl	mongoose.c	/^int mg_check_ip_acl(const char *acl, uint32_t remote_ip) {$/;"	f
+mg_check_nonce	mongoose.c	/^static int mg_check_nonce(const char *nonce) {$/;"	f	file:
+mg_close_conn	mongoose.c	/^void mg_close_conn(struct mg_connection *conn) {$/;"	f
+mg_coap_add_option	mongoose.c	/^struct mg_coap_option *mg_coap_add_option(struct mg_coap_message *cm,$/;"	f
+mg_coap_compose	mongoose.c	/^uint32_t mg_coap_compose(struct mg_coap_message *cm, struct mbuf *io) {$/;"	f
+mg_coap_free_options	mongoose.c	/^void mg_coap_free_options(struct mg_coap_message *cm) {$/;"	f
+mg_coap_parse	mongoose.c	/^uint32_t mg_coap_parse(struct mbuf *io, struct mg_coap_message *cm) {$/;"	f
+mg_coap_send_ack	mongoose.c	/^uint32_t mg_coap_send_ack(struct mg_connection *nc, uint16_t msg_id) {$/;"	f
+mg_coap_send_message	mongoose.c	/^uint32_t mg_coap_send_message(struct mg_connection *nc,$/;"	f
+mg_conn_addr_to_str	mongoose.c	/^int mg_conn_addr_to_str(struct mg_connection *nc, char *buf, size_t len,$/;"	f
+mg_connect	mongoose.c	/^struct mg_connection *mg_connect(struct mg_mgr *mgr, const char *address,$/;"	f
+mg_connect_http	mongoose.c	/^struct mg_connection *mg_connect_http($/;"	f
+mg_connect_http_base	mongoose.c	/^struct mg_connection *mg_connect_http_base($/;"	f
+mg_connect_http_opt	mongoose.c	/^struct mg_connection *mg_connect_http_opt($/;"	f
+mg_connect_opt	mongoose.c	/^struct mg_connection *mg_connect_opt(struct mg_mgr *mgr, const char *address,$/;"	f
+mg_connect_ws	mongoose.c	/^struct mg_connection *mg_connect_ws($/;"	f
+mg_connect_ws_opt	mongoose.c	/^struct mg_connection *mg_connect_ws_opt($/;"	f
+mg_create_connection	mongoose.c	/^MG_INTERNAL struct mg_connection *mg_create_connection($/;"	f
+mg_create_connection_base	mongoose.c	/^MG_INTERNAL struct mg_connection *mg_create_connection_base($/;"	f
+mg_create_itermediate_directories	mongoose.c	/^static int mg_create_itermediate_directories(const char *path) {$/;"	f	file:
+mg_default_iface_vtable	mongoose.c	/^const struct mg_iface_vtable mg_default_iface_vtable = MG_LWIP_IFACE_VTABLE;$/;"	v	typeref:struct:mg_iface_vtable
+mg_default_iface_vtable	mongoose.c	/^const struct mg_iface_vtable mg_default_iface_vtable = MG_NULL_IFACE_VTABLE;$/;"	v	typeref:struct:mg_iface_vtable
+mg_default_iface_vtable	mongoose.c	/^const struct mg_iface_vtable mg_default_iface_vtable = MG_PIC32_IFACE_VTABLE;$/;"	v	typeref:struct:mg_iface_vtable
+mg_default_iface_vtable	mongoose.c	/^const struct mg_iface_vtable mg_default_iface_vtable = MG_SL_IFACE_VTABLE;$/;"	v	typeref:struct:mg_iface_vtable
+mg_default_iface_vtable	mongoose.c	/^const struct mg_iface_vtable mg_default_iface_vtable = MG_SOCKET_IFACE_VTABLE;$/;"	v	typeref:struct:mg_iface_vtable
+mg_deliver_websocket_data	mongoose.c	/^static int mg_deliver_websocket_data(struct mg_connection *nc) {$/;"	f	file:
+mg_destroy_conn	mongoose.c	/^void mg_destroy_conn(struct mg_connection *conn, int destroy_if) {$/;"	f
+mg_dns_copy_questions	mongoose.c	/^int mg_dns_copy_questions(struct mbuf *io, struct mg_dns_message *msg) {$/;"	f
+mg_dns_create_reply	mongoose.c	/^struct mg_dns_reply mg_dns_create_reply(struct mbuf *io,$/;"	f
+mg_dns_encode_name	mongoose.c	/^int mg_dns_encode_name(struct mbuf *io, const char *name, size_t len) {$/;"	f
+mg_dns_encode_record	mongoose.c	/^int mg_dns_encode_record(struct mbuf *io, struct mg_dns_resource_record *rr,$/;"	f
+mg_dns_header	mongoose.c	/^struct mg_dns_header {$/;"	s	file:
+mg_dns_insert_header	mongoose.c	/^int mg_dns_insert_header(struct mbuf *io, size_t pos,$/;"	f
+mg_dns_next_record	mongoose.c	/^struct mg_dns_resource_record *mg_dns_next_record($/;"	f
+mg_dns_parse_record_data	mongoose.c	/^int mg_dns_parse_record_data(struct mg_dns_message *msg,$/;"	f
+mg_dns_reply_record	mongoose.c	/^int mg_dns_reply_record(struct mg_dns_reply *reply,$/;"	f
+mg_dns_send_reply	mongoose.c	/^void mg_dns_send_reply(struct mg_connection *nc, struct mg_dns_reply *r) {$/;"	f
+mg_dns_tid	mongoose.c	/^static int mg_dns_tid = 0xa0;$/;"	v	file:
+mg_dns_uncompress_name	mongoose.c	/^size_t mg_dns_uncompress_name(struct mg_dns_message *msg, struct mg_str *name,$/;"	f
+mg_do_connect	mongoose.c	/^MG_INTERNAL struct mg_connection *mg_do_connect(struct mg_connection *nc,$/;"	f
+mg_do_recv	mongoose.c	/^static int mg_do_recv(struct mg_connection *nc) {$/;"	f	file:
+mg_do_ssi_include	mongoose.c	/^static void mg_do_ssi_include(struct mg_connection *nc, struct http_message *hm,$/;"	f	file:
+mg_escape	mongoose.c	/^static void mg_escape(const char *src, char *dst, size_t dst_len) {$/;"	f	file:
+mg_ev_mgr_lwip_data	mongoose.c	/^struct mg_ev_mgr_lwip_data {$/;"	s	file:
+mg_ev_mgr_lwip_process_signals	mongoose.c	/^void mg_ev_mgr_lwip_process_signals(struct mg_mgr *mgr) {$/;"	f
+mg_ev_mgr_lwip_signal	mongoose.c	/^struct mg_ev_mgr_lwip_signal {$/;"	s	file:
+mg_file_upload_handler	mongoose.c	/^void mg_file_upload_handler(struct mg_connection *nc, int ev, void *ev_data,$/;"	f
+mg_find_iface	mongoose.c	/^struct mg_iface *mg_find_iface(struct mg_mgr *mgr,$/;"	f
+mg_find_index_file	mongoose.c	/^MG_INTERNAL void mg_find_index_file(const char *path, const char *list,$/;"	f
+mg_fopen	mongoose.c	/^FILE *mg_fopen(const char *path, const char *mode) {$/;"	f
+mg_forward	mongoose.c	/^void mg_forward(struct mg_connection *from, struct mg_connection *to) {$/;"	f
+mg_fread	mongoose.c	/^size_t mg_fread(void *ptr, size_t size, size_t count, FILE *f) {$/;"	f
+mg_fwrite	mongoose.c	/^size_t mg_fwrite(const void *ptr, size_t size, size_t count, FILE *f) {$/;"	f
+mg_get_errno	mongoose.c	/^DO_NOT_WARN_UNUSED MG_INTERNAL int mg_get_errno(void) {$/;"	f
+mg_get_http_basic_auth	mongoose.c	/^int mg_get_http_basic_auth(struct http_message *hm, char *user, size_t user_len,$/;"	f
+mg_get_http_header	mongoose.c	/^struct mg_str *mg_get_http_header(struct http_message *hm, const char *name) {$/;"	f
+mg_get_http_var	mongoose.c	/^int mg_get_http_var(const struct mg_str *buf, const char *name, char *dst,$/;"	f
+mg_get_ip_address_of_nameserver	mongoose.c	/^static int mg_get_ip_address_of_nameserver(char *name, size_t name_len) {$/;"	f	file:
+mg_get_line_len	mongoose.c	/^static size_t mg_get_line_len(const char *buf, size_t buf_len) {$/;"	f	file:
+mg_get_mime_type	mongoose.c	/^static struct mg_str mg_get_mime_type(const char *path, const char *dflt,$/;"	f	file:
+mg_get_month_index	mongoose.c	/^static int mg_get_month_index(const char *s) {$/;"	f	file:
+mg_get_ntp_ts	mongoose.c	/^static void mg_get_ntp_ts(const char *ntp, uint64_t *val) {$/;"	f	file:
+mg_get_sec	mongoose.c	/^static uint64_t mg_get_sec(uint64_t val) {$/;"	f	file:
+mg_get_usec	mongoose.c	/^static uint64_t mg_get_usec(uint64_t val) {$/;"	f	file:
+mg_gmt_time_string	mongoose.c	/^static void mg_gmt_time_string(char *buf, size_t buf_len, time_t *t) {$/;"	f	file:
+mg_handle_cgi	mongoose.c	/^MG_INTERNAL void mg_handle_cgi(struct mg_connection *nc, const char *prog,$/;"	f
+mg_handle_chunked	mongoose.c	/^MG_INTERNAL size_t mg_handle_chunked(struct mg_connection *nc,$/;"	f
+mg_handle_delete	mongoose.c	/^MG_INTERNAL void mg_handle_delete(struct mg_connection *nc,$/;"	f
+mg_handle_incoming_websocket_frame	mongoose.c	/^static void mg_handle_incoming_websocket_frame(struct mg_connection *nc,$/;"	f	file:
+mg_handle_lock	mongoose.c	/^MG_INTERNAL void mg_handle_lock(struct mg_connection *nc, const char *path) {$/;"	f
+mg_handle_mkcol	mongoose.c	/^MG_INTERNAL void mg_handle_mkcol(struct mg_connection *nc, const char *path,$/;"	f
+mg_handle_move	mongoose.c	/^MG_INTERNAL void mg_handle_move(struct mg_connection *c,$/;"	f
+mg_handle_propfind	mongoose.c	/^MG_INTERNAL void mg_handle_propfind(struct mg_connection *nc, const char *path,$/;"	f
+mg_handle_put	mongoose.c	/^MG_INTERNAL void mg_handle_put(struct mg_connection *nc, const char *path,$/;"	f
+mg_handle_recv	mongoose.c	/^static void mg_handle_recv(struct mg_connection *nc) {$/;"	f	file:
+mg_handle_send	mongoose.c	/^static void mg_handle_send(struct mg_connection *nc) {$/;"	f	file:
+mg_handle_ssi_request	mongoose.c	/^MG_INTERNAL void mg_handle_ssi_request(struct mg_connection *nc,$/;"	f
+mg_hash_md5_v	mongoose.c	/^void mg_hash_md5_v(size_t num_msgs, const uint8_t *msgs[],$/;"	f
+mg_hash_sha1_v	mongoose.c	/^void mg_hash_sha1_v(size_t num_msgs, const uint8_t *msgs[],$/;"	f
+mg_hexdump	mongoose.c	/^int mg_hexdump(const void *buf, int len, char *dst, int dst_len) {$/;"	f
+mg_hexdump_connection	mongoose.c	/^void mg_hexdump_connection(struct mg_connection *nc, const char *path,$/;"	f
+mg_hexdump_n	mongoose.c	/^static int mg_hexdump_n(const void *buf, int len, char *dst, int dst_len,$/;"	f	file:
+mg_hexdumpf	mongoose.c	/^void mg_hexdumpf(FILE *fp, const void *buf, int len) {$/;"	f
+mg_http_call_endpoint_handler	mongoose.c	/^static void mg_http_call_endpoint_handler(struct mg_connection *nc, int ev,$/;"	f	file:
+mg_http_check_digest_auth	mongoose.c	/^int mg_http_check_digest_auth(struct http_message *hm, const char *auth_domain,$/;"	f
+mg_http_conn_destructor	mongoose.c	/^static void mg_http_conn_destructor(void *proto_data) {$/;"	f	file:
+mg_http_construct_etag	mongoose.c	/^static void mg_http_construct_etag(char *buf, size_t buf_len,$/;"	f	file:
+mg_http_create_digest_auth_header	mongoose.c	/^int mg_http_create_digest_auth_header(char *buf, size_t buf_len,$/;"	f
+mg_http_endpoint	mongoose.c	/^struct mg_http_endpoint {$/;"	s	file:
+mg_http_free_proto_data_cgi	mongoose.c	/^MG_INTERNAL void mg_http_free_proto_data_cgi(struct mg_http_proto_data_cgi *d) {$/;"	f
+mg_http_free_proto_data_endpoints	mongoose.c	/^static void mg_http_free_proto_data_endpoints(struct mg_http_endpoint **ep) {$/;"	f	file:
+mg_http_free_proto_data_file	mongoose.c	/^static void mg_http_free_proto_data_file(struct mg_http_proto_data_file *d) {$/;"	f	file:
+mg_http_free_proto_data_mp_stream	mongoose.c	/^static void mg_http_free_proto_data_mp_stream($/;"	f	file:
+mg_http_free_reverse_proxy_data	mongoose.c	/^static void mg_http_free_reverse_proxy_data(struct mg_reverse_proxy_data *rpd) {$/;"	f	file:
+mg_http_get_endpoint_handler	mongoose.c	/^struct mg_http_endpoint *mg_http_get_endpoint_handler(struct mg_connection *nc,$/;"	f
+mg_http_get_proto_data	mongoose.c	/^static struct mg_http_proto_data *mg_http_get_proto_data($/;"	f	file:
+mg_http_get_request_len	mongoose.c	/^static int mg_http_get_request_len(const char *s, int buf_len) {$/;"	f	file:
+mg_http_handle_forwarding	mongoose.c	/^static int mg_http_handle_forwarding(struct mg_connection *nc,$/;"	f	file:
+mg_http_handler	mongoose.c	/^void mg_http_handler(struct mg_connection *nc, int ev,$/;"	f
+mg_http_handler2	mongoose.c	/^static void mg_http_handler2(struct mg_connection *nc, int ev,$/;"	f	file:
+mg_http_is_authorized	mongoose.c	/^int mg_http_is_authorized(struct http_message *hm, const struct mg_str path,$/;"	f
+mg_http_is_authorized	mongoose.c	/^int mg_http_is_authorized(struct http_message *hm, struct mg_str path,$/;"	f
+mg_http_multipart_begin	mongoose.c	/^static void mg_http_multipart_begin(struct mg_connection *nc,$/;"	f	file:
+mg_http_multipart_call_handler	mongoose.c	/^static void mg_http_multipart_call_handler(struct mg_connection *c, int ev,$/;"	f	file:
+mg_http_multipart_continue	mongoose.c	/^static void mg_http_multipart_continue(struct mg_connection *c) {$/;"	f	file:
+mg_http_multipart_continue_wait_for_chunk	mongoose.c	/^static int mg_http_multipart_continue_wait_for_chunk(struct mg_connection *c) {$/;"	f	file:
+mg_http_multipart_finalize	mongoose.c	/^static int mg_http_multipart_finalize(struct mg_connection *c) {$/;"	f	file:
+mg_http_multipart_process_boundary	mongoose.c	/^static int mg_http_multipart_process_boundary(struct mg_connection *c) {$/;"	f	file:
+mg_http_multipart_stream	mongoose.c	/^struct mg_http_multipart_stream {$/;"	s	file:
+mg_http_multipart_stream_state	mongoose.c	/^enum mg_http_multipart_stream_state {$/;"	g	file:
+mg_http_multipart_wait_for_boundary	mongoose.c	/^static int mg_http_multipart_wait_for_boundary(struct mg_connection *c) {$/;"	f	file:
+mg_http_parse_chunk	mongoose.c	/^static size_t mg_http_parse_chunk(char *buf, size_t len, char **chunk_data,$/;"	f	file:
+mg_http_parse_header	mongoose.c	/^int mg_http_parse_header(struct mg_str *hdr, const char *var_name, char *buf,$/;"	f
+mg_http_parse_header2	mongoose.c	/^int mg_http_parse_header2(struct mg_str *hdr, const char *var_name, char **buf,$/;"	f
+mg_http_parse_header_internal	mongoose.c	/^static void mg_http_parse_header_internal(struct mg_str *hdr,$/;"	f	file:
+mg_http_parse_headers	mongoose.c	/^static const char *mg_http_parse_headers(const char *s, const char *end,$/;"	f	file:
+mg_http_parse_range_header	mongoose.c	/^static int mg_http_parse_range_header(const struct mg_str *header, int64_t *a,$/;"	f	file:
+mg_http_proto_data	mongoose.c	/^struct mg_http_proto_data {$/;"	s	file:
+mg_http_proto_data_cgi	mongoose.c	/^struct mg_http_proto_data_cgi {$/;"	s	file:
+mg_http_proto_data_chuncked	mongoose.c	/^struct mg_http_proto_data_chuncked {$/;"	s	file:
+mg_http_proto_data_file	mongoose.c	/^struct mg_http_proto_data_file {$/;"	s	file:
+mg_http_proto_data_type	mongoose.c	/^enum mg_http_proto_data_type { DATA_NONE, DATA_FILE, DATA_PUT };$/;"	g	file:
+mg_http_reverse_proxy	mongoose.c	/^void mg_http_reverse_proxy(struct mg_connection *nc,$/;"	f
+mg_http_send_digest_auth_request	mongoose.c	/^void mg_http_send_digest_auth_request(struct mg_connection *c,$/;"	f
+mg_http_send_error	mongoose.c	/^void mg_http_send_error(struct mg_connection *nc, int code,$/;"	f
+mg_http_send_options	mongoose.c	/^static void mg_http_send_options(struct mg_connection *nc) {$/;"	f	file:
+mg_http_send_port_based_redirect	mongoose.c	/^static int mg_http_send_port_based_redirect($/;"	f	file:
+mg_http_send_redirect	mongoose.c	/^void mg_http_send_redirect(struct mg_connection *nc, int status_code,$/;"	f
+mg_http_serve_file	mongoose.c	/^void mg_http_serve_file(struct mg_connection *nc, struct http_message *hm,$/;"	f
+mg_http_serve_file2	mongoose.c	/^static void mg_http_serve_file2(struct mg_connection *nc, const char *path,$/;"	f	file:
+mg_http_transfer_file_data	mongoose.c	/^static void mg_http_transfer_file_data(struct mg_connection *nc) {$/;"	f	file:
+mg_if_accept_new_conn	mongoose.c	/^struct mg_connection *mg_if_accept_new_conn(struct mg_connection *lc) {$/;"	f
+mg_if_accept_tcp_cb	mongoose.c	/^void mg_if_accept_tcp_cb(struct mg_connection *nc, union socket_address *sa,$/;"	f
+mg_if_can_recv_cb	mongoose.c	/^void mg_if_can_recv_cb(struct mg_connection *nc) {$/;"	f
+mg_if_can_send_cb	mongoose.c	/^void mg_if_can_send_cb(struct mg_connection *nc) {$/;"	f
+mg_if_connect_cb	mongoose.c	/^void mg_if_connect_cb(struct mg_connection *nc, int err) {$/;"	f
+mg_if_create_iface	mongoose.c	/^struct mg_iface *mg_if_create_iface(const struct mg_iface_vtable *vtable,$/;"	f
+mg_if_get_conn_addr	mongoose.c	/^void mg_if_get_conn_addr(struct mg_connection *nc, int remote,$/;"	f
+mg_if_poll	mongoose.c	/^int mg_if_poll(struct mg_connection *nc, double now) {$/;"	f
+mg_ifaces	mongoose.c	/^const struct mg_iface_vtable *mg_ifaces[] = {$/;"	v	typeref:struct:mg_iface_vtable
+mg_is_big_endian	mongoose.c	/^int mg_is_big_endian(void) {$/;"	f
+mg_is_creation_request	mongoose.c	/^static int mg_is_creation_request(const struct http_message *hm) {$/;"	f	file:
+mg_is_dav_request	mongoose.c	/^MG_INTERNAL int mg_is_dav_request(const struct mg_str *s) {$/;"	f
+mg_is_error	mongoose.c	/^static int mg_is_error(int n) {$/;"	f	file:
+mg_is_error	mongoose.c	/^static int mg_is_error(void) {$/;"	f	file:
+mg_is_file_hidden	mongoose.c	/^static int mg_is_file_hidden(const char *path,$/;"	f	file:
+mg_is_not_modified	mongoose.c	/^MG_INTERNAL int mg_is_not_modified(struct http_message *hm, cs_stat_t *st) {$/;"	f
+mg_is_ws_control_frame	mongoose.c	/^static int mg_is_ws_control_frame(unsigned char flags) {$/;"	f	file:
+mg_is_ws_first_fragment	mongoose.c	/^static int mg_is_ws_first_fragment(unsigned char flags) {$/;"	f	file:
+mg_is_ws_fragment	mongoose.c	/^static int mg_is_ws_fragment(unsigned char flags) {$/;"	f	file:
+mg_lwip_accept_cb	mongoose.c	/^static err_t mg_lwip_accept_cb(void *arg, struct tcp_pcb *newtpcb, err_t err) {$/;"	f	file:
+mg_lwip_conn_state	mongoose.c	/^struct mg_lwip_conn_state {$/;"	s	file:
+mg_lwip_handle_accept	mongoose.c	/^void mg_lwip_handle_accept(struct mg_connection *nc) {$/;"	f
+mg_lwip_if_add_conn	mongoose.c	/^void mg_lwip_if_add_conn(struct mg_connection *nc) {$/;"	f
+mg_lwip_if_can_send	mongoose.c	/^static int mg_lwip_if_can_send(struct mg_connection *nc,$/;"	f	file:
+mg_lwip_if_connect_tcp	mongoose.c	/^void mg_lwip_if_connect_tcp(struct mg_connection *nc,$/;"	f
+mg_lwip_if_connect_tcp_ctx	mongoose.c	/^struct mg_lwip_if_connect_tcp_ctx {$/;"	s	file:
+mg_lwip_if_connect_tcp_tcpip	mongoose.c	/^static void mg_lwip_if_connect_tcp_tcpip(void *arg) {$/;"	f	file:
+mg_lwip_if_connect_udp	mongoose.c	/^void mg_lwip_if_connect_udp(struct mg_connection *nc) {$/;"	f
+mg_lwip_if_connect_udp_tcpip	mongoose.c	/^static void mg_lwip_if_connect_udp_tcpip(void *arg) {$/;"	f	file:
+mg_lwip_if_create_conn	mongoose.c	/^int mg_lwip_if_create_conn(struct mg_connection *nc) {$/;"	f
+mg_lwip_if_destroy_conn	mongoose.c	/^void mg_lwip_if_destroy_conn(struct mg_connection *nc) {$/;"	f
+mg_lwip_if_free	mongoose.c	/^void mg_lwip_if_free(struct mg_iface *iface) {$/;"	f
+mg_lwip_if_get_conn_addr	mongoose.c	/^void mg_lwip_if_get_conn_addr(struct mg_connection *nc, int remote,$/;"	f
+mg_lwip_if_init	mongoose.c	/^void mg_lwip_if_init(struct mg_iface *iface) {$/;"	f
+mg_lwip_if_listen_ctx	mongoose.c	/^struct mg_lwip_if_listen_ctx {$/;"	s	file:
+mg_lwip_if_listen_tcp	mongoose.c	/^int mg_lwip_if_listen_tcp(struct mg_connection *nc, union socket_address *sa) {$/;"	f
+mg_lwip_if_listen_tcp_tcpip	mongoose.c	/^static void mg_lwip_if_listen_tcp_tcpip(void *arg) {$/;"	f	file:
+mg_lwip_if_listen_udp	mongoose.c	/^int mg_lwip_if_listen_udp(struct mg_connection *nc, union socket_address *sa) {$/;"	f
+mg_lwip_if_listen_udp_tcpip	mongoose.c	/^static void mg_lwip_if_listen_udp_tcpip(void *arg) {$/;"	f	file:
+mg_lwip_if_poll	mongoose.c	/^time_t mg_lwip_if_poll(struct mg_iface *iface, int timeout_ms) {$/;"	f
+mg_lwip_if_remove_conn	mongoose.c	/^void mg_lwip_if_remove_conn(struct mg_connection *nc) {$/;"	f
+mg_lwip_if_sock_set	mongoose.c	/^void mg_lwip_if_sock_set(struct mg_connection *nc, sock_t sock) {$/;"	f
+mg_lwip_if_tcp_recv	mongoose.c	/^static int mg_lwip_if_tcp_recv(struct mg_connection *nc, void *buf,$/;"	f	file:
+mg_lwip_if_tcp_send	mongoose.c	/^int mg_lwip_if_tcp_send(struct mg_connection *nc, const void *buf, size_t len) {$/;"	f
+mg_lwip_if_udp_recv	mongoose.c	/^static int mg_lwip_if_udp_recv(struct mg_connection *nc, void *buf, size_t len,$/;"	f	file:
+mg_lwip_if_udp_send	mongoose.c	/^static int mg_lwip_if_udp_send(struct mg_connection *nc, const void *data,$/;"	f	file:
+mg_lwip_iface_vtable	mongoose.c	/^const struct mg_iface_vtable mg_lwip_iface_vtable = MG_LWIP_IFACE_VTABLE;$/;"	v	typeref:struct:mg_iface_vtable
+mg_lwip_post_signal	mongoose.c	/^void mg_lwip_post_signal(enum mg_sig_type sig, struct mg_connection *nc) {$/;"	f
+mg_lwip_recv_common	mongoose.c	/^static void mg_lwip_recv_common(struct mg_connection *nc, struct pbuf *p) {$/;"	f	file:
+mg_lwip_set_keepalive_params	mongoose.c	/^void mg_lwip_set_keepalive_params(struct mg_connection *nc, int idle,$/;"	f
+mg_lwip_tcp_conn_cb	mongoose.c	/^static err_t mg_lwip_tcp_conn_cb(void *arg, struct tcp_pcb *tpcb, err_t err) {$/;"	f	file:
+mg_lwip_tcp_error_cb	mongoose.c	/^static void mg_lwip_tcp_error_cb(void *arg, err_t err) {$/;"	f	file:
+mg_lwip_tcp_recv_cb	mongoose.c	/^static err_t mg_lwip_tcp_recv_cb(void *arg, struct tcp_pcb *tpcb,$/;"	f	file:
+mg_lwip_tcp_sent_cb	mongoose.c	/^static err_t mg_lwip_tcp_sent_cb(void *arg, struct tcp_pcb *tpcb,$/;"	f	file:
+mg_lwip_tcp_write_ctx	mongoose.c	/^struct mg_lwip_tcp_write_ctx {$/;"	s	file:
+mg_lwip_tcp_write_tcpip	mongoose.c	/^static void mg_lwip_tcp_write_tcpip(void *arg) {$/;"	f	file:
+mg_lwip_udp_recv_cb	mongoose.c	/^static void mg_lwip_udp_recv_cb(void *arg, struct udp_pcb *pcb, struct pbuf *p,$/;"	f	file:
+mg_match_prefix	mongoose.c	/^size_t mg_match_prefix(const char *pattern, int pattern_len, const char *str) {$/;"	f
+mg_match_prefix_n	mongoose.c	/^size_t mg_match_prefix_n(const struct mg_str pattern, const struct mg_str str) {$/;"	f
+mg_mbuf_append_base64	mongoose.c	/^void mg_mbuf_append_base64(struct mbuf *mbuf, const void *data, size_t len) {$/;"	f
+mg_mbuf_append_base64_putc	mongoose.c	/^void mg_mbuf_append_base64_putc(char ch, void *user_data) {$/;"	f
+mg_mgr_free	mongoose.c	/^void mg_mgr_free(struct mg_mgr *m) {$/;"	f
+mg_mgr_handle_conn	mongoose.c	/^void mg_mgr_handle_conn(struct mg_connection *nc, int fd_flags, double now) {$/;"	f
+mg_mgr_handle_ctl_sock	mongoose.c	/^static void mg_mgr_handle_ctl_sock(struct mg_mgr *mgr) {$/;"	f	file:
+mg_mgr_init	mongoose.c	/^void mg_mgr_init(struct mg_mgr *m, void *user_data) {$/;"	f
+mg_mgr_init_opt	mongoose.c	/^void mg_mgr_init_opt(struct mg_mgr *m, void *user_data,$/;"	f
+mg_mgr_min_timer	mongoose.c	/^double mg_mgr_min_timer(const struct mg_mgr *mgr) {$/;"	f
+mg_mgr_poll	mongoose.c	/^int mg_mgr_poll(struct mg_mgr *m, int timeout_ms) {$/;"	f
+mg_mk_str	mongoose.c	/^struct mg_str mg_mk_str(const char *s) {$/;"	f
+mg_mk_str_n	mongoose.c	/^struct mg_str mg_mk_str_n(const char *s, size_t len) {$/;"	f
+mg_mkdir	mongoose.c	/^static int mg_mkdir(const char *path, uint32_t mode) {$/;"	f	file:
+mg_mkmd5resp	mongoose.c	/^static void mg_mkmd5resp(const char *method, size_t method_len, const char *uri,$/;"	f	file:
+mg_mqtt_add_session	mongoose.c	/^static void mg_mqtt_add_session(struct mg_mqtt_session *s) {$/;"	f	file:
+mg_mqtt_broker	mongoose.c	/^void mg_mqtt_broker(struct mg_connection *nc, int ev, void *data) {$/;"	f
+mg_mqtt_broker_handle_connect	mongoose.c	/^static void mg_mqtt_broker_handle_connect(struct mg_mqtt_broker *brk,$/;"	f	file:
+mg_mqtt_broker_handle_publish	mongoose.c	/^static void mg_mqtt_broker_handle_publish(struct mg_mqtt_broker *brk,$/;"	f	file:
+mg_mqtt_broker_handle_subscribe	mongoose.c	/^static void mg_mqtt_broker_handle_subscribe(struct mg_connection *nc,$/;"	f	file:
+mg_mqtt_broker_init	mongoose.c	/^void mg_mqtt_broker_init(struct mg_mqtt_broker *brk, void *user_data) {$/;"	f
+mg_mqtt_close_session	mongoose.c	/^static void mg_mqtt_close_session(struct mg_mqtt_session *s) {$/;"	f	file:
+mg_mqtt_connack	mongoose.c	/^void mg_mqtt_connack(struct mg_connection *nc, uint8_t return_code) {$/;"	f
+mg_mqtt_destroy_session	mongoose.c	/^static void mg_mqtt_destroy_session(struct mg_mqtt_session *s) {$/;"	f	file:
+mg_mqtt_disconnect	mongoose.c	/^void mg_mqtt_disconnect(struct mg_connection *nc) {$/;"	f
+mg_mqtt_match_topic_expression	mongoose.c	/^int mg_mqtt_match_topic_expression(struct mg_str exp, struct mg_str topic) {$/;"	f
+mg_mqtt_next	mongoose.c	/^struct mg_mqtt_session *mg_mqtt_next(struct mg_mqtt_broker *brk,$/;"	f
+mg_mqtt_next_subscribe_topic	mongoose.c	/^int mg_mqtt_next_subscribe_topic(struct mg_mqtt_message *msg,$/;"	f
+mg_mqtt_ping	mongoose.c	/^void mg_mqtt_ping(struct mg_connection *nc) {$/;"	f
+mg_mqtt_pong	mongoose.c	/^void mg_mqtt_pong(struct mg_connection *nc) {$/;"	f
+mg_mqtt_proto_data_destructor	mongoose.c	/^static void mg_mqtt_proto_data_destructor(void *proto_data) {$/;"	f	file:
+mg_mqtt_puback	mongoose.c	/^void mg_mqtt_puback(struct mg_connection *nc, uint16_t message_id) {$/;"	f
+mg_mqtt_pubcomp	mongoose.c	/^void mg_mqtt_pubcomp(struct mg_connection *nc, uint16_t message_id) {$/;"	f
+mg_mqtt_publish	mongoose.c	/^void mg_mqtt_publish(struct mg_connection *nc, const char *topic,$/;"	f
+mg_mqtt_pubrec	mongoose.c	/^void mg_mqtt_pubrec(struct mg_connection *nc, uint16_t message_id) {$/;"	f
+mg_mqtt_pubrel	mongoose.c	/^void mg_mqtt_pubrel(struct mg_connection *nc, uint16_t message_id) {$/;"	f
+mg_mqtt_remove_session	mongoose.c	/^static void mg_mqtt_remove_session(struct mg_mqtt_session *s) {$/;"	f	file:
+mg_mqtt_session_init	mongoose.c	/^static void mg_mqtt_session_init(struct mg_mqtt_broker *brk,$/;"	f	file:
+mg_mqtt_suback	mongoose.c	/^void mg_mqtt_suback(struct mg_connection *nc, uint8_t *qoss, size_t qoss_len,$/;"	f
+mg_mqtt_subscribe	mongoose.c	/^void mg_mqtt_subscribe(struct mg_connection *nc,$/;"	f
+mg_mqtt_unsuback	mongoose.c	/^void mg_mqtt_unsuback(struct mg_connection *nc, uint16_t message_id) {$/;"	f
+mg_mqtt_unsubscribe	mongoose.c	/^void mg_mqtt_unsubscribe(struct mg_connection *nc, char **topics,$/;"	f
+mg_mqtt_vmatch_topic_expression	mongoose.c	/^int mg_mqtt_vmatch_topic_expression(const char *exp, struct mg_str topic) {$/;"	f
+mg_ncasecmp	mongoose.c	/^int mg_ncasecmp(const char *s1, const char *s2, size_t len) {$/;"	f
+mg_next	mongoose.c	/^struct mg_connection *mg_next(struct mg_mgr *s, struct mg_connection *conn) {$/;"	f
+mg_next_comma_list_entry	mongoose.c	/^const char *mg_next_comma_list_entry(const char *list, struct mg_str *val,$/;"	f
+mg_next_comma_list_entry_n	mongoose.c	/^struct mg_str mg_next_comma_list_entry_n(struct mg_str list, struct mg_str *val,$/;"	f
+mg_normalize_uri_path	mongoose.c	/^int mg_normalize_uri_path(const struct mg_str *in, struct mg_str *out) {$/;"	f
+mg_ntp_to_tv	mongoose.c	/^static void mg_ntp_to_tv(uint64_t val, struct timeval *tv) {$/;"	f	file:
+mg_null_if_add_conn	mongoose.c	/^static void mg_null_if_add_conn(struct mg_connection *c) {$/;"	f	file:
+mg_null_if_connect_tcp	mongoose.c	/^static void mg_null_if_connect_tcp(struct mg_connection *c,$/;"	f	file:
+mg_null_if_connect_udp	mongoose.c	/^static void mg_null_if_connect_udp(struct mg_connection *c) {$/;"	f	file:
+mg_null_if_create_conn	mongoose.c	/^static int mg_null_if_create_conn(struct mg_connection *c) {$/;"	f	file:
+mg_null_if_destroy_conn	mongoose.c	/^static void mg_null_if_destroy_conn(struct mg_connection *c) {$/;"	f	file:
+mg_null_if_free	mongoose.c	/^static void mg_null_if_free(struct mg_iface *iface) {$/;"	f	file:
+mg_null_if_get_conn_addr	mongoose.c	/^static void mg_null_if_get_conn_addr(struct mg_connection *c, int remote,$/;"	f	file:
+mg_null_if_init	mongoose.c	/^static void mg_null_if_init(struct mg_iface *iface) {$/;"	f	file:
+mg_null_if_listen_tcp	mongoose.c	/^static int mg_null_if_listen_tcp(struct mg_connection *c,$/;"	f	file:
+mg_null_if_listen_udp	mongoose.c	/^static int mg_null_if_listen_udp(struct mg_connection *c,$/;"	f	file:
+mg_null_if_poll	mongoose.c	/^static time_t mg_null_if_poll(struct mg_iface *iface, int timeout_ms) {$/;"	f	file:
+mg_null_if_remove_conn	mongoose.c	/^static void mg_null_if_remove_conn(struct mg_connection *c) {$/;"	f	file:
+mg_null_if_sock_set	mongoose.c	/^static void mg_null_if_sock_set(struct mg_connection *c, sock_t sock) {$/;"	f	file:
+mg_null_if_tcp_recv	mongoose.c	/^int mg_null_if_tcp_recv(struct mg_connection *c, void *buf, size_t len) {$/;"	f
+mg_null_if_tcp_send	mongoose.c	/^static int mg_null_if_tcp_send(struct mg_connection *c, const void *buf,$/;"	f	file:
+mg_null_if_udp_recv	mongoose.c	/^int mg_null_if_udp_recv(struct mg_connection *c, void *buf, size_t len,$/;"	f
+mg_null_if_udp_send	mongoose.c	/^static int mg_null_if_udp_send(struct mg_connection *c, const void *buf,$/;"	f	file:
+mg_null_iface_vtable	mongoose.c	/^const struct mg_iface_vtable mg_null_iface_vtable = MG_NULL_IFACE_VTABLE;$/;"	v	typeref:struct:mg_iface_vtable
+mg_num_ifaces	mongoose.c	/^int mg_num_ifaces = (int) (sizeof(mg_ifaces) \/ sizeof(mg_ifaces[0]));$/;"	v
+mg_num_leap_years	mongoose.c	/^static int mg_num_leap_years(int year) {$/;"	f	file:
+mg_open	mongoose.c	/^int mg_open(const char *path, int flag, int mode) { \/* LCOV_EXCL_LINE *\/$/;"	f
+mg_open_listening_socket	mongoose.c	/^static sock_t mg_open_listening_socket(struct mg_connection *nc,$/;"	f	file:
+mg_open_listening_socket	mongoose.c	/^static sock_t mg_open_listening_socket(union socket_address *sa, int type,$/;"	f	file:
+mg_parse_address	mongoose.c	/^MG_INTERNAL int mg_parse_address(const char *str, union socket_address *sa,$/;"	f
+mg_parse_date_string	mongoose.c	/^MG_INTERNAL time_t mg_parse_date_string(const char *datetime) {$/;"	f
+mg_parse_dns	mongoose.c	/^int mg_parse_dns(const char *buf, int len, struct mg_dns_message *msg) {$/;"	f
+mg_parse_dns_resource_record	mongoose.c	/^static unsigned char *mg_parse_dns_resource_record($/;"	f	file:
+mg_parse_http	mongoose.c	/^int mg_parse_http(const char *s, int n, struct http_message *hm, int is_req) {$/;"	f
+mg_parse_http_basic_auth	mongoose.c	/^int mg_parse_http_basic_auth(struct mg_str *hdr, char *user, size_t user_len,$/;"	f
+mg_parse_multipart	mongoose.c	/^size_t mg_parse_multipart(const char *buf, size_t buf_len, char *var_name,$/;"	f
+mg_parse_uri	mongoose.c	/^int mg_parse_uri(const struct mg_str uri, struct mg_str *scheme,$/;"	f
+mg_pic32_if_add_conn	mongoose.c	/^void mg_pic32_if_add_conn(struct mg_connection *nc) {$/;"	f
+mg_pic32_if_connect_tcp	mongoose.c	/^void mg_pic32_if_connect_tcp(struct mg_connection *nc,$/;"	f
+mg_pic32_if_connect_udp	mongoose.c	/^void mg_pic32_if_connect_udp(struct mg_connection *nc) {$/;"	f
+mg_pic32_if_create_conn	mongoose.c	/^int mg_pic32_if_create_conn(struct mg_connection *nc) {$/;"	f
+mg_pic32_if_destroy_conn	mongoose.c	/^void mg_pic32_if_destroy_conn(struct mg_connection *nc) {$/;"	f
+mg_pic32_if_free	mongoose.c	/^void mg_pic32_if_free(struct mg_iface *iface) {$/;"	f
+mg_pic32_if_get_conn_addr	mongoose.c	/^void mg_pic32_if_get_conn_addr(struct mg_connection *nc, int remote,$/;"	f
+mg_pic32_if_init	mongoose.c	/^void mg_pic32_if_init(struct mg_iface *iface) {$/;"	f
+mg_pic32_if_listen_tcp	mongoose.c	/^int mg_pic32_if_listen_tcp(struct mg_connection *nc, union socket_address *sa) {$/;"	f
+mg_pic32_if_listen_udp	mongoose.c	/^int mg_pic32_if_listen_udp(struct mg_connection *nc, union socket_address *sa) {$/;"	f
+mg_pic32_if_poll	mongoose.c	/^time_t mg_pic32_if_poll(struct mg_iface *iface, int timeout_ms) {$/;"	f
+mg_pic32_if_recved	mongoose.c	/^void mg_pic32_if_recved(struct mg_connection *nc, size_t len) {$/;"	f
+mg_pic32_if_remove_conn	mongoose.c	/^void mg_pic32_if_remove_conn(struct mg_connection *nc) {$/;"	f
+mg_pic32_if_sock_set	mongoose.c	/^void mg_pic32_if_sock_set(struct mg_connection *nc, sock_t sock) {$/;"	f
+mg_pic32_if_tcp_send	mongoose.c	/^void mg_pic32_if_tcp_send(struct mg_connection *nc, const void *buf,$/;"	f
+mg_pic32_if_udp_send	mongoose.c	/^void mg_pic32_if_udp_send(struct mg_connection *nc, const void *buf,$/;"	f
+mg_pic32_iface_vtable	mongoose.c	/^const struct mg_iface_vtable mg_pic32_iface_vtable = MG_PIC32_IFACE_VTABLE;$/;"	v	typeref:struct:mg_iface_vtable
+mg_prepare_cgi_environment	mongoose.c	/^static void mg_prepare_cgi_environment(struct mg_connection *nc,$/;"	f	file:
+mg_print_dir_entry	mongoose.c	/^static void mg_print_dir_entry(struct mg_connection *nc, const char *file_name,$/;"	f	file:
+mg_print_props	mongoose.c	/^static void mg_print_props(struct mg_connection *nc, const char *name,$/;"	f	file:
+mg_printf	mongoose.c	/^int mg_printf(struct mg_connection *conn, const char *fmt, ...) {$/;"	f
+mg_printf_html_escape	mongoose.c	/^void mg_printf_html_escape(struct mg_connection *nc, const char *fmt, ...) {$/;"	f
+mg_printf_http_chunk	mongoose.c	/^void mg_printf_http_chunk(struct mg_connection *nc, const char *fmt, ...) {$/;"	f
+mg_printf_websocket_frame	mongoose.c	/^void mg_printf_websocket_frame(struct mg_connection *nc, int op,$/;"	f
+mg_pull_from_stdout	mongoose.c	/^static void *mg_pull_from_stdout(void *arg) {$/;"	f	file:
+mg_push_to_stdin	mongoose.c	/^static void *mg_push_to_stdin(void *arg) {$/;"	f	file:
+mg_q_msg	mongoose.c	/^struct mg_q_msg {$/;"	s	file:
+mg_q_msg_type	mongoose.c	/^enum mg_q_msg_type {$/;"	g	file:
+mg_recv_tcp	mongoose.c	/^static int mg_recv_tcp(struct mg_connection *nc, char *buf, size_t len) {$/;"	f	file:
+mg_recv_udp	mongoose.c	/^static int mg_recv_udp(struct mg_connection *nc, char *buf, size_t len) {$/;"	f	file:
+mg_register_http_endpoint	mongoose.c	/^void mg_register_http_endpoint(struct mg_connection *nc, const char *uri_path,$/;"	f
+mg_register_http_endpoint_opt	mongoose.c	/^void mg_register_http_endpoint_opt(struct mg_connection *nc,$/;"	f
+mg_remove_conn	mongoose.c	/^MG_INTERNAL void mg_remove_conn(struct mg_connection *conn) {$/;"	f
+mg_remove_directory	mongoose.c	/^static int mg_remove_directory(const struct mg_serve_http_opts *opts,$/;"	f	file:
+mg_resolve	mongoose.c	/^int mg_resolve(const char *host, char *buf, size_t n) {$/;"	f
+mg_resolve2	mongoose.c	/^static int mg_resolve2(const char *host, struct in_addr *ina) {$/;"	f	file:
+mg_resolve_async	mongoose.c	/^int mg_resolve_async(struct mg_mgr *mgr, const char *name, int query,$/;"	f
+mg_resolve_async_eh	mongoose.c	/^static void mg_resolve_async_eh(struct mg_connection *nc, int ev,$/;"	f	file:
+mg_resolve_async_opt	mongoose.c	/^int mg_resolve_async_opt(struct mg_mgr *mgr, const char *name, int query,$/;"	f
+mg_resolve_async_request	mongoose.c	/^struct mg_resolve_async_request {$/;"	s	file:
+mg_resolve_from_hosts_file	mongoose.c	/^int mg_resolve_from_hosts_file(const char *name, union socket_address *usa) {$/;"	f
+mg_reverse_proxy_data	mongoose.c	/^struct mg_reverse_proxy_data {$/;"	s	file:
+mg_reverse_proxy_handler	mongoose.c	/^static void mg_reverse_proxy_handler(struct mg_connection *nc, int ev,$/;"	f	file:
+mg_run_in_task	mongoose.c	/^void mg_run_in_task(void (*cb)(struct mg_mgr *mgr, void *arg), void *cb_arg) {$/;"	f
+mg_s_cipher_list	mongoose.c	/^static const char mg_s_cipher_list[] =$/;"	v	file:
+mg_s_cipher_list	mongoose.c	/^static const int mg_s_cipher_list[] = {$/;"	v	file:
+mg_s_default_dh_params	mongoose.c	/^static const char mg_s_default_dh_params[] =$/;"	v	file:
+mg_scan_directory	mongoose.c	/^static void mg_scan_directory(struct mg_connection *nc, const char *dir,$/;"	f	file:
+mg_send	mongoose.c	/^void mg_send(struct mg_connection *nc, const void *buf, int len) {$/;"	f
+mg_send_directory_listing	mongoose.c	/^static void mg_send_directory_listing(struct mg_connection *nc, const char *dir,$/;"	f	file:
+mg_send_dns_query	mongoose.c	/^void mg_send_dns_query(struct mg_connection *nc, const char *name,$/;"	f
+mg_send_file_data	mongoose.c	/^static void mg_send_file_data(struct mg_connection *nc, FILE *fp) {$/;"	f	file:
+mg_send_head	mongoose.c	/^void mg_send_head(struct mg_connection *c, int status_code,$/;"	f
+mg_send_http_chunk	mongoose.c	/^void mg_send_http_chunk(struct mg_connection *nc, const char *buf, size_t len) {$/;"	f
+mg_send_http_file	mongoose.c	/^MG_INTERNAL void mg_send_http_file(struct mg_connection *nc, char *path,$/;"	f
+mg_send_mqtt_handshake	mongoose.c	/^void mg_send_mqtt_handshake(struct mg_connection *nc, const char *client_id) {$/;"	f
+mg_send_mqtt_handshake_opt	mongoose.c	/^void mg_send_mqtt_handshake_opt(struct mg_connection *nc, const char *client_id,$/;"	f
+mg_send_mqtt_header	mongoose.c	/^static void mg_send_mqtt_header(struct mg_connection *nc, uint8_t cmd,$/;"	f	file:
+mg_send_mqtt_short_command	mongoose.c	/^static void mg_send_mqtt_short_command(struct mg_connection *nc, uint8_t cmd,$/;"	f	file:
+mg_send_response_line	mongoose.c	/^void mg_send_response_line(struct mg_connection *nc, int status_code,$/;"	f
+mg_send_response_line_s	mongoose.c	/^void mg_send_response_line_s(struct mg_connection *nc, int status_code,$/;"	f
+mg_send_ssi_file	mongoose.c	/^static void mg_send_ssi_file(struct mg_connection *nc, struct http_message *hm,$/;"	f	file:
+mg_send_websocket_frame	mongoose.c	/^void mg_send_websocket_frame(struct mg_connection *nc, int op, const void *data,$/;"	f
+mg_send_websocket_framev	mongoose.c	/^void mg_send_websocket_framev(struct mg_connection *nc, int op,$/;"	f
+mg_send_websocket_handshake	mongoose.c	/^void mg_send_websocket_handshake(struct mg_connection *nc, const char *path,$/;"	f
+mg_send_websocket_handshake2	mongoose.c	/^void mg_send_websocket_handshake2(struct mg_connection *nc, const char *path,$/;"	f
+mg_send_websocket_handshake3	mongoose.c	/^void mg_send_websocket_handshake3(struct mg_connection *nc, const char *path,$/;"	f
+mg_send_websocket_handshake3v	mongoose.c	/^void mg_send_websocket_handshake3v(struct mg_connection *nc,$/;"	f
+mg_send_ws_header	mongoose.c	/^static void mg_send_ws_header(struct mg_connection *nc, int op, size_t len,$/;"	f	file:
+mg_serve_http	mongoose.c	/^void mg_serve_http(struct mg_connection *nc, struct http_message *hm,$/;"	f
+mg_set_cipher_list	mongoose.c	/^static enum mg_ssl_if_result mg_set_cipher_list(SSL_CTX *ctx, const char *cl) {$/;"	f	file:
+mg_set_cipher_list	mongoose.c	/^static enum mg_ssl_if_result mg_set_cipher_list(struct mg_ssl_if_ctx *ctx,$/;"	f	file:
+mg_set_close_on_exec	mongoose.c	/^void mg_set_close_on_exec(sock_t sock) {$/;"	f
+mg_set_nameserver	mongoose.c	/^void mg_set_nameserver(struct mg_mgr *mgr, const char *nameserver) {$/;"	f
+mg_set_non_blocking_mode	mongoose.c	/^static void mg_set_non_blocking_mode(sock_t sock) {$/;"	f	file:
+mg_set_non_blocking_mode	mongoose.c	/^void mg_set_non_blocking_mode(sock_t sock) {$/;"	f
+mg_set_protocol_coap	mongoose.c	/^int mg_set_protocol_coap(struct mg_connection *nc) {$/;"	f
+mg_set_protocol_dns	mongoose.c	/^void mg_set_protocol_dns(struct mg_connection *nc) {$/;"	f
+mg_set_protocol_http_websocket	mongoose.c	/^void mg_set_protocol_http_websocket(struct mg_connection *nc) {$/;"	f
+mg_set_protocol_mqtt	mongoose.c	/^void mg_set_protocol_mqtt(struct mg_connection *nc) {$/;"	f
+mg_set_protocol_sntp	mongoose.c	/^int mg_set_protocol_sntp(struct mg_connection *c) {$/;"	f
+mg_set_protocol_socks	mongoose.c	/^void mg_set_protocol_socks(struct mg_connection *c) {$/;"	f
+mg_set_ssl	mongoose.c	/^const char *mg_set_ssl(struct mg_connection *nc, const char *cert,$/;"	f
+mg_set_timer	mongoose.c	/^double mg_set_timer(struct mg_connection *c, double timestamp) {$/;"	f
+mg_sig_type	mongoose.c	/^enum mg_sig_type {$/;"	g	file:
+mg_simplelink_iface_vtable	mongoose.c	/^const struct mg_iface_vtable mg_simplelink_iface_vtable = MG_SL_IFACE_VTABLE;$/;"	v	typeref:struct:mg_iface_vtable
+mg_skip	mongoose.c	/^const char *mg_skip(const char *s, const char *end, const char *delims,$/;"	f
+mg_sl_if_add_conn	mongoose.c	/^void mg_sl_if_add_conn(struct mg_connection *nc) {$/;"	f
+mg_sl_if_connect_tcp	mongoose.c	/^static void mg_sl_if_connect_tcp(struct mg_connection *nc,$/;"	f	file:
+mg_sl_if_connect_udp	mongoose.c	/^static void mg_sl_if_connect_udp(struct mg_connection *nc) {$/;"	f	file:
+mg_sl_if_create_conn	mongoose.c	/^static int mg_sl_if_create_conn(struct mg_connection *nc) {$/;"	f	file:
+mg_sl_if_destroy_conn	mongoose.c	/^void mg_sl_if_destroy_conn(struct mg_connection *nc) {$/;"	f
+mg_sl_if_free	mongoose.c	/^void mg_sl_if_free(struct mg_iface *iface) {$/;"	f
+mg_sl_if_get_conn_addr	mongoose.c	/^void mg_sl_if_get_conn_addr(struct mg_connection *nc, int remote,$/;"	f
+mg_sl_if_init	mongoose.c	/^void mg_sl_if_init(struct mg_iface *iface) {$/;"	f
+mg_sl_if_listen_tcp	mongoose.c	/^static int mg_sl_if_listen_tcp(struct mg_connection *nc,$/;"	f	file:
+mg_sl_if_listen_udp	mongoose.c	/^static int mg_sl_if_listen_udp(struct mg_connection *nc,$/;"	f	file:
+mg_sl_if_poll	mongoose.c	/^time_t mg_sl_if_poll(struct mg_iface *iface, int timeout_ms) {$/;"	f
+mg_sl_if_remove_conn	mongoose.c	/^void mg_sl_if_remove_conn(struct mg_connection *nc) {$/;"	f
+mg_sl_if_sock_set	mongoose.c	/^void mg_sl_if_sock_set(struct mg_connection *nc, sock_t sock) {$/;"	f
+mg_sl_if_tcp_recv	mongoose.c	/^static int mg_sl_if_tcp_recv(struct mg_connection *nc, void *buf, size_t len) {$/;"	f	file:
+mg_sl_if_tcp_send	mongoose.c	/^static int mg_sl_if_tcp_send(struct mg_connection *nc, const void *buf,$/;"	f	file:
+mg_sl_if_udp_recv	mongoose.c	/^static int mg_sl_if_udp_recv(struct mg_connection *nc, void *buf, size_t len,$/;"	f	file:
+mg_sl_if_udp_send	mongoose.c	/^static int mg_sl_if_udp_send(struct mg_connection *nc, const void *buf,$/;"	f	file:
+mg_sntp_connect	mongoose.c	/^struct mg_connection *mg_sntp_connect(struct mg_mgr *mgr,$/;"	f
+mg_sntp_get_time	mongoose.c	/^struct mg_connection *mg_sntp_get_time(struct mg_mgr *mgr,$/;"	f
+mg_sntp_handler	mongoose.c	/^static void mg_sntp_handler(struct mg_connection *c, int ev,$/;"	f	file:
+mg_sntp_parse_reply	mongoose.c	/^MG_INTERNAL int mg_sntp_parse_reply(const char *buf, int len,$/;"	f
+mg_sntp_send_request	mongoose.c	/^void mg_sntp_send_request(struct mg_connection *c) {$/;"	f
+mg_sntp_util_ev_handler	mongoose.c	/^static void mg_sntp_util_ev_handler(struct mg_connection *c, int ev,$/;"	f	file:
+mg_sock_addr_to_str	mongoose.c	/^int mg_sock_addr_to_str(const union socket_address *sa, char *buf, size_t len,$/;"	f
+mg_sock_get_addr	mongoose.c	/^static void mg_sock_get_addr(sock_t sock, int remote,$/;"	f	file:
+mg_sock_set	mongoose.c	/^void mg_sock_set(struct mg_connection *nc, sock_t sock) {$/;"	f
+mg_sock_to_str	mongoose.c	/^void mg_sock_to_str(sock_t sock, char *buf, size_t len, int flags) {$/;"	f
+mg_socket_if_add_conn	mongoose.c	/^void mg_socket_if_add_conn(struct mg_connection *nc) {$/;"	f
+mg_socket_if_connect_tcp	mongoose.c	/^void mg_socket_if_connect_tcp(struct mg_connection *nc,$/;"	f
+mg_socket_if_connect_udp	mongoose.c	/^void mg_socket_if_connect_udp(struct mg_connection *nc) {$/;"	f
+mg_socket_if_create_conn	mongoose.c	/^int mg_socket_if_create_conn(struct mg_connection *nc) {$/;"	f
+mg_socket_if_destroy_conn	mongoose.c	/^void mg_socket_if_destroy_conn(struct mg_connection *nc) {$/;"	f
+mg_socket_if_free	mongoose.c	/^void mg_socket_if_free(struct mg_iface *iface) {$/;"	f
+mg_socket_if_get_conn_addr	mongoose.c	/^void mg_socket_if_get_conn_addr(struct mg_connection *nc, int remote,$/;"	f
+mg_socket_if_init	mongoose.c	/^void mg_socket_if_init(struct mg_iface *iface) {$/;"	f
+mg_socket_if_listen_tcp	mongoose.c	/^int mg_socket_if_listen_tcp(struct mg_connection *nc,$/;"	f
+mg_socket_if_listen_udp	mongoose.c	/^static int mg_socket_if_listen_udp(struct mg_connection *nc,$/;"	f	file:
+mg_socket_if_poll	mongoose.c	/^time_t mg_socket_if_poll(struct mg_iface *iface, int timeout_ms) {$/;"	f
+mg_socket_if_remove_conn	mongoose.c	/^void mg_socket_if_remove_conn(struct mg_connection *nc) {$/;"	f
+mg_socket_if_sock_set	mongoose.c	/^void mg_socket_if_sock_set(struct mg_connection *nc, sock_t sock) {$/;"	f
+mg_socket_if_tcp_recv	mongoose.c	/^static int mg_socket_if_tcp_recv(struct mg_connection *nc, void *buf,$/;"	f	file:
+mg_socket_if_tcp_send	mongoose.c	/^static int mg_socket_if_tcp_send(struct mg_connection *nc, const void *buf,$/;"	f	file:
+mg_socket_if_udp_recv	mongoose.c	/^static int mg_socket_if_udp_recv(struct mg_connection *nc, void *buf,$/;"	f	file:
+mg_socket_if_udp_send	mongoose.c	/^static int mg_socket_if_udp_send(struct mg_connection *nc, const void *buf,$/;"	f	file:
+mg_socket_iface_vtable	mongoose.c	/^const struct mg_iface_vtable mg_socket_iface_vtable = MG_SOCKET_IFACE_VTABLE;$/;"	v	typeref:struct:mg_iface_vtable
+mg_socketpair	mongoose.c	/^int mg_socketpair(sock_t sp[2], int sock_type) {$/;"	f
+mg_socketpair_accept	mongoose.c	/^mg_socketpair_accept(sock_t sock, union socket_address *sa, socklen_t sa_len) {$/;"	f
+mg_socketpair_close	mongoose.c	/^MG_INTERNAL void mg_socketpair_close(sock_t *sock) {$/;"	f
+mg_socks5_connect	mongoose.c	/^static void mg_socks5_connect(struct mg_connection *c, const char *addr) {$/;"	f	file:
+mg_socks5_handle_request	mongoose.c	/^static void mg_socks5_handle_request(struct mg_connection *c) {$/;"	f	file:
+mg_socks5_handshake	mongoose.c	/^static void mg_socks5_handshake(struct mg_connection *c) {$/;"	f	file:
+mg_socks_if_add_conn	mongoose.c	/^static void mg_socks_if_add_conn(struct mg_connection *c) {$/;"	f	file:
+mg_socks_if_connect_tcp	mongoose.c	/^static void mg_socks_if_connect_tcp(struct mg_connection *c,$/;"	f	file:
+mg_socks_if_connect_udp	mongoose.c	/^static void mg_socks_if_connect_udp(struct mg_connection *c) {$/;"	f	file:
+mg_socks_if_create_conn	mongoose.c	/^static int mg_socks_if_create_conn(struct mg_connection *c) {$/;"	f	file:
+mg_socks_if_destroy_conn	mongoose.c	/^static void mg_socks_if_destroy_conn(struct mg_connection *c) {$/;"	f	file:
+mg_socks_if_free	mongoose.c	/^static void mg_socks_if_free(struct mg_iface *iface) {$/;"	f	file:
+mg_socks_if_get_conn_addr	mongoose.c	/^static void mg_socks_if_get_conn_addr(struct mg_connection *c, int remote,$/;"	f	file:
+mg_socks_if_init	mongoose.c	/^static void mg_socks_if_init(struct mg_iface *iface) {$/;"	f	file:
+mg_socks_if_listen_tcp	mongoose.c	/^static int mg_socks_if_listen_tcp(struct mg_connection *c,$/;"	f	file:
+mg_socks_if_listen_udp	mongoose.c	/^static int mg_socks_if_listen_udp(struct mg_connection *c,$/;"	f	file:
+mg_socks_if_poll	mongoose.c	/^static time_t mg_socks_if_poll(struct mg_iface *iface, int timeout_ms) {$/;"	f	file:
+mg_socks_if_remove_conn	mongoose.c	/^static void mg_socks_if_remove_conn(struct mg_connection *c) {$/;"	f	file:
+mg_socks_if_sock_set	mongoose.c	/^static void mg_socks_if_sock_set(struct mg_connection *c, sock_t sock) {$/;"	f	file:
+mg_socks_if_tcp_recv	mongoose.c	/^int mg_socks_if_tcp_recv(struct mg_connection *c, void *buf, size_t len) {$/;"	f
+mg_socks_if_tcp_send	mongoose.c	/^static int mg_socks_if_tcp_send(struct mg_connection *c, const void *buf,$/;"	f	file:
+mg_socks_if_udp_recv	mongoose.c	/^int mg_socks_if_udp_recv(struct mg_connection *c, void *buf, size_t len,$/;"	f
+mg_socks_if_udp_send	mongoose.c	/^static int mg_socks_if_udp_send(struct mg_connection *c, const void *buf,$/;"	f	file:
+mg_socks_iface_vtable	mongoose.c	/^const struct mg_iface_vtable mg_socks_iface_vtable = {$/;"	v	typeref:struct:mg_iface_vtable
+mg_socks_mk_iface	mongoose.c	/^struct mg_iface *mg_socks_mk_iface(struct mg_mgr *mgr, const char *proxy_addr) {$/;"	f
+mg_spawn_stdio_thread	mongoose.c	/^static void mg_spawn_stdio_thread(sock_t sock, HANDLE hPipe,$/;"	f	file:
+mg_ssl_handshake	mongoose.c	/^MG_INTERNAL void mg_ssl_handshake(struct mg_connection *nc) {$/;"	f
+mg_ssl_if_conn_accept	mongoose.c	/^enum mg_ssl_if_result mg_ssl_if_conn_accept(struct mg_connection *nc,$/;"	f
+mg_ssl_if_conn_close_notify	mongoose.c	/^void mg_ssl_if_conn_close_notify(struct mg_connection *nc) {$/;"	f
+mg_ssl_if_conn_free	mongoose.c	/^void mg_ssl_if_conn_free(struct mg_connection *nc) {$/;"	f
+mg_ssl_if_conn_init	mongoose.c	/^enum mg_ssl_if_result mg_ssl_if_conn_init($/;"	f
+mg_ssl_if_ctx	mongoose.c	/^struct mg_ssl_if_ctx {$/;"	s	file:
+mg_ssl_if_handshake	mongoose.c	/^enum mg_ssl_if_result mg_ssl_if_handshake(struct mg_connection *nc) {$/;"	f
+mg_ssl_if_init	mongoose.c	/^void mg_ssl_if_init() {$/;"	f
+mg_ssl_if_mbed_err	mongoose.c	/^static enum mg_ssl_if_result mg_ssl_if_mbed_err(struct mg_connection *nc,$/;"	f	file:
+mg_ssl_if_mbed_free_certs_and_keys	mongoose.c	/^static void mg_ssl_if_mbed_free_certs_and_keys(struct mg_ssl_if_ctx *ctx) {$/;"	f	file:
+mg_ssl_if_mbed_random	mongoose.c	/^int mg_ssl_if_mbed_random(void *ctx, unsigned char *buf, size_t len) {$/;"	f
+mg_ssl_if_mbed_recv	mongoose.c	/^static int mg_ssl_if_mbed_recv(void *ctx, unsigned char *buf, size_t len) {$/;"	f	file:
+mg_ssl_if_mbed_send	mongoose.c	/^static int mg_ssl_if_mbed_send(void *ctx, const unsigned char *buf,$/;"	f	file:
+mg_ssl_if_mbed_set_psk	mongoose.c	/^static enum mg_ssl_if_result mg_ssl_if_mbed_set_psk(struct mg_ssl_if_ctx *ctx,$/;"	f	file:
+mg_ssl_if_ossl_psk_cb	mongoose.c	/^static unsigned int mg_ssl_if_ossl_psk_cb(SSL *ssl, const char *hint,$/;"	f	file:
+mg_ssl_if_ossl_set_psk	mongoose.c	/^static enum mg_ssl_if_result mg_ssl_if_ossl_set_psk(struct mg_ssl_if_ctx *ctx,$/;"	f	file:
+mg_ssl_if_read	mongoose.c	/^int mg_ssl_if_read(struct mg_connection *nc, void *buf, size_t buf_size) {$/;"	f
+mg_ssl_if_read	mongoose.c	/^int mg_ssl_if_read(struct mg_connection *nc, void *buf, size_t len) {$/;"	f
+mg_ssl_if_ssl_err	mongoose.c	/^static enum mg_ssl_if_result mg_ssl_if_ssl_err(struct mg_connection *nc,$/;"	f	file:
+mg_ssl_if_write	mongoose.c	/^int mg_ssl_if_write(struct mg_connection *nc, const void *buf, size_t len) {$/;"	f
+mg_ssl_if_write	mongoose.c	/^int mg_ssl_if_write(struct mg_connection *nc, const void *data, size_t len) {$/;"	f
+mg_ssl_mbed_log	mongoose.c	/^static void mg_ssl_mbed_log(void *ctx, int level, const char *file, int line,$/;"	f	file:
+mg_start_process	mongoose.c	/^static int mg_start_process(const char *interp, const char *cmd,$/;"	f	file:
+mg_start_task	mongoose.c	/^bool mg_start_task(int priority, int stack_size, mg_init_cb mg_init) {$/;"	f
+mg_start_thread	mongoose.c	/^void *mg_start_thread(void *(*f)(void *), void *p) {$/;"	f
+mg_stat	mongoose.c	/^int mg_stat(const char *path, cs_stat_t *st) {$/;"	f
+mg_static_builtin_mime_types	mongoose.c	/^} mg_static_builtin_mime_types[] = {$/;"	v	typeref:struct:__anon2	file:
+mg_status_message	mongoose.c	/^const char *mg_status_message(int status_code) {$/;"	f
+mg_strchr	mongoose.c	/^const char *mg_strchr(const struct mg_str s, int c) {$/;"	f
+mg_strcmp	mongoose.c	/^int mg_strcmp(const struct mg_str str1, const struct mg_str str2) {$/;"	f
+mg_strdup	mongoose.c	/^struct mg_str mg_strdup(const struct mg_str s) {$/;"	f
+mg_strdup_common	mongoose.c	/^static struct mg_str mg_strdup_common(const struct mg_str s,$/;"	f	file:
+mg_strdup_nul	mongoose.c	/^struct mg_str mg_strdup_nul(const struct mg_str s) {$/;"	f
+mg_strncmp	mongoose.c	/^int mg_strncmp(const struct mg_str str1, const struct mg_str str2, size_t n) {$/;"	f
+mg_strstr	mongoose.c	/^const char *mg_strstr(const struct mg_str haystack,$/;"	f
+mg_strstrip	mongoose.c	/^struct mg_str mg_strstrip(struct mg_str s) {$/;"	f
+mg_task	mongoose.c	/^static void mg_task(void *arg) {$/;"	f	file:
+mg_threadparam	mongoose.c	/^struct mg_threadparam {$/;"	s	file:
+mg_time	mongoose.c	/^double mg_time(void) {$/;"	f
+mg_timer	mongoose.c	/^MG_INTERNAL void mg_timer(struct mg_connection *c, double now) {$/;"	f
+mg_uri_to_local_path	mongoose.c	/^MG_INTERNAL int mg_uri_to_local_path(struct http_message *hm,$/;"	f
+mg_url_decode	mongoose.c	/^int mg_url_decode(const char *src, int src_len, char *dst, int dst_len,$/;"	f
+mg_url_encode	mongoose.c	/^struct mg_str mg_url_encode(const struct mg_str src) {$/;"	f
+mg_url_encode_opt	mongoose.c	/^struct mg_str mg_url_encode_opt(const struct mg_str src,$/;"	f
+mg_use_ca_cert	mongoose.c	/^static enum mg_ssl_if_result mg_use_ca_cert(SSL_CTX *ctx, const char *cert) {$/;"	f	file:
+mg_use_ca_cert	mongoose.c	/^static enum mg_ssl_if_result mg_use_ca_cert(struct mg_ssl_if_ctx *ctx,$/;"	f	file:
+mg_use_cert	mongoose.c	/^static enum mg_ssl_if_result mg_use_cert(SSL_CTX *ctx, const char *cert,$/;"	f	file:
+mg_use_cert	mongoose.c	/^static enum mg_ssl_if_result mg_use_cert(struct mg_ssl_if_ctx *ctx,$/;"	f	file:
+mg_vcasecmp	mongoose.c	/^int mg_vcasecmp(const struct mg_str *str1, const char *str2) {$/;"	f
+mg_vcmp	mongoose.c	/^int mg_vcmp(const struct mg_str *str1, const char *str2) {$/;"	f
+mg_version_header	mongoose.c	/^static const char *mg_version_header = "Mongoose\/" MG_VERSION;$/;"	v	file:
+mg_vprintf	mongoose.c	/^int mg_vprintf(struct mg_connection *nc, const char *fmt, va_list ap) {$/;"	f
+mg_wait_until_ready	mongoose.c	/^static int mg_wait_until_ready(sock_t sock, int for_read) {$/;"	f	file:
+mg_ws_close	mongoose.c	/^static void mg_ws_close(struct mg_connection *nc, const void *data,$/;"	f	file:
+mg_ws_get_proto_data	mongoose.c	/^static struct mg_ws_proto_data *mg_ws_get_proto_data(struct mg_connection *nc) {$/;"	f	file:
+mg_ws_handler	mongoose.c	/^MG_INTERNAL void mg_ws_handler(struct mg_connection *nc, int ev,$/;"	f
+mg_ws_handshake	mongoose.c	/^MG_INTERNAL void mg_ws_handshake(struct mg_connection *nc,$/;"	f
+mg_ws_mask_frame	mongoose.c	/^static void mg_ws_mask_frame(struct mbuf *mbuf, struct ws_mask_ctx *ctx) {$/;"	f	file:
+mg_ws_proto_data	mongoose.c	/^struct mg_ws_proto_data {$/;"	s	file:
+mg_ws_random_mask	mongoose.c	/^static uint32_t mg_ws_random_mask(void) {$/;"	f	file:
+mgos_lock	mongoose.c	15099;"	d	file:
+mgos_unlock	mongoose.c	15100;"	d	file:
+mime_type	mongoose.c	/^  const char *mime_type;$/;"	m	struct:__anon2	file:
+mkdir	mongoose.c	/^int mkdir(const char *path, mode_t mode) {$/;"	f
+mp_stream	mongoose.c	/^  struct mg_http_multipart_stream mp_stream;$/;"	m	struct:mg_http_proto_data	typeref:struct:mg_http_proto_data::mg_http_multipart_stream	file:
+mqtt_handler	mongoose.c	/^static void mqtt_handler(struct mg_connection *nc, int ev,$/;"	f	file:
+name	mongoose.c	/^  char *name;$/;"	m	struct:sl_file_size_hint	file:
+name	mongoose.c	/^  char name[1024];$/;"	m	struct:mg_resolve_async_request	file:
+nc	mongoose.c	/^  struct mg_connection *nc;$/;"	m	struct:mg_cgi_env_block	typeref:struct:mg_cgi_env_block::mg_connection	file:
+nc	mongoose.c	/^  struct mg_connection *nc;$/;"	m	struct:mg_ev_mgr_lwip_signal	typeref:struct:mg_ev_mgr_lwip_signal::mg_connection	file:
+nc	mongoose.c	/^  struct mg_connection *nc;$/;"	m	struct:mg_lwip_conn_state	typeref:struct:mg_lwip_conn_state::mg_connection	file:
+nc	mongoose.c	/^  struct mg_connection *nc;$/;"	m	struct:mg_lwip_if_connect_tcp_ctx	typeref:struct:mg_lwip_if_connect_tcp_ctx::mg_connection	file:
+nc	mongoose.c	/^  struct mg_connection *nc;$/;"	m	struct:mg_lwip_if_listen_ctx	typeref:struct:mg_lwip_if_listen_ctx::mg_connection	file:
+nc	mongoose.c	/^  struct mg_connection *nc;$/;"	m	struct:mg_lwip_tcp_write_ctx	typeref:struct:mg_lwip_tcp_write_ctx::mg_connection	file:
+next	mongoose.c	/^  struct mg_http_endpoint *next;$/;"	m	struct:mg_http_endpoint	typeref:struct:mg_http_endpoint::mg_http_endpoint	file:
+num_answers	mongoose.c	/^  uint16_t num_answers;$/;"	m	struct:mg_dns_header	file:
+num_authority_prs	mongoose.c	/^  uint16_t num_authority_prs;$/;"	m	struct:mg_dns_header	file:
+num_other_prs	mongoose.c	/^  uint16_t num_other_prs;$/;"	m	struct:mg_dns_header	file:
+num_questions	mongoose.c	/^  uint16_t num_questions;$/;"	m	struct:mg_dns_header	file:
+num_recd	mongoose.c	/^  size_t num_recd;$/;"	m	struct:file_upload_state	file:
+num_sent	mongoose.c	/^  size_t num_sent; \/* Number of acknowledged bytes to be reported to the core *\/$/;"	m	struct:mg_lwip_conn_state	file:
+nvars	mongoose.c	/^  int nvars;                               \/* Number of variables in envp[] *\/$/;"	m	struct:mg_cgi_env_block	file:
+open	mongoose.c	/^int open(const char *filename, int oflag, int pmode) {$/;"	f
+open	mongoose.c	/^int open(const char *pathname, unsigned flags, int mode) {$/;"	f
+opendir	mongoose.c	/^DIR *opendir(const char *dir_name) {$/;"	f
+opendir	mongoose.c	/^DIR *opendir(const char *name) {$/;"	f
+p	mongoose.c	/^  struct pbuf *p;$/;"	m	struct:udp_sendto_ctx	typeref:struct:udp_sendto_ctx::pbuf	file:
+parse_mqtt	mongoose.c	/^MG_INTERNAL int parse_mqtt(struct mbuf *io, struct mg_mqtt_message *mm) {$/;"	f
+parse_net	mongoose.c	/^static int parse_net(const char *spec, uint32_t *net, uint32_t *mask) {$/;"	f	file:
+parse_uri_component	mongoose.c	/^static void parse_uri_component(const char **p, const char *end,$/;"	f	file:
+pcb	mongoose.c	/^  } pcb;$/;"	m	struct:mg_lwip_conn_state	typeref:union:mg_lwip_conn_state::__anon3	file:
+pem_to_der	mongoose.c	/^bool pem_to_der(const char *pem_file, const char *der_file) {$/;"	f
+port	mongoose.c	/^  uint16_t port;$/;"	m	struct:udp_sendto_ctx	file:
+pos	mongoose.c	/^  _off_t pos;$/;"	m	struct:sl_fd_info	file:
+pos	mongoose.c	/^  size_t pos; \/* zero means unmasked *\/$/;"	m	struct:ws_mask_ctx	file:
+processing_part	mongoose.c	/^  int processing_part;$/;"	m	struct:mg_http_multipart_stream	file:
+proxy_addr	mongoose.c	/^  char *proxy_addr;        \/* HOST:PORT of the socks5 proxy server *\/$/;"	m	struct:socksdata	file:
+psk	mongoose.c	/^  struct mbuf psk;$/;"	m	struct:mg_ssl_if_ctx	typeref:struct:mg_ssl_if_ctx::mbuf	file:
+query	mongoose.c	/^  int query;$/;"	m	struct:mg_resolve_async_request	file:
+rcvd	mongoose.c	/^  size_t rcvd; \/* How many bytes we have received. *\/$/;"	m	struct:mg_http_proto_data	file:
+read	mongoose.c	/^int read(int fd, char *buf, unsigned count) {$/;"	f
+readdir	mongoose.c	/^struct dirent *readdir(DIR *d) {$/;"	f
+readdir	mongoose.c	/^struct dirent *readdir(DIR *dir) {$/;"	f
+reass_len	mongoose.c	/^  size_t reass_len;$/;"	m	struct:mg_ws_proto_data	file:
+recv_avail_size	mongoose.c	/^MG_INTERNAL size_t recv_avail_size(struct mg_connection *conn, size_t max) {$/;"	f
+recv_pending	mongoose.c	/^  int recv_pending;$/;"	m	struct:mg_lwip_conn_state	file:
+relay_data	mongoose.c	/^static void relay_data(struct mg_connection *c) {$/;"	f	file:
+rename	mongoose.c	/^int rename(const char *frompath, const char *topath) {$/;"	f
+resolve_cb	mongoose.c	/^static void resolve_cb(struct mg_dns_message *msg, void *data,$/;"	f	file:
+result	mongoose.c	/^  struct dirent result;$/;"	m	struct:win32_dir	typeref:struct:win32_dir::dirent	file:
+ret	mongoose.c	/^  int ret;$/;"	m	struct:mg_lwip_if_listen_ctx	file:
+ret	mongoose.c	/^  int ret;$/;"	m	struct:mg_lwip_tcp_write_ctx	file:
+ret	mongoose.c	/^  int ret;$/;"	m	struct:udp_sendto_ctx	file:
+retries	mongoose.c	/^  int retries;$/;"	m	struct:mg_resolve_async_request	file:
+reverse_proxy_data	mongoose.c	/^  struct mg_reverse_proxy_data reverse_proxy_data;$/;"	m	struct:mg_http_proto_data	typeref:struct:mg_http_proto_data::mg_reverse_proxy_data	file:
+rmdir	mongoose.c	/^int rmdir(const char *dirname) {$/;"	f
+rmdir	mongoose.c	/^int rmdir(const char *path) {$/;"	f
+rol	mongoose.c	1263;"	d	file:
+rx_chain	mongoose.c	/^  struct pbuf *rx_chain; \/* Chain of incoming data segments. *\/$/;"	m	struct:mg_lwip_conn_state	typeref:struct:mg_lwip_conn_state::pbuf	file:
+rx_offset	mongoose.c	/^  size_t rx_offset; \/* Offset within the first pbuf (if partially consumed) *\/$/;"	m	struct:mg_lwip_conn_state	file:
+s	mongoose.c	/^  sock_t s;$/;"	m	struct:mg_threadparam	file:
+s	mongoose.c	/^  struct mg_connection *s; \/* Respective connection to the server *\/$/;"	m	struct:socksdata	typeref:struct:socksdata::mg_connection	file:
+s_filter_pattern	mongoose.c	/^static char *s_filter_pattern = NULL;$/;"	v	file:
+s_filter_pattern_len	mongoose.c	/^static size_t s_filter_pattern_len;$/;"	v	file:
+s_listening_address	mqtt_broker.c	/^static const char *s_listening_address = "127.0.0.1:1883";$/;"	v	file:
+s_mg_q	mongoose.c	/^static OsiMsgQ_t s_mg_q;$/;"	v	file:
+s_sl_fds	mongoose.c	/^static struct sl_fd_info s_sl_fds[MAX_OPEN_SLFS_FILES];$/;"	v	typeref:struct:sl_fd_info	file:
+s_sl_file_size_hints	mongoose.c	/^static struct sl_file_size_hint s_sl_file_size_hints[MAX_OPEN_SLFS_FILES];$/;"	v	typeref:struct:sl_file_size_hint	file:
+sa	mongoose.c	/^  const union socket_address *sa;$/;"	m	struct:mg_lwip_if_connect_tcp_ctx	typeref:union:mg_lwip_if_connect_tcp_ctx::socket_address	file:
+sa	mongoose.c	/^  union socket_address *sa;$/;"	m	struct:mg_lwip_if_listen_ctx	typeref:union:mg_lwip_if_listen_ctx::socket_address	file:
+saved_len	mongoose.c	/^  size_t saved_len;$/;"	m	struct:mg_ssl_if_ctx	file:
+scanto	mongoose.c	/^static const char *scanto(const char *p, struct mg_str *s) {$/;"	f	file:
+sent	mongoose.c	/^  int64_t sent;  \/* How many bytes have been already sent. *\/$/;"	m	struct:mg_http_proto_data_file	file:
+serv_ev_handler	mongoose.c	/^static void serv_ev_handler(struct mg_connection *c, int ev, void *ev_data) {$/;"	f	file:
+set_errno	mongoose.c	/^int set_errno(int e) {$/;"	f
+sig	mongoose.c	/^  int sig;$/;"	m	struct:mg_ev_mgr_lwip_signal	file:
+sig_queue	mongoose.c	/^  struct mg_ev_mgr_lwip_signal sig_queue[MG_SIG_QUEUE_LEN];$/;"	m	struct:mg_ev_mgr_lwip_data	typeref:struct:mg_ev_mgr_lwip_data::mg_ev_mgr_lwip_signal	file:
+sig_queue_len	mongoose.c	/^  int sig_queue_len;$/;"	m	struct:mg_ev_mgr_lwip_data	file:
+size	mongoose.c	/^  size_t size;$/;"	m	struct:sl_fd_info	file:
+size	mongoose.c	/^  size_t size;$/;"	m	struct:sl_file_size_hint	file:
+sl_fd_info	mongoose.c	/^struct sl_fd_info {$/;"	s	file:
+sl_file_size_hint	mongoose.c	/^struct sl_file_size_hint {$/;"	s	file:
+sl_fs_init	mongoose.c	/^int sl_fs_init(void) {$/;"	f
+sl_fs_to_errno	mongoose.c	/^static int sl_fs_to_errno(_i32 r) {$/;"	f	file:
+sl_pem2der	mongoose.c	/^static char *sl_pem2der(const char *pem_file) {$/;"	f	file:
+sl_restart_cb	mongoose.c	/^void sl_restart_cb(struct mg_mgr *mgr) {$/;"	f
+sl_set_ssl_opts	mongoose.c	/^int sl_set_ssl_opts(int sock, struct mg_connection *nc) {$/;"	f
+sleep	mongoose.c	/^unsigned int sleep(unsigned int seconds) {$/;"	f
+slfs_open	mongoose.c	/^int slfs_open(const unsigned char *fname, uint32_t flags) {$/;"	f
+sntp_data	mongoose.c	/^struct sntp_data {$/;"	s	file:
+socks_handler	mongoose.c	/^static void socks_handler(struct mg_connection *c, int ev, void *ev_data) {$/;"	f	file:
+socks_if_disband	mongoose.c	/^static void socks_if_disband(struct socksdata *d) {$/;"	f	file:
+socks_if_handler	mongoose.c	/^static void socks_if_handler(struct mg_connection *c, int ev, void *ev_data) {$/;"	f	file:
+socks_if_relay	mongoose.c	/^static void socks_if_relay(struct mg_connection *s) {$/;"	f	file:
+socksdata	mongoose.c	/^struct socksdata {$/;"	s	file:
+ssl	mongoose.c	/^  SSL *ssl;$/;"	m	struct:mg_ssl_if_ctx	file:
+ssl	mongoose.c	/^  mbedtls_ssl_context *ssl;$/;"	m	struct:mg_ssl_if_ctx	file:
+ssl_ca_cert	mongoose.c	/^  char *ssl_ca_cert;$/;"	m	struct:mg_ssl_if_ctx	file:
+ssl_cert	mongoose.c	/^  char *ssl_cert;$/;"	m	struct:mg_ssl_if_ctx	file:
+ssl_ctx	mongoose.c	/^  SSL_CTX *ssl_ctx;$/;"	m	struct:mg_ssl_if_ctx	file:
+ssl_key	mongoose.c	/^  char *ssl_key;$/;"	m	struct:mg_ssl_if_ctx	file:
+ssl_server_name	mongoose.c	/^  char *ssl_server_name;$/;"	m	struct:mg_ssl_if_ctx	file:
+start_index	mongoose.c	/^  int start_index;$/;"	m	struct:mg_ev_mgr_lwip_data	file:
+state	mongoose.c	/^  enum mg_http_multipart_stream_state state;$/;"	m	struct:mg_http_multipart_stream	typeref:enum:mg_http_multipart_stream::mg_http_multipart_stream_state	file:
+str_util_lowercase	mongoose.c	/^static int str_util_lowercase(const char *s) {$/;"	f	file:
+strdup	mongoose.c	/^char *strdup(const char *src) {$/;"	f
+strerror	mongoose.c	/^const char *strerror(int err) {$/;"	f
+tcp	mongoose.c	/^    struct tcp_pcb *tcp;$/;"	m	union:mg_lwip_conn_state::__anon3	typeref:struct:mg_lwip_conn_state::__anon3::tcp_pcb	file:
+tcp_close_tcpip	mongoose.c	/^static void tcp_close_tcpip(void *arg) {$/;"	f	file:
+tcp_output_tcpip	mongoose.c	/^static void tcp_output_tcpip(void *arg) {$/;"	f	file:
+tcp_recved_ctx	mongoose.c	/^struct tcp_recved_ctx {$/;"	s	file:
+tcp_recved_tcpip	mongoose.c	/^void tcp_recved_tcpip(void *arg) {$/;"	f
+tcpip_callback	mongoose.c	15085;"	d	file:
+tcpip_callback_fn	mongoose.c	/^typedef void (*tcpip_callback_fn)(void *arg);$/;"	t	file:
+timeout	mongoose.c	/^  time_t timeout;$/;"	m	struct:mg_resolve_async_request	file:
+to_wchar	mongoose.c	/^int to_wchar(const char *path, wchar_t *wbuf, size_t wbuf_len) {$/;"	f
+tpcb	mongoose.c	/^  struct tcp_pcb *tpcb;$/;"	m	struct:tcp_recved_ctx	typeref:struct:tcp_recved_ctx::tcp_pcb	file:
+transaction_id	mongoose.c	/^  uint16_t transaction_id;$/;"	m	struct:mg_dns_header	file:
+type	mongoose.c	/^  enum mg_http_proto_data_type type;$/;"	m	struct:mg_http_proto_data_file	typeref:enum:mg_http_proto_data_file::mg_http_proto_data_type	file:
+type	mongoose.c	/^  enum mg_q_msg_type type;$/;"	m	struct:mg_q_msg	typeref:enum:mg_q_msg::mg_q_msg_type	file:
+udp	mongoose.c	/^    struct udp_pcb *udp;$/;"	m	union:mg_lwip_conn_state::__anon3	typeref:struct:mg_lwip_conn_state::__anon3::udp_pcb	file:
+udp_remove_tcpip	mongoose.c	/^static void udp_remove_tcpip(void *arg) {$/;"	f	file:
+udp_sendto_ctx	mongoose.c	/^struct udp_sendto_ctx {$/;"	s	file:
+udp_sendto_tcpip	mongoose.c	/^static void udp_sendto_tcpip(void *arg) {$/;"	f	file:
+unlink	mongoose.c	/^int unlink(const char *pathname) {$/;"	f
+upcb	mongoose.c	/^  struct udp_pcb *upcb;$/;"	m	struct:udp_sendto_ctx	typeref:struct:udp_sendto_ctx::udp_pcb	file:
+uri_pattern	mongoose.c	/^  struct mg_str uri_pattern; \/* owned *\/$/;"	m	struct:mg_http_endpoint	typeref:struct:mg_http_endpoint::mg_str	file:
+user_buf	mongoose.c	/^  char *user_buf;$/;"	m	struct:altbuf	file:
+user_buf_size	mongoose.c	/^  size_t user_buf_size;$/;"	m	struct:altbuf	file:
+user_data	mongoose.c	/^  void *user_data;$/;"	m	struct:mg_http_endpoint	file:
+user_data	mongoose.c	/^  void *user_data;$/;"	m	struct:mg_http_multipart_stream	file:
+var_name	mongoose.c	/^  const char *var_name;$/;"	m	struct:mg_http_multipart_stream	file:
+vars	mongoose.c	/^  const char *vars[MG_MAX_CGI_ENVIR_VARS]; \/* char *envp[] *\/$/;"	m	struct:mg_cgi_env_block	file:
+win32_dir	mongoose.c	/^struct win32_dir {$/;"	s	file:
+write	mongoose.c	/^int write(int fd, const char *buf, unsigned count) {$/;"	f
+ws_data	mongoose.c	/^  struct mg_ws_proto_data ws_data;$/;"	m	struct:mg_http_proto_data	typeref:struct:mg_http_proto_data::mg_ws_proto_data	file:
+ws_mask_ctx	mongoose.c	/^struct ws_mask_ctx {$/;"	s	file:
