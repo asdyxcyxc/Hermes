@@ -2458,6 +2458,9 @@ static u8 run_target(char** argv, u32 timeout) {
   if (getenv("DEBUG_MODE"))
     printf("-----------> WIFSTOPPED = %d, WIFSIGNALED = %d\n", WIFSTOPPED(status), WIFSIGNALED(status));
 
+  if (write(AFL_WRITE_FAKE, "CONTINUE", 8) < 0)
+    PFATAL("[ afl ] Cannot communicate with client");
+
   prev_child_pid = child_pid;
   if (!WIFSTOPPED(status)) child_pid = 0;
   
@@ -2641,7 +2644,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
     init_forkserver(argv);
   }
 
-  if (getenv("DEBUG_MODE")) {
+  if (getenv("DEBUG_MODE") && getenv("PRINT_BITMAP")) {
     printf("[************* DEBUG AFTER RUN *************]\n");
     u32 i;
 
@@ -2686,7 +2689,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     cksum = hash32(trace_bits, MAP_SIZE, HASH_CONST);
 
-//     if (getenv("DEBUG_MODE")) {
+//     if (getenv("DEBUG_MODE") && getenv("PRINT_BITMAP")) {
 //         printf("[+] Client recv child_pid: %d\n", child_pid);
 //         printf("[************* DEBUG *************]\n");
 //         u32 i;
@@ -2719,13 +2722,13 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
         var_detected = 1;
 
-        if (getenv("DEBUG_MODE")) {
+        if (getenv("DEBUG_MODE") && getenv("PRINT_BITMAP")) {
             printf("[********** DEBUG VAR DETECTED ***********\n");
             for (i=0; i < MAP_SIZE; ++i)
                 if (trace_bits[i] || first_trace[i])
                     printf("[---] 0x%x: First trace: %d, trace bit %d\n", i, first_trace[i], trace_bits[i]);
             printf("[++++] Final prev: %llu\n", *(u64 *)new_prev_loc);
-            getchar();
+//             getchar();
         }
 
       } else {

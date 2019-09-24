@@ -166,11 +166,14 @@ int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
 {
   int result = orig_accept(sockfd, addr, addrlen);
   pid_t pid = getpid();
-  write(TARGET_WRITE_FAKE, &pid, sizeof(pid_t));
+  if (write(TARGET_WRITE_FAKE, &pid, sizeof(pid_t)) < 0)
+    printf("[ target %d ] Failed to write the child pid to client due to (%d): %s\n", pid, errno, strerror(errno));
   char tmp_buf[10];
-  read(TARGET_READ_FAKE, tmp_buf, sizeof(tmp_buf));
+  if (read(TARGET_READ_FAKE, tmp_buf, sizeof(tmp_buf)) < 0)
+    printf("[ target %d ] Failed to read the done signal from client due to (%d): %s\n", pid, errno, strerror(errno));
 
-  write(TARGET_WRITE_AFL, "TIME", 4);
+  if (write(TARGET_WRITE_AFL, "TIME", 4) < 0)
+    printf("[ target %d ] Failed to write to time start to AFL due to (%d): %s\n", pid, errno, strerror(errno));
 
   if (getenv("DEBUG_MODE"))
     printf("TARGET recv: %s\n", tmp_buf);

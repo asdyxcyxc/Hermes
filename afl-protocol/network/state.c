@@ -281,12 +281,12 @@ void pprint(const char *prefix, char *s, int size)
 void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *trace_bits, u8 *new_prev_loc)
 {
   pid_t cfd;
-  s32 pipe_target_fake[2], pipe_fake_target[2], pipe_afl_target[2];
+  s32 pipe_target_fake[2], pipe_fake_target[2], pipe_afl_target[2], pipe_fake_afl[2];
   char tmp_buf[10];
 
   ACTF("Making pipes ...");
 
-  if (pipe(pipe_target_fake) || pipe(pipe_fake_target) || pipe(pipe_afl_target))
+  if (pipe(pipe_target_fake) || pipe(pipe_fake_target) || pipe(pipe_afl_target) || pipe(pipe_fake_afl))
     PFATAL("pipe() for setup communications failed");
   cfd = fork();
 
@@ -299,6 +299,8 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
       PFATAL("dup2() for read from target to client failed");
     if (dup2(pipe_fake_target[1], FAKE_WRITE_TARGET) < 0)
       PFATAL("dup2() for write from fake to target failed");
+    if (dup2(pipe_fake_afl[0], FAKE_READ_AFL) < 0)
+      PFATAL("dup2() for read from afl to fake failed"); 
 
     close(pipe_target_fake[0]);
     close(pipe_target_fake[1]);
@@ -306,6 +308,8 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
     close(pipe_fake_target[1]);
     close(pipe_afl_target[0]);
     close(pipe_afl_target[1]);
+    close(pipe_fake_afl[0]);
+    close(pipe_fake_afl[1]);
 
     char *bind_dir = getenv("BIND_DIR");
     char *sub_addr = getenv("USE_SOCKFD");
@@ -325,10 +329,16 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
       else
         sockfd = new_socket("127.0.0.1", port);
 
-      int child_pid;
-      read(FAKE_READ_TARGET, &child_pid, sizeof(int));
+      if (sockfd < 0) PFATAL("Cannot connect to target");
 
-      if (getenv("DEBUG_MODE")) {
+      if (getenv("DEBUG_MODE"))
+        printf("[+] Client has been connected\n");
+
+      int child_pid;
+      if (read(FAKE_READ_TARGET, &child_pid, sizeof(int)) < 0)
+        PFATAL("[ client ] Cannot read from target\n");
+
+      if (getenv("DEBUG_MODE") && getenv("PRINT_BITMAP")) {
         printf("[+] Client recv child_pid: %d\n", child_pid);
         printf("[************* DEBUG BEOFRE RESET *************]\n");
         u32 i;
@@ -343,12 +353,8 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
       memset(trace_bits, 0, MAP_SIZE);
       memset(new_prev_loc, 0, sizeof(u64));
 
-      write(FAKE_WRITE_TARGET, "DONE", 4);
-
-      if (sockfd < 0) PFATAL("Cannot connect to target");
-
-      if (getenv("DEBUG_MODE"))
-        printf("[+] Client has been connected\n");
+      if (write(FAKE_WRITE_TARGET, "DONE", 4) < 0)
+        PFATAL("[ client ] Cannot write to target");
 
 
       s32 fd = open(out_file, O_RDONLY);
@@ -364,6 +370,11 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
 
       shutdown(sockfd, SHUT_RDWR);
       close(sockfd);
+      if (read(FAKE_READ_AFL, tmp_buf, sizeof(tmp_buf)) < 0)
+        PFATAL("[ client ] Cannot communicate with AFL\n");
+
+      if (getenv("DEBUG_MODE"))
+        printf("[ client ] Recv from afl: %s\n", tmp_buf);
     }
     free(sockfile);
     exit(0);
@@ -376,6 +387,8 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
       PFATAL("dup2() for read from target to afl failed");
     if (dup2(pipe_afl_target[1], TARGET_WRITE_AFL) < 0)
       PFATAL("dup2() for write from target to afl failed");
+    if (dup2(pipe_fake_afl[1], AFL_WRITE_FAKE) < 0)
+      PFATAL("dup2() for write from afl to fake failed");
 
     close(pipe_target_fake[0]);
     close(pipe_target_fake[1]);
@@ -383,6 +396,9 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
     close(pipe_fake_target[1]);
     close(pipe_afl_target[0]);
     close(pipe_afl_target[1]);
+    close(pipe_fake_afl[0]);
+    close(pipe_fake_afl[1]);
+
 
     *client_fd = cfd;
   }

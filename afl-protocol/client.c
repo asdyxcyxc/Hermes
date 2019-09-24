@@ -23,7 +23,6 @@ void process(char *filename, unsigned int port)
   else
     sockfd = new_socket("127.0.0.1", port);
 
-  close(sockfd);
   sendAll(sockfd, buffer, size);
   recvAll(sockfd);
   sleep(2);
