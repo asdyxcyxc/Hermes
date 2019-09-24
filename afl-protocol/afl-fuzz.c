@@ -1375,7 +1375,7 @@ EXP_ST void setup_shm(void) {
      later on, perhaps? */
 
   if (!dumb_mode) {
-    setenv("PREV_ENV_VAR", prev_str, 1);
+    setenv("PREV_ENV", prev_str, 1);
     setenv(SHM_ENV_VAR, shm_str, 1);
   }
 
