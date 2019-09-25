@@ -164,8 +164,11 @@ int socket(int domain, int type, int protocol)
 
 int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
 {
-  int result = orig_accept(sockfd, addr, addrlen);
   pid_t pid = getpid();
+  if (getenv("DEBUG_MODE"))
+    printf("[ target %d ] Going in to accept()\n", pid);
+
+  int result = orig_accept(sockfd, addr, addrlen);
   if (write(TARGET_WRITE_FAKE, &pid, sizeof(pid_t)) < 0)
     printf("[ target %d ] Failed to write the child pid to client due to (%d): %s\n", pid, errno, strerror(errno));
   char tmp_buf[10];

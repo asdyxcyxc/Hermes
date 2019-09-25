@@ -332,7 +332,7 @@ void setup_communications(u32 *client_fd, const char *out_file, u16 port, u8 *tr
       if (sockfd < 0) PFATAL("Cannot connect to target");
 
       if (getenv("DEBUG_MODE"))
-        printf("[+] Client has been connected\n");
+        printf("[ client ] Client has been connected\n");
 
       int child_pid;
       if (read(FAKE_READ_TARGET, &child_pid, sizeof(int)) < 0)

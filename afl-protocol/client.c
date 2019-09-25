@@ -24,8 +24,7 @@ void process(char *filename, unsigned int port)
     sockfd = new_socket("127.0.0.1", port);
 
   sendAll(sockfd, buffer, size);
-  recvAll(sockfd);
-  sleep(2);
+//   recvAll(sockfd);
   ck_free(buffer);
 
   deleteProtocol(tmp_prot);
