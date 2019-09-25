@@ -12,7 +12,9 @@ RUN cd afl-2.52b/ && make && make install && cd -
 
 RUN cd afl-protocol && make && cd -
 
-RUN cd sample/simple && CC=afl-gcc make && mkdir -p input_dir && cd -
+RUN cd sample/simple && CC=afl-gcc make && cd -
+
+RUN cd sample/complex && CC=afl-gcc make && cd -
 
 RUN chmod +x ./entrypoint.sh
 
