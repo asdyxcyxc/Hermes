@@ -131,7 +131,7 @@ Build it
 docker build . -t fuzzer
 ```
 
-The run it
+Then run it
 ```
 docker run fuzzer simple
 docker run fuzzer complex
