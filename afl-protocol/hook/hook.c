@@ -35,6 +35,8 @@ typedef int (*orig_close_f)(int fd);
 typedef int (*orig_bind_f)(int sockfd, const struct sockaddr *addr,
                 socklen_t addrlen);
 typedef int (*orig_listen_f)(int sockfd, int backlog);
+typedef int (*orig_select_f)(int nfds, fd_set *readfds, fd_set *writefds,
+                  fd_set *exceptfds, struct timeval *timeout);
 
 static orig_recv_f orig_recv = NULL;
 static orig_socket_f orig_socket = NULL;
@@ -48,6 +50,7 @@ static orig_pthread_detach_f orig_pthread_detach = NULL;
 static orig_close_f orig_close = NULL;
 static orig_bind_f orig_bind = NULL;
 static orig_listen_f orig_listen = NULL;
+static orig_select_f orig_select = NULL;
 
 static __attribute__((constructor)) void init_method(void)
 {
@@ -63,7 +66,18 @@ static __attribute__((constructor)) void init_method(void)
   orig_close = (orig_close_f)dlsym(RTLD_NEXT, "close");
   orig_bind = (orig_bind_f)dlsym(RTLD_NEXT, "bind");
   orig_listen = (orig_listen_f)dlsym(RTLD_NEXT, "listen");
+  orig_select = (orig_select_f)dlsym(RTLD_NEXT, "select");
 
+}
+
+int select(int nfds, fd_set *readfds, fd_set *writefds,
+                  fd_set *exceptfds, struct timeval *timeout)
+{
+  int result = orig_select(nfds, readfds, writefds, exceptfds, timeout);
+  if (result < 0 && getenv("DEBUG_MODE")) {
+    printf("[ target ] Failed to select due to (%d): %s\n", errno, strerror(errno));
+  }
+  return result;
 }
 
 int listen(int sockfd, int backlog)
@@ -72,8 +86,9 @@ int listen(int sockfd, int backlog)
     printf("[ target %d ] Going in to listen\n", sockfd);
 
   char *bind_dir = getenv("BIND_DIR");
-  if (getenv("SHOW_SOCKFD") && bind_dir)
+  if (getenv("SHOW_SOCKFD") && bind_dir) {
     printf("[ target ] Listening on sock file: %s/sock_%d\n", bind_dir, sockfd);
+  }
   return orig_listen(sockfd, backlog);
 }
 
@@ -129,6 +144,7 @@ int close(int fd)
     if (client_fd == fd) {
       if (getenv("DEBUG_MODE"))
         printf("[ target ] Closing socket fd\n");
+      int result = orig_close(fd);
       if (getenv("USE_SIGSTOP")) {
         int tmp = kill(getpid(), SIGSTOP);
         if (getenv("DEBUG_MODE"))
@@ -136,6 +152,7 @@ int close(int fd)
       } else
         kill(getpid(), SIGUSR2);
       shutdown(fd, SHUT_RDWR);
+      return result;
     }
   }
 
@@ -183,7 +200,6 @@ int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
 
   sprintf(tmp_buf, "%d", result);
   setenv("CLIENT_FD", tmp_buf, 1);
-
   return result;
 }
 
