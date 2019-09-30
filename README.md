@@ -124,3 +124,15 @@ $ BIND_DIR=/tmp/ USE_SOCKFD=3 USE_SIGSTOP=1 ./afl-fuzz -i ../sample/complex/in -
 ```
 
 ![Screen shot for complex chat room](screenshot_complex.png)
+
+## Run with Docker
+Build it
+```
+docker build . -t fuzzer
+```
+
+Then run it
+```
+docker run fuzzer simple
+docker run fuzzer complex
+```
