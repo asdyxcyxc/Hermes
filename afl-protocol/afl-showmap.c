@@ -259,9 +259,9 @@ static void run_target(char** argv) {
 
   static struct itimerval it;
   int status = 0;
-  int pipe_target_fake[2], pipe_fake_target[2];
+  int pipe_target_fake[2], pipe_fake_target[2], pipe_afl_target[2];
 
-  if (pipe(pipe_fake_target) || pipe(pipe_target_fake))
+  if (pipe(pipe_fake_target) || pipe(pipe_target_fake) || pipe(pipe_afl_target))
     PFATAL("pipe() failed");
 
   if (!quiet_mode)
@@ -279,11 +279,15 @@ static void run_target(char** argv) {
         PFATAL("dup2() for write from target to client failed");
     if (dup2(pipe_fake_target[0], TARGET_READ_FAKE) < 0)
         PFATAL("dup2() for read from fake to target failed");
+     if (dup2(pipe_afl_target[1], TARGET_WRITE_AFL) < 0)
+      PFATAL("dup2() for read from target to afl failed");
 
     close(pipe_target_fake[0]);
     close(pipe_target_fake[1]);
     close(pipe_fake_target[0]);
     close(pipe_fake_target[1]);
+    close(pipe_afl_target[0]);
+    close(pipe_afl_target[1]);
 
     struct rlimit r;
 
@@ -340,11 +344,15 @@ static void run_target(char** argv) {
       PFATAL("dup2() for read from target to client failed");
   if (dup2(pipe_fake_target[1], FAKE_WRITE_TARGET) < 0)
       PFATAL("dup2() for write from fake to target failed");
+   if (dup2(pipe_afl_target[0], AFL_READ_TARGET) < 0)
+      PFATAL("dup2() for read from target to afl failed");
 
   close(pipe_target_fake[0]);
   close(pipe_target_fake[1]);
   close(pipe_fake_target[0]);
   close(pipe_fake_target[1]);
+  close(pipe_afl_target[0]);
+  close(pipe_afl_target[1]);
 
   char *bind_dir = getenv("BIND_DIR");
   char *sub_addr = getenv("USE_SOCKFD");
@@ -389,7 +397,12 @@ static void run_target(char** argv) {
 
   // ------------------------------------------
 
+  char tmp_buf[10];
+  if (read(AFL_READ_TARGET, tmp_buf, sizeof(tmp_buf)) < 0)
+      PFATAL("[ AFL ] Cannot read from target due to (%d): %s\n", errno, strerror(errno));
 
+  if (getenv("DEBUG_MODE"))
+    printf("[ AFL ] Recv from target: %s\n", tmp_buf);
 
   /* Configure timeout, wait for child, cancel timeout. */
 

@@ -8,7 +8,7 @@ LDFLAGS = -ldl
 
 COMM_HEADER = helper/alloc-inl.h helper/config.h helper/debug.h helper/types.h
 
-all: afl-fuzz interceptor libhook afl-showmap client
+all: afl-fuzz interceptor libhook afl-showmap client dump_state
 
 afl-fuzz: afl-fuzz.c $(COMM_HEADER)
 	$(CC) $(CFLAGS) -DAFL_PATH=$(AFL_PATH) -DDOC_PATH=$(DOC_PATH) -DBIN_PATH=$(BIN_PATH) $@.c network/*.c -o $@ $(LDFLAGS) $(INCLUDE) 
@@ -25,6 +25,9 @@ afl-showmap: afl-showmap.c $(COMM_HEADER)
 	$(CC) $(CFLAGS) -DAFL_PATH=$(AFL_PATH) -DDOC_PATH=$(DOC_PATH) -DBIN_PATH=$(BIN_PATH) $@.c network/*.c -o $@ $(LDFLAGS) $(INCLUDE)
 
 client: client.c $(COMM_HEADER)
+	$(CC) -g $@.c network/state.c network/utilities.c -o $@
+
+dump_state: dump_state.c $(COMM_HEADER)
 	$(CC) -g $@.c network/state.c network/utilities.c -o $@
 
 clean:
