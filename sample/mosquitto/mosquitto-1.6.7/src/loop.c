@@ -509,6 +509,7 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 		fdcount = WSAPoll(pollfds, pollfd_index, 100);
 #endif
 #ifdef WITH_EPOLL
+		char tmp_buf[10];
 		switch(fdcount){
 		case -1:
 			if(errno != EINTR){
@@ -531,8 +532,7 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 								pid_t pid = getpid();
 								if (write(996, &pid, sizeof(pid_t)) < 0)
 									printf("[ target %d ] Failed to write the child pid to client due to (%d): %s\n", pid, errno, strerror(errno));
-
-								char tmp_buf[10];
+								
 								if (read(989, tmp_buf, sizeof(tmp_buf)) < 0)
 									printf("[ target %d ] Failed to read the done signal from client due to (%d): %s\n", pid, errno, strerror(errno));
 
@@ -659,6 +659,7 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 
 void do_disconnect(struct mosquitto_db *db, struct mosquitto *context, int reason)
 {
+	int flag = 1;
 	char *id;
 #ifdef WITH_EPOLL
 	struct epoll_event ev;
@@ -713,77 +714,27 @@ void do_disconnect(struct mosquitto_db *db, struct mosquitto *context, int reaso
 			if(context->state != mosq_cs_disconnecting && context->state != mosq_cs_disconnect_with_will){
 				switch(reason){
 					case MOSQ_ERR_SUCCESS:
+						flag = 0;
 						break;
 					case MOSQ_ERR_PROTOCOL:
 						log__printf(NULL, MOSQ_LOG_NOTICE, "Client %s disconnected due to protocol error.", id);
-						if (getenv("DEBUG_MODE"))
-							printf("[ target ] Done processing\n");
-						if (getenv("USE_SIGSTOP")) {
-							int tmp = kill(getpid(), SIGSTOP);
-							if (getenv("DEBUG_MODE"))
-								printf("[ target ] Kill myself: %d\n", tmp);
-						} else
-							kill(getpid(), SIGUSR2);
 						break;
 					case MOSQ_ERR_CONN_LOST:
 						log__printf(NULL, MOSQ_LOG_NOTICE, "Socket error on client %s, disconnecting.", id);
-						if (getenv("DEBUG_MODE"))
-							printf("[ target ] Done processing\n");
-						if (getenv("USE_SIGSTOP")) {
-							int tmp = kill(getpid(), SIGSTOP);
-							if (getenv("DEBUG_MODE"))
-								printf("[ target ] Kill myself: %d\n", tmp);
-						} else
-							kill(getpid(), SIGUSR2);
 						break;
 					case MOSQ_ERR_AUTH:
 						log__printf(NULL, MOSQ_LOG_NOTICE, "Client %s disconnected, no longer authorised.", id);
-						if (getenv("DEBUG_MODE"))
-							printf("[ target ] Done processing\n");
-						if (getenv("USE_SIGSTOP")) {
-							int tmp = kill(getpid(), SIGSTOP);
-							if (getenv("DEBUG_MODE"))
-								printf("[ target ] Kill myself: %d\n", tmp);
-						} else
-							kill(getpid(), SIGUSR2);
 						break;
 					case MOSQ_ERR_KEEPALIVE:
 						log__printf(NULL, MOSQ_LOG_NOTICE, "Client %s has exceeded timeout, disconnecting.", id);
-						if (getenv("DEBUG_MODE"))
-							printf("[ target ] Done processing\n");
-						if (getenv("USE_SIGSTOP")) {
-							int tmp = kill(getpid(), SIGSTOP);
-							if (getenv("DEBUG_MODE"))
-								printf("[ target ] Kill myself: %d\n", tmp);
-						} else
-							kill(getpid(), SIGUSR2);
 						break;
 					default:
 						log__printf(NULL, MOSQ_LOG_NOTICE, "Socket error on client %s, disconnecting.", id);
-						if (getenv("DEBUG_MODE"))
-							printf("[ target ] Done processing\n");
-						if (getenv("USE_SIGSTOP")) {
-							int tmp = kill(getpid(), SIGSTOP);
-							if (getenv("DEBUG_MODE"))
-								printf("[ target ] Kill myself: %d\n", tmp);
-						} else
-							kill(getpid(), SIGUSR2);
 						break;
 				}
 
 			}else{
 				log__printf(NULL, MOSQ_LOG_NOTICE, "Client %s disconnected.", id);
-
-
-				if (getenv("DEBUG_MODE"))
-					printf("[ target ] Done processing\n");
-				if (getenv("USE_SIGSTOP")) {
-					int tmp = kill(getpid(), SIGSTOP);
-					if (getenv("DEBUG_MODE"))
-						printf("[ target ] Kill myself: %d\n", tmp);
-				} else
-					kill(getpid(), SIGUSR2);
-
 			}
 		}
 #ifdef WITH_EPOLL
@@ -794,6 +745,16 @@ void do_disconnect(struct mosquitto_db *db, struct mosquitto *context, int reaso
 		}
 #endif		
 		context__disconnect(db, context);
+	}
+	if (flag) {
+		if (getenv("DEBUG_MODE"))
+			printf("[ target ] Done processing\n");
+		if (getenv("USE_SIGSTOP")) {
+			int tmp = kill(getpid(), SIGSTOP);
+			if (getenv("DEBUG_MODE"))
+				printf("[ target ] Kill myself: %d\n", tmp);
+		} else
+			kill(getpid(), SIGUSR2);
 	}
 }
 
