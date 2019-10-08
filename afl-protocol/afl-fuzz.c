@@ -2054,8 +2054,8 @@ EXP_ST void init_forkserver(char** argv) {
 
     setsid();
 
-    dup2(dev_null_fd, 1);
-    dup2(dev_null_fd, 2);
+//     dup2(dev_null_fd, 1);
+//     dup2(dev_null_fd, 2);
 
     if (out_file) {
 
@@ -8147,7 +8147,7 @@ int main(int argc, char** argv) {
 
 
   if (getenv("AFL_NO_FORKSRV"))    no_forkserver    = 1;
-  if (!getenv("USE_SIGSTOP"))       no_forkserver    = 1;
+  no_forkserver = 1;
 
   if (getenv("AFL_NO_CPU_RED"))    no_cpu_meter_red = 1;
   if (getenv("AFL_NO_ARITH"))      no_arith         = 1;
