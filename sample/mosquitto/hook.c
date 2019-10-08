@@ -23,7 +23,7 @@
 
 typedef ssize_t (*orig_recv_f)(int fd, void *buf, size_t len, int flags);
 // typedef int (*orig_socket_f)(int domain, int type, int protocol);
-// typedef int (*orig_accept_f)(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
+typedef int (*orig_accept_f)(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 typedef ssize_t (*orig_send_f)(int sockfd, const void *buf, size_t len, int flags);
 typedef int (*orig_pthread_create_f)(pthread_t *thread, const pthread_attr_t *attr,
                           void *(*start_routine) (void *), void *arg);
@@ -40,7 +40,7 @@ typedef int (*orig_pthread_detach_f)(pthread_t thread);
 
 static orig_recv_f orig_recv = NULL;
 // static orig_socket_f orig_socket = NULL;
-// static orig_accept_f orig_accept = NULL;
+static orig_accept_f orig_accept = NULL;
 static orig_send_f orig_send = NULL;
 static orig_pthread_create_f orig_pthread_create = NULL;
 static orig_pthread_mutex_lock_f orig_pthread_mutex_lock = NULL;
@@ -56,7 +56,7 @@ static __attribute__((constructor)) void init_method(void)
 {
   orig_recv = (orig_recv_f)dlsym(RTLD_NEXT, "recv");
 //   orig_socket = (orig_socket_f)dlsym(RTLD_NEXT, "socket");
-//   orig_accept = (orig_accept_f)dlsym(RTLD_NEXT, "accept");
+  orig_accept = (orig_accept_f)dlsym(RTLD_NEXT, "accept");
   orig_send = (orig_send_f)dlsym(RTLD_NEXT, "send");
   orig_pthread_create = (orig_pthread_create_f)dlsym(RTLD_NEXT, "pthread_create");
   orig_pthread_mutex_lock = (orig_pthread_mutex_lock_f)dlsym(RTLD_NEXT, "pthread_mutex_lock");
@@ -117,7 +117,7 @@ static __attribute__((constructor)) void init_method(void)
 ssize_t recv(int sockfd, void *buf, size_t len, int flags)
 {
   if (getenv("DEBUG_MODE"))
-    printf("[ target ] Recv data from %s to sockfd: %d\n",getenv("CLIENT_FD"), sockfd);
+    printf("[ target ] Recv data from sockfd: %d\n", sockfd);
 
   ssize_t result = orig_recv(sockfd, buf, len, flags);
 //   if (result <= 0) {
@@ -193,13 +193,13 @@ ssize_t recv(int sockfd, void *buf, size_t len, int flags)
 //   return result;
 // }
 // 
-// int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
-// {
-//   pid_t pid = getpid();
-//   if (getenv("DEBUG_MODE"))
-//     printf("[ target %d ] Going in to accept()\n", pid);
-// 
-//   int result = orig_accept(sockfd, addr, addrlen);
+int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
+{
+  pid_t pid = getpid();
+  if (getenv("DEBUG_MODE"))
+    printf("[ target %d ] Going in to accept()\n", pid);
+
+  int result = orig_accept(sockfd, addr, addrlen);
 //   if (!getenv("DUPLICATE_ACCEPT")) {
 //     if (getenv("DEBUG_MODE"))
 //       printf("[ target ] First time accept\n");
@@ -221,8 +221,8 @@ ssize_t recv(int sockfd, void *buf, size_t len, int flags)
 //   if (getenv("DEBUG_MODE"))
 //     printf("TARGET recv: %s\n", tmp_buf);
 // 
-//   return result;
-// }
+  return result;
+}
 
 ssize_t send(int sockfd, const void *buf, size_t len, int flags)
 {

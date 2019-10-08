@@ -377,6 +377,9 @@ static void run_target(char** argv) {
     PFATAL("Cannot read from target due to (%d): %s\n", errno, strerror(errno));
   }
 
+  if (getenv("DEBUG_MODE"))
+    printf("[ AFL ] Target pid: %d\n", tmp_pid);
+
   if (write(FAKE_WRITE_TARGET, "DONE", 4) < 0) {
     PFATAL("Cannot write to target due to (%d): %s\n", errno, strerror(errno));
   }
