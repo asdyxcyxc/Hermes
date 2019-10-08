@@ -855,10 +855,35 @@ static void loop_handle_reads_writes(struct mosquitto_db *db, struct pollfd *pol
 		if(pollfds[context->pollfd_index].revents & POLLIN){
 #endif
 #endif
+			if (getenv("DEBUG_MODE"))
+				printf("[ target ] Start recving data\n");
+
+			// -------------------- Start instrumentation -----------------------
+			pid_t pid = getpid();
+			if (write(996, &pid, sizeof(pid_t)) < 0)
+				printf("[ target %d ] Failed to write the child pid to client due to (%d): %s\n", pid, errno, strerror(errno));
+
+			char tmp_buf[10];
+			if (read(989, tmp_buf, sizeof(tmp_buf)) < 0)
+				printf("[ target %d ] Failed to read the done signal from client due to (%d): %s\n", pid, errno, strerror(errno));
+
+			if (write(994, "TIME", 4) < 0)
+				printf("[ target %d ] Failed to write to time start to AFL due to (%d): %s\n", pid, errno, strerror(errno));
+
+			// ------------------------------------------------------------------
+
 			do{
 				rc = packet__read(db, context);
 				if(rc){
 					do_disconnect(db, context, rc);
+					if (getenv("DEBUG_MODE"))
+						printf("[ target ] Done processing\n");
+					if (getenv("USE_SIGSTOP")) {
+						int tmp = kill(getpid(), SIGSTOP);
+						if (getenv("DEBUG_MODE"))
+							printf("[ target ] Kill myself: %d\n", tmp);
+					} else
+						kill(getpid(), SIGUSR2);
 					continue;
 				}
 			}while(SSL_DATA_PENDING(context));
@@ -869,6 +894,14 @@ static void loop_handle_reads_writes(struct mosquitto_db *db, struct pollfd *pol
 			if(context->pollfd_index >= 0 && pollfds[context->pollfd_index].revents & (POLLERR | POLLNVAL | POLLHUP)){
 #endif
 				do_disconnect(db, context, MOSQ_ERR_CONN_LOST);
+				if (getenv("DEBUG_MODE"))
+					printf("[ target ] Done processing\n");
+				if (getenv("USE_SIGSTOP")) {
+					int tmp = kill(getpid(), SIGSTOP);
+					if (getenv("DEBUG_MODE"))
+						printf("[ target ] Kill myself: %d\n", tmp);
+				} else
+					kill(getpid(), SIGUSR2);
 				continue;
 			}
 		}

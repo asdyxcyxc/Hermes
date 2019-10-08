@@ -327,7 +327,8 @@ static void run_target(char** argv) {
 
     if (!getenv("LD_BIND_LAZY")) setenv("LD_BIND_NOW", "1", 0);
 
-    setenv("LD_PRELOAD", libhook, 0);
+    if (libhook)
+      setenv("LD_PRELOAD", libhook, 0);
 
     setsid();
 

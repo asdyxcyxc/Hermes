@@ -2383,7 +2383,8 @@ static u8 run_target(char** argv, u32 timeout) {
                              "symbolize=0:"
                              "msan_track_origins=0", 0);
 
-      setenv("LD_PRELOAD", libhook_path, 0);
+      if (libhook_path)
+        setenv("LD_PRELOAD", libhook_path, 0);
 
       execv(target_path, argv);
 
