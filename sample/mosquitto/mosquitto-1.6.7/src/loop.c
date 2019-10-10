@@ -533,7 +533,7 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 									if (getenv("DEBUG_MODE")) {
 										printf("Failed to accept due to (%d): %s\n", errno, strerror(errno));
 										if (errno == 12)
-											kill(getpid(), SIGKILL)
+											kill(getpid(), SIGKILL);
 									}
 									break;
 								}
