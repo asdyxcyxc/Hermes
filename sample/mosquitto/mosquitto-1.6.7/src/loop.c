@@ -700,7 +700,7 @@ void do_disconnect(struct mosquitto_db *db, struct mosquitto *context, int reaso
 			}
 #endif		
 			if (getenv("DEBUG_MODE"))
-				printf("[ target ] Closing socket %d\n", context->sock);
+				printf("[ target ] Closing socket %d / %d\n", context->sock, db->epollfd);
 			shutdown(context->sock, SHUT_RDWR);
 			close(context->sock);
 			context->sock = INVALID_SOCKET;
@@ -752,7 +752,7 @@ void do_disconnect(struct mosquitto_db *db, struct mosquitto *context, int reaso
 		}
 #ifdef WITH_EPOLL
 		if (getenv("DEBUG_MODE"))
-				printf("[ target ] Closing socket %d\n", context->sock);
+				printf("[ target ] Closing socket %d / %d\n", context->sock, db->epollfd);
 		if (context->sock != INVALID_SOCKET && epoll_ctl(db->epollfd, EPOLL_CTL_DEL, context->sock, &ev) == -1) {
 			if(db->config->connection_messages == true){
 				log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll disconnecting: %s", strerror(errno));
