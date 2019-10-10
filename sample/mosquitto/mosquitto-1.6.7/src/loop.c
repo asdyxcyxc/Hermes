@@ -500,9 +500,11 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 #ifndef WIN32
 		// sigprocmask(SIG_SETMASK, &sigblock, &origsig);
 #ifdef WITH_EPOLL
-		printf("Before: ...\n");
+		if (getenv("DEBUG_MODE"))
+			printf("Before: ...\n");
 		fdcount = epoll_wait(db->epollfd, events, MAX_EVENTS, -1);
-		printf("Before result: %d\n", fdcount);
+		if (getenv("DEBUG_MODE"))
+			printf("Before result: %d\n", fdcount);
 #else
 		fdcount = poll(pollfds, pollfd_index, 100);
 #endif
@@ -553,6 +555,8 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 								}
 								context->events = EPOLLIN;
 							}
+							if (getenv("DEBUG_MODE") && ev.data.fd == -1)
+								printf("Failed to accept due to (%d): %s\n", errno, strerror(errno));
 						}
 						break;
 					}
