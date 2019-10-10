@@ -536,7 +536,7 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 								}
 
 								if (getenv("DEBUG_MODE"))
-									printf("[ target ] Start recving data\n");
+									printf("[ target ] Start recving data on %d\n", ev.data.fd);
 
 								pid_t pid = getpid();
 								if (write(996, &pid, sizeof(pid_t)) < 0)
@@ -678,16 +678,6 @@ void do_disconnect(struct mosquitto_db *db, struct mosquitto *context, int reaso
 #endif
 
 	if(context->state == mosq_cs_disconnected){
-		close(context->sock);
-		context__free_disused(db);
-		if (getenv("DEBUG_MODE"))
-			printf("[ target ] Done processing\n");
-		if (getenv("USE_SIGSTOP")) {
-			int tmp = kill(getpid(), SIGSTOP);
-			if (getenv("DEBUG_MODE"))
-				printf("[ target ] Kill myself: %d\n", tmp);
-		} else
-			kill(getpid(), SIGUSR2);
 		return;
 	}
 #ifdef WITH_WEBSOCKETS
@@ -709,6 +699,10 @@ void do_disconnect(struct mosquitto_db *db, struct mosquitto *context, int reaso
 				log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll disconnecting websockets: %s", strerror(errno));
 			}
 #endif		
+			if (getenv("DEBUG_MODE"))
+				printf("[ target ] Closing socket %d\n", context->sock);
+			shutdown(context->sock, SHUT_RDWR);
+			close(context->sock);
 			context->sock = INVALID_SOCKET;
 			context->pollfd_index = -1;
 		}
@@ -757,19 +751,23 @@ void do_disconnect(struct mosquitto_db *db, struct mosquitto *context, int reaso
 			}
 		}
 #ifdef WITH_EPOLL
+		if (getenv("DEBUG_MODE"))
+				printf("[ target ] Closing socket %d\n", context->sock);
 		if (context->sock != INVALID_SOCKET && epoll_ctl(db->epollfd, EPOLL_CTL_DEL, context->sock, &ev) == -1) {
 			if(db->config->connection_messages == true){
 				log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll disconnecting: %s", strerror(errno));
 			}
 		}
+		shutdown(context->sock, SHUT_RDWR);
+		close(context->sock);
 #endif		
 		context__disconnect(db, context);
 	}
 	if (flag) {
-		close(context->sock);
-		context__free_disused(db);
 		if (getenv("DEBUG_MODE"))
 			printf("[ target ] Done processing\n");
+		context__free_disused(db);
+
 		if (getenv("USE_SIGSTOP")) {
 			int tmp = kill(getpid(), SIGSTOP);
 			if (getenv("DEBUG_MODE"))
