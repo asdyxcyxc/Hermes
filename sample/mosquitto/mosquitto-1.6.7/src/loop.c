@@ -527,8 +527,13 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 				for(j=0; j<listensock_count; j++){
 					if (events[i].data.fd == listensock[j]) {
 						if (events[i].events & (EPOLLIN | EPOLLPRI)){
-							while((ev.data.fd = net__socket_accept(db, listensock[j])) != -1){
-
+							while(1){
+								ev.data.fd = net__socket_accept(db, listensock[j]);
+								if (ev.data.fd == -1) {
+									if (getenv("DEBUG_MODE"))
+										printf("Failed to accept due to (%d): %s\n", errno, strerror(errno));
+									break;
+								}
 
 								if (getenv("DEBUG_MODE"))
 									printf("[ target ] Start recving data\n");
@@ -555,8 +560,6 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 								}
 								context->events = EPOLLIN;
 							}
-							if (getenv("DEBUG_MODE") && ev.data.fd == -1)
-								printf("Failed to accept due to (%d): %s\n", errno, strerror(errno));
 						}
 						break;
 					}
