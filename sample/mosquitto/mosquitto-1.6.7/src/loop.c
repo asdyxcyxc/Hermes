@@ -25,7 +25,7 @@ Contributors:
 #ifndef WIN32
 #ifdef WITH_EPOLL
 #include <sys/epoll.h>
-#define MAX_EVENTS 1000
+#define MAX_EVENTS 2
 #endif
 #include <poll.h>
 #include <unistd.h>
@@ -500,8 +500,9 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 #ifndef WIN32
 		// sigprocmask(SIG_SETMASK, &sigblock, &origsig);
 #ifdef WITH_EPOLL
+		printf("Before: ...\n");
 		fdcount = epoll_wait(db->epollfd, events, MAX_EVENTS, -1);
-		printf("Result :%d\n", fdcount);
+		printf("Before result: %d\n", fdcount);
 #else
 		fdcount = poll(pollfds, pollfd_index, 100);
 #endif
