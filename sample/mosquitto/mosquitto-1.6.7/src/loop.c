@@ -498,13 +498,14 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 		}
 
 #ifndef WIN32
-		sigprocmask(SIG_SETMASK, &sigblock, &origsig);
+		// sigprocmask(SIG_SETMASK, &sigblock, &origsig);
 #ifdef WITH_EPOLL
-		fdcount = epoll_wait(db->epollfd, events, MAX_EVENTS, 100);
+		fdcount = epoll_wait(db->epollfd, events, MAX_EVENTS, -1);
+		printf("Result :%d\n", fdcount);
 #else
 		fdcount = poll(pollfds, pollfd_index, 100);
 #endif
-		sigprocmask(SIG_SETMASK, &origsig, NULL);
+		// sigprocmask(SIG_SETMASK, &origsig, NULL);
 #else
 		fdcount = WSAPoll(pollfds, pollfd_index, 100);
 #endif
@@ -747,6 +748,7 @@ void do_disconnect(struct mosquitto_db *db, struct mosquitto *context, int reaso
 		context__disconnect(db, context);
 	}
 	if (flag) {
+		context__free_disused(db);
 		if (getenv("DEBUG_MODE"))
 			printf("[ target ] Done processing\n");
 		if (getenv("USE_SIGSTOP")) {
