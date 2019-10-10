@@ -530,8 +530,11 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 							while(1){
 								ev.data.fd = net__socket_accept(db, listensock[j]);
 								if (ev.data.fd == -1) {
-									if (getenv("DEBUG_MODE"))
+									if (getenv("DEBUG_MODE")) {
 										printf("Failed to accept due to (%d): %s\n", errno, strerror(errno));
+										if (errno == 12)
+											kill(getpid(), SIGKILL)
+									}
 									break;
 								}
 
