@@ -678,6 +678,16 @@ void do_disconnect(struct mosquitto_db *db, struct mosquitto *context, int reaso
 #endif
 
 	if(context->state == mosq_cs_disconnected){
+		close(context->sock);
+		context__free_disused(db);
+		if (getenv("DEBUG_MODE"))
+			printf("[ target ] Done processing\n");
+		if (getenv("USE_SIGSTOP")) {
+			int tmp = kill(getpid(), SIGSTOP);
+			if (getenv("DEBUG_MODE"))
+				printf("[ target ] Kill myself: %d\n", tmp);
+		} else
+			kill(getpid(), SIGUSR2);
 		return;
 	}
 #ifdef WITH_WEBSOCKETS
