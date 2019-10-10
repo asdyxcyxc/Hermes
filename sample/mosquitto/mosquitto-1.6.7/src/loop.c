@@ -756,7 +756,7 @@ void do_disconnect(struct mosquitto_db *db, struct mosquitto *context, int reaso
 		context__disconnect(db, context);
 	}
 	if (flag) {
-		net__socket_close(db, context);
+		close(context->sock);
 		context__free_disused(db);
 		if (getenv("DEBUG_MODE"))
 			printf("[ target ] Done processing\n");
