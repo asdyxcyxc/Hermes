@@ -2979,14 +2979,20 @@ static void perform_dry_run(char** argv) {
 
         }
 
+        if (client_pid > 0) kill(client_pid, SIGKILL);
+        if (child_pid > 0) kill(child_pid, SIGKILL);
         FATAL("Test case '%s' results in a crash", fn);
 
       case FAULT_ERROR:
 
+        if (client_pid > 0) kill(client_pid, SIGKILL);
+        if (child_pid > 0) kill(child_pid, SIGKILL);
         FATAL("Unable to execute target application ('%s')", argv[0]);
 
       case FAULT_NOINST:
 
+        if (client_pid > 0) kill(client_pid, SIGKILL);
+        if (child_pid > 0) kill(child_pid, SIGKILL);
         FATAL("No instrumentation detected");
 
       case FAULT_NOBITS: 

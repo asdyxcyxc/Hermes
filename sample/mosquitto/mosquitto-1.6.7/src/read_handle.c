@@ -36,36 +36,66 @@ int handle__packet(struct mosquitto_db *db, struct mosquitto *context)
 
 	switch((context->in_packet.command)&0xF0){
 		case CMD_PINGREQ:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling ping request\n");
 			return handle__pingreq(context);
 		case CMD_PINGRESP:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling ping response\n");
 			return handle__pingresp(context);
 		case CMD_PUBACK:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling publish ack\n");
 			return handle__pubackcomp(db, context, "PUBACK");
 		case CMD_PUBCOMP:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling publish comp\n");
 			return handle__pubackcomp(db, context, "PUBCOMP");
 		case CMD_PUBLISH:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling publish\n");
 			return handle__publish(db, context);
 		case CMD_PUBREC:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling publish record\n");
 			return handle__pubrec(db, context);
 		case CMD_PUBREL:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling publish rel\n");
 			return handle__pubrel(db, context);
 		case CMD_CONNECT:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling connect\n");
 			return handle__connect(db, context);
 		case CMD_DISCONNECT:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling disconnect\n");
 			return handle__disconnect(db, context);
 		case CMD_SUBSCRIBE:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling subcribe\n");
 			return handle__subscribe(db, context);
 		case CMD_UNSUBSCRIBE:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling unsubcribe\n");
 			return handle__unsubscribe(db, context);
 #ifdef WITH_BRIDGE
 		case CMD_CONNACK:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling conn ack\n");
 			return handle__connack(db, context);
 		case CMD_SUBACK:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling subcribe ack\n");
 			return handle__suback(context);
 		case CMD_UNSUBACK:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling unsubcribe ack\n");
 			return handle__unsuback(context);
 #endif
 		case CMD_AUTH:
+			if (getenv("DEBUG_MODE"))
+				printf("[ server ] Handling auth\n");
 			return handle__auth(db, context);
 		default:
 			/* If we don't recognise the command, return an error straight away. */
