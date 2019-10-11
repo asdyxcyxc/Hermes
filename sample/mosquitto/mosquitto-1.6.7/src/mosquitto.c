@@ -358,7 +358,7 @@ int main(int argc, char *argv[])
 		on_error("Could not create socket due to (%d): %s\n", errno, strerror(errno));
 
 	server.sin_family = AF_INET;
-	server.sin_port = htons(1337);
+	server.sin_port = htons(1338);
 	server.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	err = bind(server_fd, (struct sockaddr *)&server, sizeof(server));
