@@ -185,6 +185,16 @@ void coap_session_free(coap_session_t *session) {
   coap_session_mfree(session);
   coap_log(LOG_DEBUG, "***%s: session closed\n", coap_session_str(session));
 
+  if (getenv("DEBUG_MODE"))
+      printf("[ target ] Done processing\n");
+
+  if (getenv("USE_SIGSTOP")) {
+    int tmp = kill(getpid(), SIGSTOP);
+    if (getenv("DEBUG_MODE"))
+      printf("[ target ] Kill myself: %d\n", tmp);
+  } else
+    kill(getpid(), SIGUSR2);
+
   coap_free_type(COAP_SESSION, session);
 }
 
@@ -443,16 +453,6 @@ void coap_session_disconnected(coap_session_t *session, coap_nack_reason_t reaso
         COAP_EVENT_SESSION_CLOSED : COAP_EVENT_SESSION_FAILED, session);
     }
   }
-
-  if (getenv("DEBUG_MODE"))
-      printf("[ target ] Done processing\n");
-
-  if (getenv("USE_SIGSTOP")) {
-    int tmp = kill(getpid(), SIGSTOP);
-    if (getenv("DEBUG_MODE"))
-      printf("[ target ] Kill myself: %d\n", tmp);
-  } else
-    kill(getpid(), SIGUSR2);
 }
 
 coap_session_t *
