@@ -212,7 +212,7 @@ static void *my_malloc_hook (size_t size, const void *caller)
   result = malloc (size);
   old_malloc_hook = __malloc_hook;
   old_free_hook = __free_hook;
-  if (getenv("DEBUG_HEAP"))
+  if (getenv("DEBUG_MALLOC"))
     printf ("[ ===== target ===== ] malloc(%u) = %p\n", (unsigned int) size, result);
   __malloc_hook = my_malloc_hook;
   __free_hook = my_free_hook;
@@ -226,7 +226,7 @@ static void my_free_hook (void *ptr, const void *caller)
   free (ptr);
   old_malloc_hook = __malloc_hook;
   old_free_hook = __free_hook;
-  if (getenv("DEBUG_HEAP"))
+  if (getenv("DEBUG_FREE"))
     printf ("[ ===== target ===== ] free(%p)\n", ptr);
   __malloc_hook = my_malloc_hook;
   __free_hook = my_free_hook;
