@@ -432,7 +432,7 @@ void coap_session_disconnected(coap_session_t *session, coap_nack_reason_t reaso
   }
   if ( COAP_PROTO_RELIABLE(session->proto) ) {
     if (session->sock.flags != COAP_SOCKET_EMPTY) {
-      // coap_socket_close(&session->sock);
+      coap_socket_close(&session->sock);
       coap_handle_event(session->context,
         state == COAP_SESSION_STATE_CONNECTING ?
         COAP_EVENT_TCP_FAILED : COAP_EVENT_TCP_CLOSED, session);
@@ -442,11 +442,6 @@ void coap_session_disconnected(coap_session_t *session, coap_nack_reason_t reaso
         state == COAP_SESSION_STATE_ESTABLISHED ?
         COAP_EVENT_SESSION_CLOSED : COAP_EVENT_SESSION_FAILED, session);
     }
-  }
-
-  if (session->sock.fd != COAP_INVALID_SOCKET) {
-    close(session->sock.fd);
-    session->sock.fd = COAP_INVALID_SOCKET;
   }
 
   if (getenv("DEBUG_MODE"))

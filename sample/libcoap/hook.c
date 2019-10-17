@@ -37,6 +37,8 @@ typedef int (*orig_bind_f)(int sockfd, const struct sockaddr *addr,
 typedef int (*orig_listen_f)(int sockfd, int backlog);
 typedef int (*orig_select_f)(int nfds, fd_set *readfds, fd_set *writefds,
                   fd_set *exceptfds, struct timeval *timeout);
+typedef void *(*orig_malloc_f)(size_t size);
+typedef void (*orig_free_f)(void *ptr);
 
 static orig_recv_f orig_recv = NULL;
 static orig_socket_f orig_socket = NULL;
@@ -51,6 +53,8 @@ static orig_close_f orig_close = NULL;
 static orig_bind_f orig_bind = NULL;
 static orig_listen_f orig_listen = NULL;
 static orig_select_f orig_select = NULL;
+static orig_malloc_f orig_malloc = NULL;
+static orig_free_f orig_free = NULL;
 
 static __attribute__((constructor)) void init_method(void)
 {
@@ -67,6 +71,8 @@ static __attribute__((constructor)) void init_method(void)
   orig_bind = (orig_bind_f)dlsym(RTLD_NEXT, "bind");
   orig_listen = (orig_listen_f)dlsym(RTLD_NEXT, "listen");
   orig_select = (orig_select_f)dlsym(RTLD_NEXT, "select");
+  orig_malloc = (orig_malloc_f)dlsym(RTLD_NEXT, "malloc");
+  orig_free = (orig_free_f)dlsym(RTLD_NEXT, "free");
 
 }
 
@@ -186,4 +192,19 @@ unsigned int sleep(unsigned int seconds)
 int pthread_detach(pthread_t thread)
 {
   return 0;
+}
+
+void *malloc(size_t size)
+{
+  void *result = orig_malloc(size);
+  if (getenv("DEBUG_HEAP"))
+    printf("[ ===== target ===== ] malloc(%lu) = %p\n", size, result);
+  return result;
+}
+
+void free(void *ptr)
+{
+  if (getenv("DEBUG_HEAP"))
+    printf("[ ===== target ===== ] free(%p)\n", ptr);
+  orig_free(ptr);
 }
