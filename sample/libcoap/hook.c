@@ -12,6 +12,8 @@
 #include <pthread.h>
 #include <sys/un.h>
 
+#include <malloc.h>
+
 #define FAKE_READ_TARGET 997
 #define TARGET_WRITE_FAKE 996
 
@@ -53,8 +55,14 @@ static orig_close_f orig_close = NULL;
 static orig_bind_f orig_bind = NULL;
 static orig_listen_f orig_listen = NULL;
 static orig_select_f orig_select = NULL;
-static orig_malloc_f orig_malloc = NULL;
-static orig_free_f orig_free = NULL;
+
+
+static void my_init_hook (void);
+static void *my_malloc_hook (size_t, const void *);
+static void my_free_hook (void*, const void *);
+
+static void *(*old_malloc_hook)(size_t, const void *);
+static void *(*old_free_hook)(size_t, const void *);
 
 static __attribute__((constructor)) void init_method(void)
 {
@@ -71,9 +79,11 @@ static __attribute__((constructor)) void init_method(void)
   orig_bind = (orig_bind_f)dlsym(RTLD_NEXT, "bind");
   orig_listen = (orig_listen_f)dlsym(RTLD_NEXT, "listen");
   orig_select = (orig_select_f)dlsym(RTLD_NEXT, "select");
-  orig_malloc = (orig_malloc_f)dlsym(RTLD_NEXT, "malloc");
-  orig_free = (orig_free_f)dlsym(RTLD_NEXT, "free");
 
+  old_malloc_hook = __malloc_hook;
+  old_free_hook = __free_hook;
+  __malloc_hook = my_malloc_hook;
+  __free_hook = my_free_hook;
 }
 
 int select(int nfds, fd_set *readfds, fd_set *writefds,
@@ -194,17 +204,30 @@ int pthread_detach(pthread_t thread)
   return 0;
 }
 
-void *malloc(size_t size)
+static void *my_malloc_hook (size_t size, const void *caller)
 {
-  void *result = orig_malloc(size);
+  void *result;
+  __malloc_hook = old_malloc_hook;
+  __free_hook = old_free_hook;
+  result = malloc (size);
+  old_malloc_hook = __malloc_hook;
+  old_free_hook = __free_hook;
   if (getenv("DEBUG_HEAP"))
-    printf("[ ===== target ===== ] malloc(%lu) = %p\n", size, result);
+    printf ("[ ===== target ===== ] malloc(%u) = %p\n", (unsigned int) size, result);
+  __malloc_hook = my_malloc_hook;
+  __free_hook = my_free_hook;
   return result;
 }
 
-void free(void *ptr)
+static void my_free_hook (void *ptr, const void *caller)
 {
+  __malloc_hook = old_malloc_hook;
+  __free_hook = old_free_hook;
+  free (ptr);
+  old_malloc_hook = __malloc_hook;
+  old_free_hook = __free_hook;
   if (getenv("DEBUG_HEAP"))
-    printf("[ ===== target ===== ] free(%p)\n", ptr);
-  orig_free(ptr);
+    printf ("[ ===== target ===== ] free(%p)\n", ptr);
+  __malloc_hook = my_malloc_hook;
+  __free_hook = my_free_hook;
 }
