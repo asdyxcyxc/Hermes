@@ -370,7 +370,7 @@ static void run_target(char** argv) {
 
 
   if (getenv("DEBUG_MODE"))
-    printf("[+] Client has been connected\n");
+    printf("[ AFL ] Client has been connected\n");
 
   int tmp_pid;
   if (read(FAKE_READ_TARGET, &tmp_pid, sizeof(int)) < 0) {

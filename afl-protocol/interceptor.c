@@ -115,14 +115,6 @@ static void my_packet_handler(u_char *args, const struct pcap_pkthdr *header, co
         printf("Memory address where payload begins: %p\n\n", payload);
 
         if (payload_length > 0) {
-            // const u_char *temp_pointer = payload;
-            // int byte_count = 0;
-            // while (byte_count++ < payload_length) {
-            // 	printf("%c", *temp_pointer);
-            // 	temp_pointer++;
-            // }
-            // printf("\n");
-
             if (ntohs(tcp_info->th_sport) == port_server) {
                 if (current_size > 0) {
                     if (state->size == 0) {

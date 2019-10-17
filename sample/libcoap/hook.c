@@ -73,6 +73,9 @@ static __attribute__((constructor)) void init_method(void)
 int select(int nfds, fd_set *readfds, fd_set *writefds,
                   fd_set *exceptfds, struct timeval *timeout)
 {
+  if (getenv("DEBUG_MODE"))
+    printf("[ target ] Going into select\n");
+
   int result = orig_select(nfds, readfds, writefds, exceptfds, timeout);
   if (result < 0 && getenv("DEBUG_MODE")) {
     printf("[ target ] Failed to select due to (%d): %s\n", errno, strerror(errno));
@@ -116,45 +119,17 @@ int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
 
 ssize_t recv(int sockfd, void *buf, size_t len, int flags)
 {
+  if (getenv("DEBUG_MODE"))
+    printf("[ target ] Recv on sockfd: %d\n", sockfd);
+  
   ssize_t result = orig_recv(sockfd, buf, len, flags);
-  if (result <= 0) {
-    if (getenv("DEBUG_MODE"))
-      printf("[ target %d ] Done processing\n", getpid());
-
-    unsetenv("CLIENT_FD");
-
-    shutdown(sockfd, SHUT_RDWR);
-    orig_close(sockfd);
-    if (getenv("USE_SIGSTOP")) {
-      int tmp = kill(getpid(), SIGSTOP);
-      if (getenv("DEBUG_MODE"))
-        printf("[ target ] Kill myself: %d\n", tmp);
-    } else
-      kill(getpid(), SIGUSR2);
-  }
   return result;
 }
 
 int close(int fd)
 {
-  char *cfd_buf = getenv("CLIENT_FD");
-  if (cfd_buf) {
-
-    int client_fd = atoi(cfd_buf);
-    if (client_fd == fd) {
-      if (getenv("DEBUG_MODE"))
-        printf("[ target ] Closing socket fd\n");
-      int result = orig_close(fd);
-      if (getenv("USE_SIGSTOP")) {
-        int tmp = kill(getpid(), SIGSTOP);
-        if (getenv("DEBUG_MODE"))
-          printf("[ target ] Kill myself: %d\n", tmp);
-      } else
-        kill(getpid(), SIGUSR2);
-      shutdown(fd, SHUT_RDWR);
-      return result;
-    }
-  }
+  if (getenv("DEBUG_MODE"))
+    printf("[ target ] Close fd: %d\n", fd);
 
   return orig_close(fd);
 }
@@ -162,16 +137,7 @@ int close(int fd)
 int socket(int domain, int type, int protocol)
 {
   int result;
-  if (getenv("BIND_DIR"))
-    result = orig_socket(AF_UNIX, type, protocol);
-  else {
-    result = orig_socket(domain, type, protocol);
-
-    if (result >= 0) {
-      int opt_val = 1;
-      setsockopt(result, SOL_SOCKET, SO_REUSEADDR, &opt_val, sizeof opt_val);
-    }
-  }
+  result = orig_socket(domain, type, protocol);
   
   if (getenv("DEBUG_MODE"))
     printf("[ target ] Socket created: %d\n", result);
@@ -181,25 +147,10 @@ int socket(int domain, int type, int protocol)
 
 int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
 {
-  pid_t pid = getpid();
   if (getenv("DEBUG_MODE"))
-    printf("[ target %d ] Going in to accept()\n", pid);
+    printf("[ target ] Going in to accept()\n");
 
   int result = orig_accept(sockfd, addr, addrlen);
-  if (write(TARGET_WRITE_FAKE, &pid, sizeof(pid_t)) < 0)
-    printf("[ target %d ] Failed to write the child pid to client due to (%d): %s\n", pid, errno, strerror(errno));
-  char tmp_buf[10];
-  if (read(TARGET_READ_FAKE, tmp_buf, sizeof(tmp_buf)) < 0)
-    printf("[ target %d ] Failed to read the done signal from client due to (%d): %s\n", pid, errno, strerror(errno));
-
-  if (write(TARGET_WRITE_AFL, "TIME", 4) < 0)
-    printf("[ target %d ] Failed to write to time start to AFL due to (%d): %s\n", pid, errno, strerror(errno));
-
-  if (getenv("DEBUG_MODE"))
-    printf("TARGET recv: %s\n", tmp_buf);
-
-  sprintf(tmp_buf, "%d", result);
-  setenv("CLIENT_FD", tmp_buf, 1);
   return result;
 }
 
