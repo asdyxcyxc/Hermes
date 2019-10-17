@@ -444,8 +444,8 @@ void coap_session_disconnected(coap_session_t *session, coap_nack_reason_t reaso
     }
   }
 
-  close(session->sock);
-  session->sock = COAP_INVALID_SOCKET;
+  close(session->sock.fd);
+  session->sock.fd = COAP_INVALID_SOCKET;
 
   if (getenv("DEBUG_MODE"))
       printf("[ target ] Done processing\n");
