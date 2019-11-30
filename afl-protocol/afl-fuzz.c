@@ -4129,7 +4129,7 @@ static void show_stats(void) {
 
   sprintf(tmp + banner_pad, "%s " cLCY VERSION cLGN
           " (%s)",  crash_mode ? cPIN "peruvian were-rabbit" : 
-          cYEL "AFL protocol fuzzer", use_banner);
+          cYEL "Protocol Fuzzer", use_banner);
 
   SAYF("\n%s\n\n", tmp);
 

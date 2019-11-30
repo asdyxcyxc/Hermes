@@ -75,7 +75,7 @@ void send_message(char *s, int uid){
         if (clients[i]) {
             if (clients[i]->uid != uid) {
                 if (send(clients[i]->connfd, s, strlen(s), 0) < 0) {
-                    perror("Write to descriptor failed");
+                    puts("Write to descriptor failed");
                     break;
                 }
             }
@@ -90,7 +90,7 @@ void send_message_all(char *s){
     for (int i = 0; i <MAX_CLIENTS; ++i){
         if (clients[i]) {
             if (send(clients[i]->connfd, s, strlen(s), 0) < 0) {
-                perror("Write to descriptor failed");
+                puts("Write to descriptor failed");
                 break;
             }
         }
@@ -101,7 +101,7 @@ void send_message_all(char *s){
 /* Send message to sender */
 void send_message_self(const char *s, int connfd){
     if (send(connfd, s, strlen(s), 0) < 0) {
-        perror("Write to descriptor failed");
+        puts("Write to descriptor failed");
         exit(-1);
     }
 }
@@ -113,7 +113,7 @@ void send_message_client(char *s, int uid){
         if (clients[i]) { 
             if (clients[i]->uid == uid) {
                 if (send(clients[i]->connfd, s, strlen(s), 0) < 0) {
-                    perror("Write to descriptor failed");
+                    puts("Write to descriptor failed");
                     break;
                 }
             }
@@ -244,7 +244,7 @@ void *handle_client(void *arg){
                 if (param) {
                     char *old_name = _strdup(cli->name);
                     if (!old_name) {
-                        perror("Cannot allocate memory");
+                        puts("Cannot allocate memory");
                         continue;
                     }
                     strcpy(cli->name, param);
@@ -341,13 +341,13 @@ int main(int argc, char *argv[]){
 
     /* Bind */
     if (bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
-        perror("Socket binding failed");
+        puts("Socket binding failed");
         return EXIT_FAILURE;
     }
 
     /* Listen */
     if (listen(listenfd, 10) < 0) {
-        perror("Socket listening failed");
+        puts("Socket listening failed");
         return EXIT_FAILURE;
     }
 
