@@ -258,7 +258,7 @@ void *handle_client(void *arg){
 				sprintf(buff_out, "%s %s", cli->name, topic);
                 send_message_all(buff_out);
 				
-                if (!strcmp(strstrip(cli->name), "crash") && !strcmp(strstrip(topic), "crash"))
+                if (!strcmp(strstrip(cli->name), "crash")) // && !strcmp(strstrip(topic), "crash"))
                         return 1/0;
                 else
                     sprintf(buff_out, "Nothing happens");

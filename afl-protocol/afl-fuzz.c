@@ -2514,8 +2514,10 @@ static u8 run_target(char** argv, u32 timeout) {
 
     if (!getenv("USE_SIGSTOP") && kill_signal == SIGUSR2) return FAULT_NONE;
 
-	if (getenv("DEBUG_MODE"))
+	if (getenv("DEBUG_MODE")) {
 		printf("[ AFL ] Crashed child\n");
+		getchar();
+	}
 
     return FAULT_CRASH;
 
@@ -4129,7 +4131,7 @@ static void show_stats(void) {
 
   sprintf(tmp + banner_pad, "%s " cLCY VERSION cLGN
           " (%s)",  crash_mode ? cPIN "peruvian were-rabbit" : 
-          cYEL "Protocol Fuzzer", use_banner);
+          cYEL "Hermes", use_banner);
 
   SAYF("\n%s\n\n", tmp);
 
