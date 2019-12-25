@@ -1,3 +1,7 @@
+# BIND_DIR=/tmp USE_SOCKFD=5 USE_SIGSTOP=1 ./afl-fuzz -i ../sample/new_mongoose/input_dir -o ../sample/new_mongoose/output_dir -p 1883 -h ./libhook.so -t 10000  -- ../sample/new_mongoose/mqtt_broker
+
+
+
 getenv("PREV_ENV")                               = nil
 getenv("PREV_ENV")                               = nil
 __sysv_signal(13, 1, 0x7fffffffdf38, 0x55555559f570) = 0
