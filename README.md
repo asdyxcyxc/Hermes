@@ -1,4 +1,4 @@
-# protocol_fuzzer
+# Hermes
 
 ## Install dependencies
 - Install `libpcap` for recording communication between server and client
